@@ -8,6 +8,7 @@
 		"dev:hosted": "vite dev",
 		"convex:dash": "docker run --rm -p 6791:6791 -e NEXT_PUBLIC_DEPLOYMENT_URL=http://127.0.0.1:3210 ghcr.io/get-convex/convex-dashboard:latest",
 		"convex:gen": "CONVEX_AGENT_MODE=anonymous convex codegen",
+		"course:import": "bun run scripts/import-filesystem-course.ts",
 		"build": "vite build",
 		"preview": "vite preview",
 		"runner:start": "bun run src/runner/server.ts",

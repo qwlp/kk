@@ -1,9 +1,10 @@
 import type { LessonRunResponse, RunIntent, SubmissionTestResult } from '$lib/types';
 import type {
-	ConsoleLessonDefinition,
 	IoCase,
+	PublishedConsoleLessonEvaluator,
+	PublishedUnitLessonEvaluator,
 	UnitCase,
-	UnitLessonDefinition
+	PublishedLessonEvaluator
 } from '$lib/server/course/types';
 
 export interface RunnerConsoleLessonDefinition {
@@ -104,7 +105,7 @@ export const isLessonRunResponse = (value: unknown): value is LessonRunResponse 
 	value.tests.every(isSubmissionTestResult);
 
 export const toRunnerLessonDefinition = (
-	lesson: ConsoleLessonDefinition | UnitLessonDefinition
+	lesson: PublishedConsoleLessonEvaluator | PublishedUnitLessonEvaluator
 ): RunnerLessonDefinition => {
 	if (lesson.mode === 'console') {
 		return {
@@ -125,3 +126,8 @@ export const toRunnerLessonDefinition = (
 		hiddenCases: lesson.hiddenCases
 	};
 };
+
+export const isPublishedCodingLessonEvaluator = (
+	lesson: PublishedLessonEvaluator
+): lesson is PublishedConsoleLessonEvaluator | PublishedUnitLessonEvaluator =>
+	lesson.mode === 'console' || lesson.mode === 'unit';

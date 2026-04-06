@@ -1,8 +1,9 @@
 import { error, redirect } from '@sveltejs/kit';
-import { getFirstLesson } from '$lib/server/course';
+import { effectRunner } from '$lib/runtime';
+import { getAppEntryLesson } from '$lib/server/course';
 
 export const load = async () => {
-	const firstLesson = getFirstLesson();
+	const firstLesson = await effectRunner(getAppEntryLesson());
 
 	if (!firstLesson) {
 		error(500, {

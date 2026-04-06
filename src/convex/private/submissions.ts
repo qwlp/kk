@@ -3,7 +3,11 @@ import { privateMutation, privateQuery } from './helpers';
 
 export const createPending = privateMutation({
 	args: {
+		courseSlug: v.optional(v.string()),
+		chapterSlug: v.optional(v.string()),
 		lessonSlug: v.string(),
+		courseVersionNumber: v.optional(v.number()),
+		lessonVersionId: v.optional(v.id('lessonVersions')),
 		code: v.string(),
 		mode: v.union(v.literal('console'), v.literal('unit'), v.literal('quiz')),
 		createdAt: v.number()
@@ -22,7 +26,11 @@ export const createPending = privateMutation({
 
 export const createCompleted = privateMutation({
 	args: {
+		courseSlug: v.optional(v.string()),
+		chapterSlug: v.optional(v.string()),
 		lessonSlug: v.string(),
+		courseVersionNumber: v.optional(v.number()),
+		lessonVersionId: v.optional(v.id('lessonVersions')),
 		code: v.string(),
 		mode: v.union(v.literal('console'), v.literal('unit'), v.literal('quiz')),
 		status: v.union(
@@ -92,7 +100,11 @@ export const listRecent = privateQuery({
 
 		return docs.map((doc: (typeof docs)[number]) => ({
 			id: doc._id,
+			courseSlug: doc.courseSlug,
+			chapterSlug: doc.chapterSlug,
 			lessonSlug: doc.lessonSlug ?? doc.challengeSlug ?? '',
+			courseVersionNumber: doc.courseVersionNumber,
+			lessonVersionId: doc.lessonVersionId,
 			mode: doc.mode === 'stdin' ? 'console' : doc.mode === 'function' ? 'unit' : doc.mode,
 			status: doc.status,
 			stdout: doc.stdout,

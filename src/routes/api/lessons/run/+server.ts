@@ -1,9 +1,12 @@
 import { error, json } from '@sveltejs/kit';
 import { Effect } from 'effect';
-import { effectRunner } from '$lib/runtime';
-import { getLessonDefinition } from '$lib/server/course';
+import { createGenericError, effectRunner } from '$lib/runtime';
+import { getPublishedLessonEvaluator } from '$lib/server/course';
 import { LessonRunnerService } from '$lib/server/services/lesson-runner';
-import { toRunnerLessonDefinition } from '$lib/server/services/runner-contract';
+import {
+	isPublishedCodingLessonEvaluator,
+	toRunnerLessonDefinition
+} from '$lib/server/services/runner-contract';
 
 const getClientIp = (requestEvent: { request: Request; getClientAddress: () => string }) => {
 	const forwardedFor = requestEvent.request.headers.get('x-forwarded-for');
@@ -46,27 +49,20 @@ export const POST = async (event) => {
 		});
 	}
 
-	const lesson = getLessonDefinition(lessonSlug);
-
-	if (!lesson) {
-		error(404, {
-			message: 'Lesson not found',
-			kind: 'lesson_not_found',
-			timestamp: Date.now()
-		});
-	}
-
-	if (lesson.mode === 'quiz') {
-		error(400, {
-			message: 'Quiz lessons cannot be run',
-			kind: 'quiz_run_not_supported',
-			timestamp: Date.now()
-		});
-	}
-
-	const clientIp = getClientIp(event);
-
 	const runEffect = Effect.gen(function* () {
+		const lesson = yield* getPublishedLessonEvaluator({ lessonSlug });
+
+		if (!isPublishedCodingLessonEvaluator(lesson)) {
+			return yield* Effect.fail(
+				createGenericError({
+					message: 'Quiz lessons cannot be run',
+					status: 400,
+					kind: 'quiz_run_not_supported'
+				})
+			);
+		}
+
+		const clientIp = getClientIp(event);
 		const runner = yield* LessonRunnerService;
 
 		return yield* runner.runSubmission({

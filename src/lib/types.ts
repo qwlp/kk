@@ -46,16 +46,12 @@ export interface BasePublicLesson extends CourseSequenceItem {
 export interface ConsoleLesson extends BasePublicLesson {
 	mode: 'console';
 	starterCode: string;
-	solutionCode: string;
 	sampleInput?: string;
 }
 
 export interface UnitLesson extends BasePublicLesson {
 	mode: 'unit';
 	starterCode: string;
-	solutionCode: string;
-	testFileName: string;
-	testFileContent: string;
 	functionName: string;
 }
 
@@ -83,7 +79,11 @@ export interface SubmissionTestResult {
 
 export interface SubmissionRecord {
 	id: string;
+	courseSlug?: string;
+	chapterSlug?: string;
 	lessonSlug: string;
+	courseVersionNumber?: number;
+	lessonVersionId?: string;
 	code: string;
 	mode: LessonMode;
 	status: SubmissionStatus;

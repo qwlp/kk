@@ -54,7 +54,6 @@
 	let running = $state<RunIntent | null>(null);
 	let submissionError = $state<string | null>(null);
 	let vimModeEnabled = $state(false);
-	let activeEditorFile = $state<'main' | 'test'>('main');
 	let completedLessons = $state<string[]>([]);
 	let confettiPieces = $state<ConfettiPiece[]>([]);
 	let edgeFlashTone = $state<'error' | null>(null);
@@ -69,17 +68,10 @@
 	let lessonPaneRatio = $state(0.46);
 	let horizontalResizeState = $state<HorizontalResizeState | null>(null);
 
-	const isViewingTestFile = $derived.by(
-		() => currentLesson.mode === 'unit' && activeEditorFile === 'test'
-	);
 	const editorValue = $derived.by(() => {
 		if (currentLesson.mode === 'quiz') return '';
-		if (currentLesson.mode === 'unit' && isViewingTestFile) {
-			return currentLesson.testFileContent;
-		}
 		return code;
 	});
-	const editorReadOnly = $derived.by(() => isViewingTestFile);
 	const terminalOutput = $derived.by(() => {
 		if (submissionError) return submissionError;
 		if (!result) return '';
@@ -140,7 +132,6 @@
 		syncedLessonSlug = currentLesson.slug;
 		result = null;
 		submissionError = null;
-		activeEditorFile = 'main';
 
 		if (currentLesson.mode === 'quiz') {
 			selectedChoiceId = submittedQuizChoices[currentLesson.slug] ?? '';
@@ -574,17 +565,13 @@
 					<CodingLessonWorkspace
 						lesson={currentLesson}
 						{editorValue}
-						{editorReadOnly}
 						{vimModeEnabled}
-						{isViewingTestFile}
-						{activeEditorFile}
 						{running}
 						{terminalOutput}
 						{result}
 						onValueChange={handleCodeChange}
 						onRun={() => void runCodingLesson()}
 						onSubmit={() => void submitCurrentLesson()}
-						onSelectFile={(file) => (activeEditorFile = file)}
 					/>
 				</div>
 			{/if}

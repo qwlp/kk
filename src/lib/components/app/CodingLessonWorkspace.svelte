@@ -17,33 +17,25 @@
 	interface Props {
 		lesson: ConsoleLesson | UnitLesson;
 		editorValue: string;
-		editorReadOnly: boolean;
 		vimModeEnabled: boolean;
-		isViewingTestFile: boolean;
-		activeEditorFile: 'main' | 'test';
 		running: RunIntent | null;
 		terminalOutput: string;
 		result: LessonRunResponse | LessonSubmitResponse | null;
 		onValueChange: (value: string) => void;
 		onRun: () => void;
 		onSubmit: () => void;
-		onSelectFile: (file: 'main' | 'test') => void;
 	}
 
 	let {
 		lesson,
 		editorValue,
-		editorReadOnly,
 		vimModeEnabled,
-		isViewingTestFile,
-		activeEditorFile,
 		running,
 		terminalOutput,
 		result,
 		onValueChange,
 		onRun,
-		onSubmit,
-		onSelectFile
+		onSubmit
 	}: Props = $props();
 
 	let workspacePaneElement = $state<HTMLDivElement | null>(null);
@@ -111,33 +103,6 @@
 		style={`--kk-terminal-pane-height:${terminalPaneRatio * 100}%;`}
 	>
 		<div class="flex min-h-0 flex-1 flex-col">
-			{#if lesson.mode === 'unit'}
-				<div class="flex items-center gap-2 border-b border-white/8 bg-[#151b27]/92 px-4 pt-2">
-					<button
-						type="button"
-						onclick={() => onSelectFile('main')}
-						class={`rounded-t-xl border border-b-0 px-4 py-2 font-mono text-xs transition ${
-							activeEditorFile === 'main'
-								? 'border-[var(--kk-border)] bg-[var(--kk-panel-2)] text-[var(--kk-text)]'
-								: 'border-transparent text-[var(--kk-text-dim)] hover:text-[var(--kk-text)]'
-						}`}
-					>
-						main.py
-					</button>
-					<button
-						type="button"
-						onclick={() => onSelectFile('test')}
-						class={`rounded-t-xl border border-b-0 px-4 py-2 font-mono text-xs transition ${
-							activeEditorFile === 'test'
-								? 'border-[var(--kk-border)] bg-[var(--kk-panel-2)] text-[var(--kk-text)]'
-								: 'border-transparent text-[var(--kk-text-dim)] hover:text-[var(--kk-text)]'
-						}`}
-					>
-						{lesson.testFileName}
-					</button>
-				</div>
-			{/if}
-
 			{#if lesson.mode === 'console' && lesson.sampleInput}
 				<div class="border-b border-white/8 bg-[rgba(21,27,39,0.92)] px-4 py-3">
 					<p
@@ -151,12 +116,7 @@
 			{/if}
 
 			<div class="code-surface relative min-h-0 flex-1 bg-[rgba(27,20,31,0.98)]">
-				<CodeEditor
-					value={editorValue}
-					readOnly={editorReadOnly}
-					vimMode={vimModeEnabled}
-					{onValueChange}
-				/>
+				<CodeEditor value={editorValue} readOnly={false} vimMode={vimModeEnabled} {onValueChange} />
 				<div
 					class="pointer-events-none absolute inset-x-0 top-0 h-16 bg-[linear-gradient(180deg,rgba(12,16,25,0.12),transparent)]"
 				></div>
@@ -186,7 +146,7 @@
 					<button
 						type="button"
 						onclick={onSubmit}
-						disabled={running !== null || isViewingTestFile}
+						disabled={running !== null}
 						class="appearance-none rounded-full border-0 bg-[#d94f8b] px-5 py-2 font-mono text-[0.97rem] font-semibold text-[#fff0f6] shadow-none transition hover:bg-[#c8437d] disabled:cursor-not-allowed disabled:opacity-60"
 					>
 						▶ {running === 'submit' ? 'Submitting...' : 'Submit'}
@@ -194,7 +154,7 @@
 					<button
 						type="button"
 						onclick={onRun}
-						disabled={running !== null || isViewingTestFile}
+						disabled={running !== null}
 						class="rounded-full border border-[var(--kk-border)] bg-[var(--kk-panel-3)] px-5 py-2 font-mono text-[0.97rem] font-semibold text-[var(--kk-text)] shadow-[0_6px_20px_rgba(0,0,0,0.2)] transition hover:border-[var(--kk-border-strong)] hover:bg-[rgba(55,33,54,0.95)] disabled:cursor-not-allowed disabled:opacity-60"
 					>
 						▶ {running === 'run' ? 'Running...' : 'Run'}

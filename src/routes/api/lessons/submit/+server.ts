@@ -1,10 +1,13 @@
 import { error, json } from '@sveltejs/kit';
 import { Effect } from 'effect';
 import { api } from '../../../../convex/_generated/api';
-import { effectRunner } from '$lib/runtime';
-import { getLessonDefinition } from '$lib/server/course';
+import { createGenericError, effectRunner } from '$lib/runtime';
+import { getPublishedLessonEvaluator } from '$lib/server/course';
 import { LessonRunnerService } from '$lib/server/services/lesson-runner';
-import { toRunnerLessonDefinition } from '$lib/server/services/runner-contract';
+import {
+	isPublishedCodingLessonEvaluator,
+	toRunnerLessonDefinition
+} from '$lib/server/services/runner-contract';
 import { ConvexPrivateService } from '$lib/services/convex';
 import type { LessonSubmitResponse } from '$lib/types';
 
@@ -53,35 +56,30 @@ export const POST = async (event) => {
 		});
 	}
 
-	const lesson = getLessonDefinition(lessonSlug);
-
-	if (!lesson) {
-		error(404, {
-			message: 'Lesson not found',
-			kind: 'lesson_not_found',
-			timestamp: Date.now()
-		});
-	}
-
-	if (lesson.mode !== 'quiz' && !code.trim()) {
-		error(400, {
-			message: 'code is required for coding lessons',
-			kind: 'invalid_lesson_submit_payload',
-			timestamp: Date.now()
-		});
-	}
-
-	if (lesson.mode === 'quiz' && !selectedChoiceId) {
-		error(400, {
-			message: 'selectedChoiceId is required for quiz lessons',
-			kind: 'invalid_quiz_submit_payload',
-			timestamp: Date.now()
-		});
-	}
-
-	const clientIp = getClientIp(event);
-
 	const submissionEffect = Effect.gen(function* () {
+		const lesson = yield* getPublishedLessonEvaluator({ lessonSlug });
+
+		if (lesson.mode !== 'quiz' && !code.trim()) {
+			return yield* Effect.fail(
+				createGenericError({
+					message: 'code is required for coding lessons',
+					status: 400,
+					kind: 'invalid_lesson_submit_payload'
+				})
+			);
+		}
+
+		if (lesson.mode === 'quiz' && !selectedChoiceId) {
+			return yield* Effect.fail(
+				createGenericError({
+					message: 'selectedChoiceId is required for quiz lessons',
+					status: 400,
+					kind: 'invalid_quiz_submit_payload'
+				})
+			);
+		}
+
+		const clientIp = getClientIp(event);
 		const createdAt = Date.now();
 
 		let result: LessonSubmitResponse;
@@ -96,6 +94,16 @@ export const POST = async (event) => {
 				selectedChoiceId
 			};
 		} else {
+			if (!isPublishedCodingLessonEvaluator(lesson)) {
+				return yield* Effect.fail(
+					createGenericError({
+						message: 'Lesson evaluator is not a coding lesson',
+						status: 400,
+						kind: 'invalid_lesson_submit_payload'
+					})
+				);
+			}
+
 			const runner = yield* LessonRunnerService;
 			const runResult = yield* runner.runSubmission({
 				lesson: toRunnerLessonDefinition(lesson),
@@ -112,7 +120,11 @@ export const POST = async (event) => {
 		const submissionId = yield* convex.mutation({
 			func: api.private.submissions.createCompleted,
 			args: {
+				courseSlug: lesson.courseSlug,
+				chapterSlug: lesson.chapterSlug,
 				lessonSlug: lesson.slug,
+				courseVersionNumber: lesson.courseVersionNumber,
+				lessonVersionId: lesson.lessonVersionId as never,
 				code: lesson.mode === 'quiz' ? '' : code,
 				mode: lesson.mode,
 				status: result.status,
