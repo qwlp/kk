@@ -1,0 +1,27 @@
+{
+	"slug": "scope-quiz-1",
+	"order": 2,
+	"title": "Quiz: What Scope Means",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What does \"scope\" describe?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Where a variable name can be accessed in a program."
+		},
+		{
+			"id": "b",
+			"label": "How long a program takes to run."
+		},
+		{
+			"id": "c",
+			"label": "How many lines of code are in a file."
+		},
+		{
+			"id": "d",
+			"label": "The color of the console output."
+		}
+	],
+	"correctChoiceId": "a"
+}

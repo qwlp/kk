@@ -1,0 +1,21 @@
+{
+	"slug": "dictionaries-console-1",
+	"order": 1,
+	"title": "Reading a Value by Key",
+	"prompt": "Create the dictionary and print the value for the key \"name\".",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "Ayla\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "Ayla\n"
+		}
+	]
+}

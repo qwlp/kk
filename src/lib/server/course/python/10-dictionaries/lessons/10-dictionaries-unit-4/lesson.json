@@ -1,0 +1,42 @@
+{
+	"slug": "dictionaries-unit-4",
+	"order": 10,
+	"title": "Describing a Player",
+	"prompt": "Write `describe_player` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "describe_player",
+	"publicCases": [
+		{
+			"name": "public-ayla",
+			"args": [
+				{
+					"name": "Ayla",
+					"level": 3
+				}
+			],
+			"expected": "Ayla is level 3"
+		},
+		{
+			"name": "public-kai",
+			"args": [
+				{
+					"name": "Kai",
+					"level": 7
+				}
+			],
+			"expected": "Kai is level 7"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-zero",
+			"args": [
+				{
+					"name": "Mira",
+					"level": 0
+				}
+			],
+			"expected": "Mira is level 0"
+		}
+	]
+}

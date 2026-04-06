@@ -1,0 +1,27 @@
+{
+	"slug": "sets-quiz-1",
+	"order": 2,
+	"title": "Quiz: What Makes a Set Special",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What is the main property of a set?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "It stores unique values."
+		},
+		{
+			"id": "b",
+			"label": "It stores values by key."
+		},
+		{
+			"id": "c",
+			"label": "It always keeps values sorted alphabetically."
+		},
+		{
+			"id": "d",
+			"label": "It can only store numbers."
+		}
+	],
+	"correctChoiceId": "a"
+}

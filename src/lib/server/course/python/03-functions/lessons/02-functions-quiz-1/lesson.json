@@ -1,0 +1,27 @@
+{
+	"slug": "functions-quiz-1",
+	"order": 2,
+	"title": "Quiz: What a Function Is",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Why do programmers use functions?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "To reuse code instead of copying the same logic everywhere."
+		},
+		{
+			"id": "b",
+			"label": "To stop Python from using variables."
+		},
+		{
+			"id": "c",
+			"label": "To make every program print automatically."
+		},
+		{
+			"id": "d",
+			"label": "To replace all loops."
+		}
+	],
+	"correctChoiceId": "a"
+}

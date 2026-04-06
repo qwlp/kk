@@ -3,9 +3,16 @@ import { v } from 'convex/values';
 
 export default defineSchema({
 	submissions: defineTable({
-		challengeSlug: v.string(),
+		lessonSlug: v.optional(v.string()),
+		challengeSlug: v.optional(v.string()),
 		code: v.string(),
-		mode: v.union(v.literal('function'), v.literal('stdin')),
+		mode: v.union(
+			v.literal('console'),
+			v.literal('unit'),
+			v.literal('quiz'),
+			v.literal('stdin'),
+			v.literal('function')
+		),
 		status: v.union(
 			v.literal('running'),
 			v.literal('passed'),
@@ -25,6 +32,7 @@ export default defineSchema({
 			})
 		),
 		durationMs: v.number(),
-		createdAt: v.number()
+		createdAt: v.number(),
+		selectedChoiceId: v.optional(v.string())
 	})
 });

@@ -1,0 +1,27 @@
+{
+	"slug": "comparisons-unit-3",
+	"order": 9,
+	"title": "Checking for Weekend Days",
+	"prompt": "Write `is_weekend` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "is_weekend",
+	"publicCases": [
+		{
+			"name": "public-sat",
+			"args": ["Sat"],
+			"expected": true
+		},
+		{
+			"name": "public-mon",
+			"args": ["Mon"],
+			"expected": false
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-sun",
+			"args": ["Sun"],
+			"expected": true
+		}
+	]
+}

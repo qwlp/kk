@@ -1,0 +1,27 @@
+{
+	"slug": "comparisons-unit-2",
+	"order": 6,
+	"title": "Checking a Weight Limit",
+	"prompt": "Write `can_carry` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "can_carry",
+	"publicCases": [
+		{
+			"name": "public-true",
+			"args": [8, 10],
+			"expected": true
+		},
+		{
+			"name": "public-false",
+			"args": [12, 10],
+			"expected": false
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-edge",
+			"args": [10, 10],
+			"expected": true
+		}
+	]
+}

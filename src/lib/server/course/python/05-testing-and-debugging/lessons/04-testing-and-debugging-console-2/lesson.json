@@ -1,0 +1,21 @@
+{
+	"slug": "testing-and-debugging-console-2",
+	"order": 4,
+	"title": "Fixing a Wrong Variable",
+	"prompt": "Store 9 in `lives` and print it.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "9\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "9\n"
+		}
+	]
+}

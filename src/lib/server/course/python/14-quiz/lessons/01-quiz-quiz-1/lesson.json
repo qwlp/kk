@@ -1,0 +1,27 @@
+{
+	"slug": "quiz-quiz-1",
+	"order": 1,
+	"title": "Review Quiz: Printing Output",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Which built-in function displays a value in the console?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "print"
+		},
+		{
+			"id": "b",
+			"label": "append"
+		},
+		{
+			"id": "c",
+			"label": "input"
+		},
+		{
+			"id": "d",
+			"label": "range"
+		}
+	],
+	"correctChoiceId": "a"
+}

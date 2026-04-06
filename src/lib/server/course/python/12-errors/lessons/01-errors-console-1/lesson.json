@@ -1,0 +1,21 @@
+{
+	"slug": "errors-console-1",
+	"order": 1,
+	"title": "Turning Text Into a Number",
+	"prompt": "Convert the text to an integer, add to it, and print the result.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "13\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "13\n"
+		}
+	]
+}

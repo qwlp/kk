@@ -1,0 +1,27 @@
+{
+	"slug": "quiz-quiz-4",
+	"order": 4,
+	"title": "Review Quiz: Scope",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "A variable created inside a function is usually called what?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "A local variable."
+		},
+		{
+			"id": "b",
+			"label": "A global comment."
+		},
+		{
+			"id": "c",
+			"label": "A set item."
+		},
+		{
+			"id": "d",
+			"label": "A hidden test."
+		}
+	],
+	"correctChoiceId": "a"
+}

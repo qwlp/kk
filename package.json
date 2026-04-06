@@ -9,6 +9,7 @@
 		"convex:dash": "docker run --rm -p 6791:6791 -e NEXT_PUBLIC_DEPLOYMENT_URL=http://127.0.0.1:3210 ghcr.io/get-convex/convex-dashboard:latest",
 		"convex:gen": "CONVEX_AGENT_MODE=anonymous convex codegen",
 		"build": "vite build",
+		"start": "node build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -19,7 +20,7 @@
 	"devDependencies": {
 		"@eslint/compat": "^2.0.2",
 		"@eslint/js": "^9.39.2",
-		"@sveltejs/adapter-vercel": "^6.3.1",
+		"@sveltejs/adapter-node": "^5.5.4",
 		"@sveltejs/kit": "^2.50.2",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
 		"@tailwindcss/typography": "^0.5.19",
@@ -53,6 +54,7 @@
 		"convex-helpers": "^0.1.114",
 		"convex-vite-plugin": "^0.4.0",
 		"effect": "^4.0.0-beta.31",
+		"highlight.js": "^11.11.1",
 		"marked": "^17.0.6"
 	}
 }

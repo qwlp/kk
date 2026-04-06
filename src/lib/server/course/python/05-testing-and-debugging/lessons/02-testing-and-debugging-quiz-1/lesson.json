@@ -1,0 +1,27 @@
+{
+	"slug": "testing-and-debugging-quiz-1",
+	"order": 2,
+	"title": "Quiz: What a Test Gives You",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What is a unit test mainly for?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Checking whether code behaves correctly for chosen cases."
+		},
+		{
+			"id": "b",
+			"label": "Making Python code run faster automatically."
+		},
+		{
+			"id": "c",
+			"label": "Replacing functions with comments."
+		},
+		{
+			"id": "d",
+			"label": "Turning bugs into syntax errors."
+		}
+	],
+	"correctChoiceId": "a"
+}

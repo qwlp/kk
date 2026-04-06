@@ -1,0 +1,21 @@
+{
+	"slug": "functions-console-1",
+	"order": 1,
+	"title": "Calling a Built-in Function",
+	"prompt": "Use `len` to print how many letters are in \"sword\".",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "5\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "5\n"
+		}
+	]
+}

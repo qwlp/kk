@@ -1,0 +1,21 @@
+{
+	"slug": "sets-console-2",
+	"order": 4,
+	"title": "Adding to a Set",
+	"prompt": "Add the value to the set and print the membership test result.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "True\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "True\n"
+		}
+	]
+}

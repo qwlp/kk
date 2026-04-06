@@ -1,0 +1,27 @@
+{
+	"slug": "dictionaries-quiz-3",
+	"order": 8,
+	"title": "Quiz: The `in` Operator for Keys",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What does `\"potion\" in inventory` check?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Whether `\"potion\"` is a key in the dictionary."
+		},
+		{
+			"id": "b",
+			"label": "Whether any value equals `\"potion\"`."
+		},
+		{
+			"id": "c",
+			"label": "Whether the dictionary is sorted."
+		},
+		{
+			"id": "d",
+			"label": "Whether the dictionary has exactly one item."
+		}
+	],
+	"correctChoiceId": "a"
+}

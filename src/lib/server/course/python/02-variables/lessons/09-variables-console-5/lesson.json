@@ -1,0 +1,21 @@
+{
+	"slug": "variables-console-5",
+	"order": 9,
+	"title": "Reusing a Variable",
+	"prompt": "Store \"wizard\" in `role` and print it 2 times.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "wizard\nwizard\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "wizard\nwizard\n"
+		}
+	]
+}

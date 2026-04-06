@@ -1,0 +1,21 @@
+{
+	"slug": "practice-console-3",
+	"order": 7,
+	"title": "Practice: Counting Unique Tags",
+	"prompt": "Store the list, convert it to a set, and print the number of unique values.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "3\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "3\n"
+		}
+	]
+}

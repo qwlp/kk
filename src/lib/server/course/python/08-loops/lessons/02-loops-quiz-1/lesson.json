@@ -1,0 +1,27 @@
+{
+	"slug": "loops-quiz-1",
+	"order": 2,
+	"title": "Quiz: Why Loops Matter",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Why would you use a loop?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "To repeat similar work without duplicating code."
+		},
+		{
+			"id": "b",
+			"label": "To replace every variable in the file."
+		},
+		{
+			"id": "c",
+			"label": "To stop functions from returning values."
+		},
+		{
+			"id": "d",
+			"label": "To turn lists into strings automatically."
+		}
+	],
+	"correctChoiceId": "a"
+}

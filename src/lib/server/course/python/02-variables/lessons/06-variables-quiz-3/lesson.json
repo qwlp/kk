@@ -1,0 +1,27 @@
+{
+	"slug": "variables-quiz-3",
+	"order": 6,
+	"title": "Quiz: Assignment vs Equality",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "In the line `lives = 3`, what does `=` mean?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Store the value 3 in the variable `lives`."
+		},
+		{
+			"id": "b",
+			"label": "Check whether `lives` already equals 3."
+		},
+		{
+			"id": "c",
+			"label": "Print 3 to the console."
+		},
+		{
+			"id": "d",
+			"label": "Repeat the line three times."
+		}
+	],
+	"correctChoiceId": "a"
+}

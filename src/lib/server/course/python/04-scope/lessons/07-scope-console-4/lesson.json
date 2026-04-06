@@ -1,0 +1,21 @@
+{
+	"slug": "scope-console-4",
+	"order": 7,
+	"title": "Same Name, Different Function",
+	"prompt": "Write `left()` to print 1 and `right()` to print 2, then call both.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "1\n2\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "1\n2\n"
+		}
+	]
+}

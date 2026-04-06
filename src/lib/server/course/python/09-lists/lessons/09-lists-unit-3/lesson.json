@@ -1,0 +1,27 @@
+{
+	"slug": "lists-unit-3",
+	"order": 9,
+	"title": "Finding the Smallest Number",
+	"prompt": "Write `smallest` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "smallest",
+	"publicCases": [
+		{
+			"name": "public-three",
+			"args": [[5, 2, 9]],
+			"expected": 2
+		},
+		{
+			"name": "public-negative",
+			"args": [[0, -1, 4]],
+			"expected": -1
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-one",
+			"args": [[7]],
+			"expected": 7
+		}
+	]
+}

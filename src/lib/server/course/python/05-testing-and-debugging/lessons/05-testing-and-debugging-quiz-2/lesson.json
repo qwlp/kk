@@ -1,0 +1,27 @@
+{
+	"slug": "testing-and-debugging-quiz-2",
+	"order": 5,
+	"title": "Quiz: Good Debugging Starts Small",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "When a program fails, what is usually a good first step?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Look at the smallest part of the code that should produce the result."
+		},
+		{
+			"id": "b",
+			"label": "Rewrite the whole program immediately."
+		},
+		{
+			"id": "c",
+			"label": "Delete all tests."
+		},
+		{
+			"id": "d",
+			"label": "Add random code until the output changes."
+		}
+	],
+	"correctChoiceId": "a"
+}

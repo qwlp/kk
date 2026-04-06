@@ -3,9 +3,9 @@ import { privateMutation, privateQuery } from './helpers';
 
 export const createPending = privateMutation({
 	args: {
-		challengeSlug: v.string(),
+		lessonSlug: v.string(),
 		code: v.string(),
-		mode: v.union(v.literal('function'), v.literal('stdin')),
+		mode: v.union(v.literal('console'), v.literal('unit'), v.literal('quiz')),
 		createdAt: v.number()
 	},
 	handler: async (ctx, args) => {
@@ -17,6 +17,37 @@ export const createPending = privateMutation({
 			tests: [],
 			durationMs: 0
 		});
+	}
+});
+
+export const createCompleted = privateMutation({
+	args: {
+		lessonSlug: v.string(),
+		code: v.string(),
+		mode: v.union(v.literal('console'), v.literal('unit'), v.literal('quiz')),
+		status: v.union(
+			v.literal('passed'),
+			v.literal('failed'),
+			v.literal('error'),
+			v.literal('timeout'),
+			v.literal('runner_error')
+		),
+		stdout: v.string(),
+		stderr: v.string(),
+		tests: v.array(
+			v.object({
+				name: v.string(),
+				status: v.union(v.literal('passed'), v.literal('failed'), v.literal('error')),
+				visibility: v.union(v.literal('public'), v.literal('hidden')),
+				message: v.optional(v.string())
+			})
+		),
+		durationMs: v.number(),
+		createdAt: v.number(),
+		selectedChoiceId: v.optional(v.string())
+	},
+	handler: async (ctx, args) => {
+		return await ctx.db.insert('submissions', args);
 	}
 });
 
@@ -40,7 +71,8 @@ export const finalize = privateMutation({
 				message: v.optional(v.string())
 			})
 		),
-		durationMs: v.number()
+		durationMs: v.number(),
+		selectedChoiceId: v.optional(v.string())
 	},
 	handler: async (ctx, args) => {
 		const { id, ...fields } = args;
@@ -60,15 +92,16 @@ export const listRecent = privateQuery({
 
 		return docs.map((doc: (typeof docs)[number]) => ({
 			id: doc._id,
-			challengeSlug: doc.challengeSlug,
-			mode: doc.mode,
+			lessonSlug: doc.lessonSlug ?? doc.challengeSlug ?? '',
+			mode: doc.mode === 'stdin' ? 'console' : doc.mode === 'function' ? 'unit' : doc.mode,
 			status: doc.status,
 			stdout: doc.stdout,
 			stderr: doc.stderr,
 			tests: doc.tests,
 			durationMs: doc.durationMs,
 			createdAt: doc.createdAt,
-			code: doc.code
+			code: doc.code,
+			selectedChoiceId: doc.selectedChoiceId
 		}));
 	}
 });

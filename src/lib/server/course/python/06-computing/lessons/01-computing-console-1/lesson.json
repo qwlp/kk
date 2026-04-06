@@ -1,0 +1,21 @@
+{
+	"slug": "computing-console-1",
+	"order": 1,
+	"title": "Bits Make Bytes",
+	"prompt": "Print 8.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "8\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "8\n"
+		}
+	]
+}

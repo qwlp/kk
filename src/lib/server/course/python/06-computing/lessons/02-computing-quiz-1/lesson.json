@@ -1,0 +1,27 @@
+{
+	"slug": "computing-quiz-1",
+	"order": 2,
+	"title": "Quiz: What a Bit Is",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What is a bit?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "A small unit of digital information."
+		},
+		{
+			"id": "b",
+			"label": "A type of Python loop."
+		},
+		{
+			"id": "c",
+			"label": "A built-in function that prints values."
+		},
+		{
+			"id": "d",
+			"label": "A variable that can only store text."
+		}
+	],
+	"correctChoiceId": "a"
+}

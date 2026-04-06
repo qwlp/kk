@@ -1,0 +1,21 @@
+{
+	"slug": "comparisons-console-3",
+	"order": 7,
+	"title": "Using `if` and `else`",
+	"prompt": "Use `if` and `else` so the program prints the correct message.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "Keep going\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "Keep going\n"
+		}
+	]
+}

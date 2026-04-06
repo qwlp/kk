@@ -1,0 +1,27 @@
+{
+	"slug": "errors-unit-1",
+	"order": 3,
+	"title": "Dividing Safely",
+	"prompt": "Write `safe_divide` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "safe_divide",
+	"publicCases": [
+		{
+			"name": "public-zero",
+			"args": [10, 0],
+			"expected": 0
+		},
+		{
+			"name": "public-normal",
+			"args": [10, 2],
+			"expected": 5
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-three",
+			"args": [9, 3],
+			"expected": 3
+		}
+	]
+}

@@ -1,0 +1,37 @@
+{
+	"slug": "dictionaries-unit-2",
+	"order": 6,
+	"title": "Checking Whether a Key Exists",
+	"prompt": "Write `has_item` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "has_item",
+	"publicCases": [
+		{
+			"name": "public-yes",
+			"args": [
+				{
+					"potion": 2
+				},
+				"potion"
+			],
+			"expected": true
+		},
+		{
+			"name": "public-no",
+			"args": [
+				{
+					"potion": 2
+				},
+				"key"
+			],
+			"expected": false
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-empty",
+			"args": [{}, "potion"],
+			"expected": false
+		}
+	]
+}

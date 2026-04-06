@@ -1,0 +1,27 @@
+{
+	"slug": "variables-quiz-1",
+	"order": 2,
+	"title": "Quiz: What a Variable Is",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What is the main job of a variable?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "To store a value so it can be reused later."
+		},
+		{
+			"id": "b",
+			"label": "To print output without `print()`."
+		},
+		{
+			"id": "c",
+			"label": "To make code run from bottom to top."
+		},
+		{
+			"id": "d",
+			"label": "To turn every number into a string."
+		}
+	],
+	"correctChoiceId": "a"
+}

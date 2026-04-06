@@ -1,0 +1,27 @@
+{
+	"slug": "quiz-quiz-6",
+	"order": 6,
+	"title": "Review Quiz: Loops",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Which statement is commonly used to loop over items in a collection?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "for"
+		},
+		{
+			"id": "b",
+			"label": "def"
+		},
+		{
+			"id": "c",
+			"label": "return"
+		},
+		{
+			"id": "d",
+			"label": "except"
+		}
+	],
+	"correctChoiceId": "a"
+}

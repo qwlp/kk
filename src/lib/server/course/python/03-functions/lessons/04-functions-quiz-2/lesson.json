@@ -1,0 +1,27 @@
+{
+	"slug": "functions-quiz-2",
+	"order": 4,
+	"title": "Quiz: Parameters Are Inputs",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "In `def greet(name):`, what is `name`?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "A parameter that receives input for the function."
+		},
+		{
+			"id": "b",
+			"label": "A keyword that ends the function."
+		},
+		{
+			"id": "c",
+			"label": "A built-in Python type."
+		},
+		{
+			"id": "d",
+			"label": "A comment."
+		}
+	],
+	"correctChoiceId": "a"
+}

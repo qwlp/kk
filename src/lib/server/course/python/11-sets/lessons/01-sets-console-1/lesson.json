@@ -1,0 +1,21 @@
+{
+	"slug": "sets-console-1",
+	"order": 1,
+	"title": "Sets Keep Unique Values",
+	"prompt": "Create the set and print how many unique values it contains.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "2\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "2\n"
+		}
+	]
+}

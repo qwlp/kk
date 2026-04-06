@@ -1,0 +1,27 @@
+{
+	"slug": "introduction-quiz-5",
+	"order": 10,
+	"title": "Quiz: Exact Output Matters",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Why do these lessons ask for exact output?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Because the tests compare your output to the expected text."
+		},
+		{
+			"id": "b",
+			"label": "Because Python can only print one phrase per file."
+		},
+		{
+			"id": "c",
+			"label": "Because all programs must use the same output."
+		},
+		{
+			"id": "d",
+			"label": "Because strings cannot contain spaces."
+		}
+	],
+	"correctChoiceId": "a"
+}

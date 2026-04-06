@@ -1,0 +1,27 @@
+{
+	"slug": "errors-quiz-3",
+	"order": 8,
+	"title": "Quiz: What `except` Does",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What is the role of an `except` block?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "To handle a matching error and run fallback code."
+		},
+		{
+			"id": "b",
+			"label": "To define a new function."
+		},
+		{
+			"id": "c",
+			"label": "To make a variable global."
+		},
+		{
+			"id": "d",
+			"label": "To repeat the same code forever."
+		}
+	],
+	"correctChoiceId": "a"
+}

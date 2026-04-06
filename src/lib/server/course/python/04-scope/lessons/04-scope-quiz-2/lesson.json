@@ -1,0 +1,27 @@
+{
+	"slug": "scope-quiz-2",
+	"order": 4,
+	"title": "Quiz: Local Variables",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Where can a local variable usually be used?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Inside the function where it was created."
+		},
+		{
+			"id": "b",
+			"label": "In every file in the project."
+		},
+		{
+			"id": "c",
+			"label": "Only inside comments."
+		},
+		{
+			"id": "d",
+			"label": "Only inside strings."
+		}
+	],
+	"correctChoiceId": "a"
+}

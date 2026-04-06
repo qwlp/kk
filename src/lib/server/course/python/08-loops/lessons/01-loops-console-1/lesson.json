@@ -1,0 +1,21 @@
+{
+	"slug": "loops-console-1",
+	"order": 1,
+	"title": "Repeating With a `for` Loop",
+	"prompt": "Use a loop to print each item on its own line.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "1\n2\n3\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "1\n2\n3\n"
+		}
+	]
+}

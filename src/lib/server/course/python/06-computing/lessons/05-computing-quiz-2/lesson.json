@@ -1,0 +1,27 @@
+{
+	"slug": "computing-quiz-2",
+	"order": 5,
+	"title": "Quiz: How Many Bits in a Byte",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "How many bits are in one byte?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "8"
+		},
+		{
+			"id": "b",
+			"label": "2"
+		},
+		{
+			"id": "c",
+			"label": "10"
+		},
+		{
+			"id": "d",
+			"label": "1024"
+		}
+	],
+	"correctChoiceId": "a"
+}

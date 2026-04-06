@@ -1,0 +1,21 @@
+{
+	"slug": "variables-console-3",
+	"order": 5,
+	"title": "Using Variables in Calculations",
+	"prompt": "Use variables to calculate and print `total_damage`.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "15\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "15\n"
+		}
+	]
+}

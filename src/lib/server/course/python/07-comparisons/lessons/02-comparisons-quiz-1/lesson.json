@@ -1,0 +1,27 @@
+{
+	"slug": "comparisons-quiz-1",
+	"order": 2,
+	"title": "Quiz: Comparison Results",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What kind of value does `5 > 3` produce?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "A boolean value."
+		},
+		{
+			"id": "b",
+			"label": "A list."
+		},
+		{
+			"id": "c",
+			"label": "A function."
+		},
+		{
+			"id": "d",
+			"label": "A dictionary."
+		}
+	],
+	"correctChoiceId": "a"
+}

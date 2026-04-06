@@ -1,0 +1,6 @@
+{
+	"slug": "variables",
+	"order": 2,
+	"title": "Variables",
+	"description": "Store values in names so your program can reuse and update them."
+}

@@ -1,0 +1,27 @@
+{
+	"slug": "sets-unit-3",
+	"order": 9,
+	"title": "Finding Shared Items",
+	"prompt": "Write `shared_items` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "shared_items",
+	"publicCases": [
+		{
+			"name": "public-one",
+			"args": [{}, {}],
+			"expected": {}
+		},
+		{
+			"name": "public-none",
+			"args": [{}, {}],
+			"expected": {}
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-many",
+			"args": [{}, {}],
+			"expected": {}
+		}
+	]
+}

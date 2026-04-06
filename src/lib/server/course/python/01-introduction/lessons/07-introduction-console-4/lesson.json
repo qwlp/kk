@@ -1,0 +1,21 @@
+{
+	"slug": "introduction-console-4",
+	"order": 7,
+	"title": "Reading Code Top to Bottom",
+	"prompt": "Print \"Load\", \"Aim\", \"Fire\" on separate lines.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "Load\nAim\nFire\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "Load\nAim\nFire\n"
+		}
+	]
+}

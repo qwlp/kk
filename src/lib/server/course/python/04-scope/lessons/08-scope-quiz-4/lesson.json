@@ -1,0 +1,27 @@
+{
+	"slug": "scope-quiz-4",
+	"order": 8,
+	"title": "Quiz: Same Name in Different Functions",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Can two different functions each use a local variable named `count`?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Yes, because each function has its own local scope."
+		},
+		{
+			"id": "b",
+			"label": "No, Python only allows one variable name per file."
+		},
+		{
+			"id": "c",
+			"label": "No, local variables must all be unique everywhere."
+		},
+		{
+			"id": "d",
+			"label": "Only if both variables store strings."
+		}
+	],
+	"correctChoiceId": "a"
+}

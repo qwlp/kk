@@ -1,0 +1,27 @@
+{
+	"slug": "scope-quiz-5",
+	"order": 10,
+	"title": "Quiz: Parameters and Scope",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "A parameter like `name` in `def greet(name):` belongs to which scope?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "The function’s local scope."
+		},
+		{
+			"id": "b",
+			"label": "Only the global scope."
+		},
+		{
+			"id": "c",
+			"label": "The comment scope."
+		},
+		{
+			"id": "d",
+			"label": "No scope at all."
+		}
+	],
+	"correctChoiceId": "a"
+}

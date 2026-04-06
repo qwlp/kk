@@ -1,0 +1,21 @@
+{
+	"slug": "errors-console-2",
+	"order": 4,
+	"title": "Avoiding a Missing-Key Error",
+	"prompt": "Use `.get()` with a default value and print the result.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "0\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "0\n"
+		}
+	]
+}

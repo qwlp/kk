@@ -1,0 +1,21 @@
+{
+	"slug": "dictionaries-console-3",
+	"order": 7,
+	"title": "Using Multiple Dictionary Values",
+	"prompt": "Print both requested dictionary values on separate lines.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "Ayla\n3\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "Ayla\n3\n"
+		}
+	]
+}

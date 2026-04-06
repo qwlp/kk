@@ -1,0 +1,27 @@
+{
+	"slug": "lists-quiz-1",
+	"order": 2,
+	"title": "Quiz: What a List Stores",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What is a Python list best at storing?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "An ordered collection of values."
+		},
+		{
+			"id": "b",
+			"label": "Only one value at a time."
+		},
+		{
+			"id": "c",
+			"label": "Only key/value pairs."
+		},
+		{
+			"id": "d",
+			"label": "Only unique values."
+		}
+	],
+	"correctChoiceId": "a"
+}

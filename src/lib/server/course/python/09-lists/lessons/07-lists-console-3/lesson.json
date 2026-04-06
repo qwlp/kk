@@ -1,0 +1,21 @@
+{
+	"slug": "lists-console-3",
+	"order": 7,
+	"title": "Looping Over a List",
+	"prompt": "Store the items in `colors` and use a loop to print them.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "red\ngreen\nblue\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "red\ngreen\nblue\n"
+		}
+	]
+}

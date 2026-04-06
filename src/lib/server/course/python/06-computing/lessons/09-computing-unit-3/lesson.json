@@ -1,0 +1,27 @@
+{
+	"slug": "computing-unit-3",
+	"order": 9,
+	"title": "Checking Available Memory",
+	"prompt": "Write `has_enough_memory` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "has_enough_memory",
+	"publicCases": [
+		{
+			"name": "public-true",
+			"args": [128, 256],
+			"expected": true
+		},
+		{
+			"name": "public-false",
+			"args": [512, 256],
+			"expected": false
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-edge",
+			"args": [256, 256],
+			"expected": true
+		}
+	]
+}

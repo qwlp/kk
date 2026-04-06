@@ -1,0 +1,27 @@
+{
+	"slug": "practice-quiz-2",
+	"order": 5,
+	"title": "Quiz: Breaking Problems Into Steps",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What is usually a good strategy for a larger beginner problem?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Break it into smaller steps you already know how to solve."
+		},
+		{
+			"id": "b",
+			"label": "Avoid using variables or functions."
+		},
+		{
+			"id": "c",
+			"label": "Ignore edge cases until the very end."
+		},
+		{
+			"id": "d",
+			"label": "Rewrite the whole language in your head first."
+		}
+	],
+	"correctChoiceId": "a"
+}

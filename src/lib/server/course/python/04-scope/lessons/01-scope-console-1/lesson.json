@@ -1,0 +1,21 @@
+{
+	"slug": "scope-console-1",
+	"order": 1,
+	"title": "Local Variables Live Inside Functions",
+	"prompt": "Inside `show_message`, create a local variable and print it, then call the function.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "Local scope\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "Local scope\n"
+		}
+	]
+}

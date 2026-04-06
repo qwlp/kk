@@ -1,0 +1,21 @@
+{
+	"slug": "testing-and-debugging-console-4",
+	"order": 10,
+	"title": "Fixing a Simple Calculation Bug",
+	"prompt": "Print the result of 8 + 4.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "12\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "12\n"
+		}
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"slug": "dictionaries-quiz-2",
+	"order": 5,
+	"title": "Quiz: Looking Up by Key",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "How do you read the value for the key `\"name\"` from a dictionary called `player`?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "player[\"name\"]"
+		},
+		{
+			"id": "b",
+			"label": "player[0]"
+		},
+		{
+			"id": "c",
+			"label": "player.name()"
+		},
+		{
+			"id": "d",
+			"label": "name[player]"
+		}
+	],
+	"correctChoiceId": "a"
+}

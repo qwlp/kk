@@ -1,0 +1,21 @@
+{
+	"slug": "functions-console-3",
+	"order": 5,
+	"title": "Functions With Parameters",
+	"prompt": "Write `announce(name)` and call it with \"Ayla\".",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "Now entering:\nAyla\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "Now entering:\nAyla\n"
+		}
+	]
+}

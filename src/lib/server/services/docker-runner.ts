@@ -5,8 +5,8 @@ import path from 'node:path';
 import { spawn } from 'node:child_process';
 import { Data, Effect, Layer, ServiceMap } from 'effect';
 import { env } from '$env/dynamic/private';
-import type { RunIntent, SubmissionRunResponse, SubmissionTestResult } from '$lib/types';
-import type { ChallengeDefinition } from '../challenges/types';
+import type { LessonRunResponse, RunIntent, SubmissionTestResult } from '$lib/types';
+import type { ConsoleLessonDefinition, UnitLessonDefinition } from '../course/types';
 
 const RUN_TIMEOUT_MS = 12_000;
 const IMAGE_PREP_TIMEOUT_MS = 120_000;
@@ -47,14 +47,14 @@ export class RunnerRateLimitError extends Data.TaggedError('RunnerRateLimitError
 }> {}
 
 type RunSubmissionInput = {
-	challenge: ChallengeDefinition;
+	lesson: ConsoleLessonDefinition | UnitLessonDefinition;
 	code: string;
 	clientIp: string;
 	intent: RunIntent;
 	stdin?: string;
 };
 
-type FinalRunResult = Omit<SubmissionRunResponse, 'submissionId'>;
+type FinalRunResult = LessonRunResponse;
 
 interface DockerRunnerDef {
 	runSubmission: (
@@ -238,7 +238,7 @@ def main() -> None:
     function_name = payload.get("functionName")
 
     if intent == "run":
-        if mode == "function":
+        if mode == "unit":
             stdout, stderr, exit_code = run_visible_tests()
             status = "passed" if exit_code == 0 else "failed"
         else:
@@ -268,7 +268,7 @@ def main() -> None:
 
     for case in tests:
         try:
-            if mode == "function":
+            if mode == "unit":
                 outcome, case_stdout, case_stderr = run_function_case(function_name, case)
             else:
                 outcome, case_stdout, case_stderr = run_stdin_case(case)
@@ -365,11 +365,11 @@ const toCasePayload = ({
 	intent,
 	stdin
 }: {
-	challenge: ChallengeDefinition;
+	challenge: ConsoleLessonDefinition | UnitLessonDefinition;
 	intent: RunIntent;
 	stdin?: string;
 }) => {
-	if (challenge.mode === 'function') {
+	if (challenge.mode === 'unit') {
 		return {
 			intent,
 			mode: challenge.mode,
@@ -393,11 +393,15 @@ const toCasePayload = ({
 	};
 };
 
-const writeRunnerFiles = async (runDir: string, challenge: ChallengeDefinition, code: string) => {
+const writeRunnerFiles = async (
+	runDir: string,
+	challenge: ConsoleLessonDefinition | UnitLessonDefinition,
+	code: string
+) => {
 	const manifest = {
 		slug: challenge.slug,
 		mode: challenge.mode,
-		functionName: challenge.mode === 'function' ? challenge.functionName : undefined
+		functionName: challenge.mode === 'unit' ? challenge.functionName : undefined
 	};
 
 	await Promise.all([
@@ -408,7 +412,7 @@ const writeRunnerFiles = async (runDir: string, challenge: ChallengeDefinition, 
 			'utf8'
 		),
 		writeFile(path.join(runDir, 'run_harness.py'), PYTHON_HARNESS, 'utf8'),
-		challenge.mode === 'function' && challenge.testFileContent
+		challenge.mode === 'unit' && challenge.testFileContent
 			? writeFile(
 					path.join(runDir, challenge.testFileName ?? 'main_test.py'),
 					challenge.testFileContent,
@@ -641,7 +645,7 @@ export class DockerRunnerService extends ServiceMap.Service<DockerRunnerService,
 				activeRuns = Math.max(0, activeRuns - 1);
 			});
 
-		const runSubmission = ({ challenge, code, clientIp, intent, stdin }: RunSubmissionInput) =>
+		const runSubmission = ({ lesson, code, clientIp, intent, stdin }: RunSubmissionInput) =>
 			Effect.acquireUseRelease(
 				acquireSlot(clientIp),
 				() =>
@@ -651,8 +655,8 @@ export class DockerRunnerService extends ServiceMap.Service<DockerRunnerService,
 							const startedAt = Date.now();
 
 							try {
-								await writeRunnerFiles(runDir, challenge, code);
-								const harnessPayload = toCasePayload({ challenge, intent, stdin });
+								await writeRunnerFiles(runDir, lesson, code);
+								const harnessPayload = toCasePayload({ challenge: lesson, intent, stdin });
 								const result = await runDockerHarness(runDir, harnessPayload);
 
 								if (result.timedOut) {

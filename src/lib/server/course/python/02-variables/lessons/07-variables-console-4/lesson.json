@@ -1,0 +1,21 @@
+{
+	"slug": "variables-console-4",
+	"order": 7,
+	"title": "Printing Labels and Variables",
+	"prompt": "Use variables to calculate and print `xp`.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "XP:\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "XP:\n"
+		}
+	]
+}

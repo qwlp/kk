@@ -18,6 +18,7 @@
 
 	let container = $state<HTMLDivElement | null>(null);
 	let editorView = $state<EditorView | null>(null);
+	let syncingExternalValue = $state(false);
 
 	const editableCompartment = new Compartment();
 	const vimCompartment = new Compartment();
@@ -56,13 +57,27 @@
 									'radial-gradient(circle at top left, rgba(223,79,143,0.04), transparent 22%), linear-gradient(180deg, rgba(29,20,33,0.99), rgba(24,17,28,0.995))'
 							},
 							'.cm-gutters': {
-								background: 'linear-gradient(180deg, rgba(44,31,47,0.98), rgba(36,26,40,0.98))',
+								background: 'transparent !important',
+								backgroundColor: 'transparent !important',
 								color: '#9b7f92',
-								borderRight: '1px solid rgba(255, 214, 236, 0.08)',
+								borderRight: '1px solid rgba(255, 214, 236, 0.05)',
 								paddingTop: '0.15rem'
 							},
+							'.cm-gutter': {
+								background: 'transparent !important',
+								backgroundColor: 'transparent !important'
+							},
+							'.cm-lineNumbers': {
+								background: 'transparent !important',
+								backgroundColor: 'transparent !important'
+							},
+							'.cm-lineNumbers .cm-gutterElement': {
+								background: 'transparent !important',
+								backgroundColor: 'transparent !important'
+							},
 							'.cm-activeLineGutter': {
-								backgroundColor: 'rgba(240, 106, 165, 0.04)',
+								background: 'transparent !important',
+								backgroundColor: 'transparent !important',
 								color: '#dcb7c8'
 							},
 							'.cm-activeLine': {
@@ -118,6 +133,7 @@
 						{ dark: true }
 					),
 					EditorView.updateListener.of((update) => {
+						if (syncingExternalValue) return;
 						if (!update.docChanged) return;
 						onValueChange?.(update.state.doc.toString());
 					})
@@ -138,6 +154,7 @@
 		const currentValue = editorView.state.doc.toString();
 		if (currentValue === value) return;
 
+		syncingExternalValue = true;
 		editorView.dispatch({
 			changes: {
 				from: 0,
@@ -145,6 +162,7 @@
 				insert: value
 			}
 		});
+		syncingExternalValue = false;
 	});
 
 	$effect(() => {

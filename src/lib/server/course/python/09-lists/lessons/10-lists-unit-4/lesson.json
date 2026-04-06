@@ -1,0 +1,27 @@
+{
+	"slug": "lists-unit-4",
+	"order": 10,
+	"title": "Joining Names With Commas",
+	"prompt": "Write `join_names` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "join_names",
+	"publicCases": [
+		{
+			"name": "public-two",
+			"args": [["Ayla", "Kai"]],
+			"expected": "Ayla, Kai"
+		},
+		{
+			"name": "public-one",
+			"args": [["Solo"]],
+			"expected": "Solo"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-empty",
+			"args": [[]],
+			"expected": ""
+		}
+	]
+}

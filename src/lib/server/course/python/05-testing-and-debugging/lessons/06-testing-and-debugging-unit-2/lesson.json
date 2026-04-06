@@ -1,0 +1,27 @@
+{
+	"slug": "testing-and-debugging-unit-2",
+	"order": 6,
+	"title": "Testing a Boolean Result",
+	"prompt": "Write `is_even` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "is_even",
+	"publicCases": [
+		{
+			"name": "public-even",
+			"args": [4],
+			"expected": true
+		},
+		{
+			"name": "public-odd",
+			"args": [5],
+			"expected": false
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-zero",
+			"args": [0],
+			"expected": true
+		}
+	]
+}

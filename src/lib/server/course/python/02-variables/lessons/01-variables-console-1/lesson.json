@@ -1,0 +1,21 @@
+{
+	"slug": "variables-console-1",
+	"order": 1,
+	"title": "Storing a Value in a Variable",
+	"prompt": "Store \"Ayla\" in `hero_name` and print it.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "Ayla\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "Ayla\n"
+		}
+	]
+}

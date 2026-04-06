@@ -1,0 +1,27 @@
+{
+	"slug": "sets-quiz-3",
+	"order": 8,
+	"title": "Quiz: Intersection Meaning",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What does set intersection return?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "The values that appear in both sets."
+		},
+		{
+			"id": "b",
+			"label": "All values from either set."
+		},
+		{
+			"id": "c",
+			"label": "The size of the larger set."
+		},
+		{
+			"id": "d",
+			"label": "Only the values from the first set."
+		}
+	],
+	"correctChoiceId": "a"
+}

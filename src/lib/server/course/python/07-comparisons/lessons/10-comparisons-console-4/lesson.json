@@ -1,0 +1,21 @@
+{
+	"slug": "comparisons-console-4",
+	"order": 10,
+	"title": "Combining Conditions With `and`",
+	"prompt": "Use an `if` statement so the program prints \"Ready\" when the condition passes.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "Ready\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "Ready\n"
+		}
+	]
+}

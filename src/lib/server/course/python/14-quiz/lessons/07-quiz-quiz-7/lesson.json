@@ -1,0 +1,27 @@
+{
+	"slug": "quiz-quiz-7",
+	"order": 7,
+	"title": "Review Quiz: Lists",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What index gives the first item in a list?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "0"
+		},
+		{
+			"id": "b",
+			"label": "1"
+		},
+		{
+			"id": "c",
+			"label": "-1"
+		},
+		{
+			"id": "d",
+			"label": "first"
+		}
+	],
+	"correctChoiceId": "a"
+}

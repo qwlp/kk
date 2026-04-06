@@ -1,0 +1,6 @@
+{
+	"slug": "lists",
+	"order": 9,
+	"title": "Lists",
+	"description": "Work with ordered collections of values using Python lists."
+}

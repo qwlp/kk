@@ -1,0 +1,27 @@
+{
+	"slug": "quiz-quiz-10",
+	"order": 10,
+	"title": "Review Quiz: Errors",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What is one reason to use `try` and `except`?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "To recover from expected kinds of runtime errors."
+		},
+		{
+			"id": "b",
+			"label": "To define list indexes."
+		},
+		{
+			"id": "c",
+			"label": "To make a variable local."
+		},
+		{
+			"id": "d",
+			"label": "To replace every `if` statement."
+		}
+	],
+	"correctChoiceId": "a"
+}

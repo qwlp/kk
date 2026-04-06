@@ -1,0 +1,27 @@
+{
+	"slug": "variables-quiz-2",
+	"order": 4,
+	"title": "Quiz: Valid Variable Names",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Which of these is the best valid Python variable name?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "player_level"
+		},
+		{
+			"id": "b",
+			"label": "2level"
+		},
+		{
+			"id": "c",
+			"label": "player level"
+		},
+		{
+			"id": "d",
+			"label": "player-level"
+		}
+	],
+	"correctChoiceId": "a"
+}

@@ -1,0 +1,27 @@
+{
+	"slug": "practice-quiz-1",
+	"order": 2,
+	"title": "Quiz: Choosing the Right Tool",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Which Python tool is a good fit when you need unique values only?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "A set."
+		},
+		{
+			"id": "b",
+			"label": "A string."
+		},
+		{
+			"id": "c",
+			"label": "A print statement."
+		},
+		{
+			"id": "d",
+			"label": "A comment."
+		}
+	],
+	"correctChoiceId": "a"
+}

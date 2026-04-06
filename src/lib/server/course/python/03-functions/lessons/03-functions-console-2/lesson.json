@@ -1,0 +1,21 @@
+{
+	"slug": "functions-console-2",
+	"order": 3,
+	"title": "Defining and Calling a Function",
+	"prompt": "Define `battle_cry` so it prints \"Charge!\", then call it once.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "Charge!\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "Charge!\n"
+		}
+	]
+}

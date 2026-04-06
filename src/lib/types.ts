@@ -1,4 +1,4 @@
-export type ChallengeMode = 'function' | 'stdin';
+export type LessonMode = 'console' | 'unit' | 'quiz';
 export type RunIntent = 'run' | 'submit';
 
 export type SubmissionStatus =
@@ -12,24 +12,67 @@ export type SubmissionStatus =
 export type TestResultStatus = 'passed' | 'failed' | 'error';
 export type TestVisibility = 'public' | 'hidden';
 
-export interface PublicChallenge {
+export interface ChapterSummary {
 	slug: string;
+	order: number;
 	title: string;
-	prompt: string;
-	starterCode: string;
-	solutionCode: string;
-	lessonHtml: string;
-	expectedOutput?: string;
-	testFileName?: string;
-	testFileContent?: string;
-	mode: ChallengeMode;
+	description: string;
+	lessonCount: number;
 }
 
-export interface ChallengeSummary {
+export interface LessonSummary {
 	slug: string;
+	chapterSlug: string;
+	order: number;
 	title: string;
-	mode: ChallengeMode;
+	mode: LessonMode;
 }
+
+export interface CourseSequenceItem {
+	slug: string;
+	chapterSlug: string;
+	title: string;
+	order: number;
+	globalOrder: number;
+	mode: LessonMode;
+}
+
+export interface BasePublicLesson extends CourseSequenceItem {
+	chapterTitle: string;
+	prompt: string;
+	lessonHtml: string;
+}
+
+export interface ConsoleLesson extends BasePublicLesson {
+	mode: 'console';
+	starterCode: string;
+	solutionCode: string;
+	sampleInput?: string;
+}
+
+export interface UnitLesson extends BasePublicLesson {
+	mode: 'unit';
+	starterCode: string;
+	solutionCode: string;
+	testFileName: string;
+	testFileContent: string;
+	functionName: string;
+}
+
+export interface QuizChoice {
+	id: string;
+	label: string;
+	labelHtml: string;
+}
+
+export interface QuizLesson extends BasePublicLesson {
+	mode: 'quiz';
+	question: string;
+	questionHtml: string;
+	choices: QuizChoice[];
+}
+
+export type PublicLesson = ConsoleLesson | UnitLesson | QuizLesson;
 
 export interface SubmissionTestResult {
 	name: string;
@@ -40,22 +83,27 @@ export interface SubmissionTestResult {
 
 export interface SubmissionRecord {
 	id: string;
-	challengeSlug: string;
+	lessonSlug: string;
 	code: string;
-	mode: ChallengeMode;
+	mode: LessonMode;
 	status: SubmissionStatus;
 	stdout: string;
 	stderr: string;
 	tests: SubmissionTestResult[];
 	durationMs: number;
 	createdAt: number;
+	selectedChoiceId?: string;
 }
 
-export interface SubmissionRunResponse {
-	submissionId?: string;
+export interface LessonRunResponse {
 	status: Exclude<SubmissionStatus, 'running'>;
 	durationMs: number;
 	stdout: string;
 	stderr: string;
 	tests: SubmissionTestResult[];
+}
+
+export interface LessonSubmitResponse extends LessonRunResponse {
+	submissionId?: string;
+	selectedChoiceId?: string;
 }

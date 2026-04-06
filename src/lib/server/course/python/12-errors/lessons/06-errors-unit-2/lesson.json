@@ -1,0 +1,27 @@
+{
+	"slug": "errors-unit-2",
+	"order": 6,
+	"title": "Parsing a Level Safely",
+	"prompt": "Write `parse_level` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "parse_level",
+	"publicCases": [
+		{
+			"name": "public-valid",
+			"args": ["7"],
+			"expected": 7
+		},
+		{
+			"name": "public-invalid",
+			"args": ["oops"],
+			"expected": 0
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-zero",
+			"args": ["0"],
+			"expected": 0
+		}
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"slug": "quiz-quiz-5",
+	"order": 5,
+	"title": "Review Quiz: Comparisons",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What does `==` do?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "It checks whether two values are equal."
+		},
+		{
+			"id": "b",
+			"label": "It assigns a variable."
+		},
+		{
+			"id": "c",
+			"label": "It starts a loop."
+		},
+		{
+			"id": "d",
+			"label": "It creates a set."
+		}
+	],
+	"correctChoiceId": "a"
+}

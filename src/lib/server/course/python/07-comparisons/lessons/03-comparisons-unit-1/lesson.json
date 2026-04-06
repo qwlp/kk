@@ -1,0 +1,27 @@
+{
+	"slug": "comparisons-unit-1",
+	"order": 3,
+	"title": "Checking a Minimum Age",
+	"prompt": "Write `is_old_enough` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "is_old_enough",
+	"publicCases": [
+		{
+			"name": "public-low",
+			"args": [17],
+			"expected": false
+		},
+		{
+			"name": "public-high",
+			"args": [18],
+			"expected": true
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-older",
+			"args": [25],
+			"expected": true
+		}
+	]
+}

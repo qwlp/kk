@@ -1,0 +1,51 @@
+{
+	"slug": "practice-unit-5",
+	"order": 10,
+	"title": "Practice: Can Craft",
+	"prompt": "Write `can_craft` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "can_craft",
+	"publicCases": [
+		{
+			"name": "public-yes",
+			"args": [
+				{
+					"wood": 3,
+					"ore": 2
+				},
+				{
+					"wood": 2,
+					"ore": 1
+				}
+			],
+			"expected": true
+		},
+		{
+			"name": "public-no",
+			"args": [
+				{
+					"wood": 1
+				},
+				{
+					"wood": 2
+				}
+			],
+			"expected": false
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-missing",
+			"args": [
+				{
+					"wood": 3
+				},
+				{
+					"wood": 2,
+					"ore": 1
+				}
+			],
+			"expected": false
+		}
+	]
+}

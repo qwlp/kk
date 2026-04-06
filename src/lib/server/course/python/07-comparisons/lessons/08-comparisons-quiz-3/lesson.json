@@ -1,0 +1,27 @@
+{
+	"slug": "comparisons-quiz-3",
+	"order": 8,
+	"title": "Quiz: Meaning of `and`",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "When does `left and right` evaluate to `True`?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Only when both `left` and `right` are true."
+		},
+		{
+			"id": "b",
+			"label": "Whenever either side is true."
+		},
+		{
+			"id": "c",
+			"label": "Only when both sides are false."
+		},
+		{
+			"id": "d",
+			"label": "It never evaluates to `True`."
+		}
+	],
+	"correctChoiceId": "a"
+}

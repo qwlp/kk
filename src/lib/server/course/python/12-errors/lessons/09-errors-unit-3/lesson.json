@@ -1,0 +1,27 @@
+{
+	"slug": "errors-unit-3",
+	"order": 9,
+	"title": "Reading the First Item Safely",
+	"prompt": "Write `first_item` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "first_item",
+	"publicCases": [
+		{
+			"name": "public-non-empty",
+			"args": [[1, 2, 3]],
+			"expected": 1
+		},
+		{
+			"name": "public-empty",
+			"args": [[]],
+			"expected": null
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-words",
+			"args": [["a", "b"]],
+			"expected": "a"
+		}
+	]
+}

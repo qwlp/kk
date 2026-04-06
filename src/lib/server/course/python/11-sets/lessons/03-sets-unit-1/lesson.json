@@ -1,0 +1,27 @@
+{
+	"slug": "sets-unit-1",
+	"order": 3,
+	"title": "Counting Unique Items",
+	"prompt": "Write `unique_count` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "unique_count",
+	"publicCases": [
+		{
+			"name": "public-dup",
+			"args": [["a", "a", "b"]],
+			"expected": 2
+		},
+		{
+			"name": "public-empty",
+			"args": [[]],
+			"expected": 0
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-all-unique",
+			"args": [[1, 2, 3]],
+			"expected": 3
+		}
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"slug": "lists-quiz-3",
+	"order": 8,
+	"title": "Quiz: What `append()` Does",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What does `append()` do to a list?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Adds one item to the end."
+		},
+		{
+			"id": "b",
+			"label": "Removes the first item."
+		},
+		{
+			"id": "c",
+			"label": "Sorts the whole list."
+		},
+		{
+			"id": "d",
+			"label": "Counts the items."
+		}
+	],
+	"correctChoiceId": "a"
+}

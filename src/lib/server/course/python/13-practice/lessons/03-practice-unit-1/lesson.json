@@ -1,0 +1,27 @@
+{
+	"slug": "practice-unit-1",
+	"order": 3,
+	"title": "Practice: Averaging Scores",
+	"prompt": "Write `average` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "average",
+	"publicCases": [
+		{
+			"name": "public-three",
+			"args": [[2, 4, 6]],
+			"expected": 4
+		},
+		{
+			"name": "public-empty",
+			"args": [[]],
+			"expected": 0
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-one",
+			"args": [[5]],
+			"expected": 5
+		}
+	]
+}

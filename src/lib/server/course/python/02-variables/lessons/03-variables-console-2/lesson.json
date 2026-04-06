@@ -1,0 +1,21 @@
+{
+	"slug": "variables-console-2",
+	"order": 3,
+	"title": "Updating a Variable",
+	"prompt": "Start with 10 in `coins`, update it, and print the final value.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "15\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "15\n"
+		}
+	]
+}

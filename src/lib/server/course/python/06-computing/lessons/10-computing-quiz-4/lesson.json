@@ -1,0 +1,27 @@
+{
+	"slug": "computing-quiz-4",
+	"order": 10,
+	"title": "Quiz: Why Abstractions Help",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Why is wrapping a conversion in a function useful?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "It hides repeated details behind a clear reusable name."
+		},
+		{
+			"id": "b",
+			"label": "It changes how many bytes are in a kilobyte."
+		},
+		{
+			"id": "c",
+			"label": "It makes Python stop using math."
+		},
+		{
+			"id": "d",
+			"label": "It turns numbers into comments."
+		}
+	],
+	"correctChoiceId": "a"
+}

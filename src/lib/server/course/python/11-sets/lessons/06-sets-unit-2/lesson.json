@@ -1,0 +1,27 @@
+{
+	"slug": "sets-unit-2",
+	"order": 6,
+	"title": "Detecting Duplicates",
+	"prompt": "Write `has_duplicates` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "has_duplicates",
+	"publicCases": [
+		{
+			"name": "public-yes",
+			"args": [[1, 1, 2]],
+			"expected": true
+		},
+		{
+			"name": "public-no",
+			"args": [[1, 2, 3]],
+			"expected": false
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-empty",
+			"args": [[]],
+			"expected": false
+		}
+	]
+}

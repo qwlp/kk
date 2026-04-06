@@ -1,0 +1,37 @@
+{
+	"slug": "practice-unit-3",
+	"order": 8,
+	"title": "Practice: Inventory Total",
+	"prompt": "Write `inventory_total` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "inventory_total",
+	"publicCases": [
+		{
+			"name": "public-two",
+			"args": [
+				{
+					"potion": 2,
+					"key": 1
+				}
+			],
+			"expected": 3
+		},
+		{
+			"name": "public-empty",
+			"args": [{}],
+			"expected": 0
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-many",
+			"args": [
+				{
+					"a": 3,
+					"b": 4
+				}
+			],
+			"expected": 7
+		}
+	]
+}

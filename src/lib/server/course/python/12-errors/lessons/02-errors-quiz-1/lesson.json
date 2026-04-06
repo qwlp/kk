@@ -1,0 +1,27 @@
+{
+	"slug": "errors-quiz-1",
+	"order": 2,
+	"title": "Quiz: What an Error Is",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What is a programming error in this context?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "A problem that makes the code fail or behave incorrectly."
+		},
+		{
+			"id": "b",
+			"label": "A special kind of loop."
+		},
+		{
+			"id": "c",
+			"label": "A comment that explains the code."
+		},
+		{
+			"id": "d",
+			"label": "A function that always returns `True`."
+		}
+	],
+	"correctChoiceId": "a"
+}

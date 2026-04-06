@@ -1,0 +1,21 @@
+{
+	"slug": "introduction-console-5",
+	"order": 9,
+	"title": "Mixing Text and Numbers",
+	"prompt": "Print the requested string and number on separate lines.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "Level 1\n2\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "Level 1\n2\n"
+		}
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"slug": "computing-unit-2",
+	"order": 6,
+	"title": "Converting Kilobytes to Bytes",
+	"prompt": "Write `kilobytes_to_bytes` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "kilobytes_to_bytes",
+	"publicCases": [
+		{
+			"name": "public-one",
+			"args": [1],
+			"expected": 1024
+		},
+		{
+			"name": "public-three",
+			"args": [3],
+			"expected": 3072
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-zero",
+			"args": [0],
+			"expected": 0
+		}
+	]
+}

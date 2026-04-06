@@ -1,0 +1,21 @@
+{
+	"slug": "functions-console-4",
+	"order": 7,
+	"title": "Returning a Value",
+	"prompt": "Define `double` so it returns a value, then print the result of calling it.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "12\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "12\n"
+		}
+	]
+}

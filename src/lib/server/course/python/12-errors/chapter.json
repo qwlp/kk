@@ -1,0 +1,6 @@
+{
+	"slug": "errors",
+	"order": 12,
+	"title": "Errors",
+	"description": "Handle bad input and edge cases so your code behaves safely."
+}

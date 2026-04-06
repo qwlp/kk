@@ -1,0 +1,39 @@
+{
+	"slug": "dictionaries-unit-1",
+	"order": 3,
+	"title": "Getting a Score From a Dictionary",
+	"prompt": "Write `get_score` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "get_score",
+	"publicCases": [
+		{
+			"name": "public-basic",
+			"args": [
+				{
+					"score": 9
+				}
+			],
+			"expected": 9
+		},
+		{
+			"name": "public-zero",
+			"args": [
+				{
+					"score": 0
+				}
+			],
+			"expected": 0
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-large",
+			"args": [
+				{
+					"score": 42
+				}
+			],
+			"expected": 42
+		}
+	]
+}

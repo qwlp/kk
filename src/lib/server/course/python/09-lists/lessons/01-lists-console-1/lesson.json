@@ -1,0 +1,21 @@
+{
+	"slug": "lists-console-1",
+	"order": 1,
+	"title": "Creating a List and Reading an Item",
+	"prompt": "Store the list in `items` and print the first item.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "rope\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "rope\n"
+		}
+	]
+}

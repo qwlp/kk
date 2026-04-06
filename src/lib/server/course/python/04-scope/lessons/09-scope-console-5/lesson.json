@@ -1,0 +1,21 @@
+{
+	"slug": "scope-console-5",
+	"order": 9,
+	"title": "Reading a Value From Outside",
+	"prompt": "Create an outer variable and print it inside `show_theme`.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "forest\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "forest\n"
+		}
+	]
+}

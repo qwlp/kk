@@ -1,0 +1,21 @@
+{
+	"slug": "sets-console-3",
+	"order": 7,
+	"title": "Finding Shared Values",
+	"prompt": "Create the two sets, compute their intersection, and print its length.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "1\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "1\n"
+		}
+	]
+}

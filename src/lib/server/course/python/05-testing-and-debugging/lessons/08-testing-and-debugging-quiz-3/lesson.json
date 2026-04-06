@@ -1,0 +1,27 @@
+{
+	"slug": "testing-and-debugging-quiz-3",
+	"order": 8,
+	"title": "Quiz: Exact Comparisons",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Why do tests catch formatting bugs so well?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Because they compare the complete actual result to the expected result."
+		},
+		{
+			"id": "b",
+			"label": "Because strings cannot contain bugs."
+		},
+		{
+			"id": "c",
+			"label": "Because tests ignore punctuation and spaces."
+		},
+		{
+			"id": "d",
+			"label": "Because Python formats every string the same way."
+		}
+	],
+	"correctChoiceId": "a"
+}

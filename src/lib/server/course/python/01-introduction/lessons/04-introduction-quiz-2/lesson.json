@@ -1,0 +1,27 @@
+{
+	"slug": "introduction-quiz-2",
+	"order": 4,
+	"title": "Quiz: Strings Use Quotes",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Which line uses a string literal correctly?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "print(\"Mage\")"
+		},
+		{
+			"id": "b",
+			"label": "print(Mage)"
+		},
+		{
+			"id": "c",
+			"label": "print(Mage\")"
+		},
+		{
+			"id": "d",
+			"label": "print(\"Mage)"
+		}
+	],
+	"correctChoiceId": "a"
+}

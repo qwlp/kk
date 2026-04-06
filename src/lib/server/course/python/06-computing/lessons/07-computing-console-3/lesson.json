@@ -1,0 +1,21 @@
+{
+	"slug": "computing-console-3",
+	"order": 7,
+	"title": "Converting Kilobytes to Bytes",
+	"prompt": "Use variables to calculate and print `bytes_total`.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "3072\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "3072\n"
+		}
+	]
+}

@@ -1,0 +1,21 @@
+{
+	"slug": "comparisons-console-2",
+	"order": 4,
+	"title": "Using `if` With a Boolean",
+	"prompt": "Use an `if` statement so the program prints \"Access granted\" when the condition passes.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "Access granted\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "Access granted\n"
+		}
+	]
+}

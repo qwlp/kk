@@ -1,0 +1,27 @@
+{
+	"slug": "functions-quiz-3",
+	"order": 6,
+	"title": "Quiz: What `return` Means",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What does `return` do in a function?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "It sends a value back to the caller."
+		},
+		{
+			"id": "b",
+			"label": "It prints automatically."
+		},
+		{
+			"id": "c",
+			"label": "It repeats the function forever."
+		},
+		{
+			"id": "d",
+			"label": "It creates a new parameter."
+		}
+	],
+	"correctChoiceId": "a"
+}

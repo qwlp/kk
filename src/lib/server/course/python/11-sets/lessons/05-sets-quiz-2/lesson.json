@@ -1,0 +1,27 @@
+{
+	"slug": "sets-quiz-2",
+	"order": 5,
+	"title": "Quiz: Membership Checks",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What does `\"rope\" in tools` check when `tools` is a set?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Whether `\"rope\"` is in the set."
+		},
+		{
+			"id": "b",
+			"label": "Whether `\"rope\"` is the first item."
+		},
+		{
+			"id": "c",
+			"label": "Whether the set is empty."
+		},
+		{
+			"id": "d",
+			"label": "Whether the set has duplicates."
+		}
+	],
+	"correctChoiceId": "a"
+}

@@ -1,0 +1,21 @@
+{
+	"slug": "scope-console-3",
+	"order": 5,
+	"title": "Returning a Value Out of a Function",
+	"prompt": "Return a value from `build_label` and print the call result.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "Knight\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "Knight\n"
+		}
+	]
+}

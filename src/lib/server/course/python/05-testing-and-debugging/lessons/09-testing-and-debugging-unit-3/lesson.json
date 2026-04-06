@@ -1,0 +1,27 @@
+{
+	"slug": "testing-and-debugging-unit-3",
+	"order": 9,
+	"title": "Returning a Formatted String",
+	"prompt": "Write `format_item` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "format_item",
+	"publicCases": [
+		{
+			"name": "public-one",
+			"args": ["potion"],
+			"expected": "Item: potion"
+		},
+		{
+			"name": "public-two",
+			"args": ["key"],
+			"expected": "Item: key"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-empty",
+			"args": [""],
+			"expected": "Item: "
+		}
+	]
+}

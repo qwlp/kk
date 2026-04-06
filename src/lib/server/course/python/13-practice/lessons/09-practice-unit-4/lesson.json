@@ -1,0 +1,27 @@
+{
+	"slug": "practice-unit-4",
+	"order": 9,
+	"title": "Practice: Top Score",
+	"prompt": "Write `top_score` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "top_score",
+	"publicCases": [
+		{
+			"name": "public-many",
+			"args": [[2, 9, 5]],
+			"expected": 9
+		},
+		{
+			"name": "public-empty",
+			"args": [[]],
+			"expected": 0
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-one",
+			"args": [[7]],
+			"expected": 7
+		}
+	]
+}

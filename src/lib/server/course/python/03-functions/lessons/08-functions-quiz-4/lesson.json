@@ -1,0 +1,27 @@
+{
+	"slug": "functions-quiz-4",
+	"order": 8,
+	"title": "Quiz: Calling a Function",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Which line calls a function named `wave`?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "wave()"
+		},
+		{
+			"id": "b",
+			"label": "def wave:"
+		},
+		{
+			"id": "c",
+			"label": "return wave"
+		},
+		{
+			"id": "d",
+			"label": "print = wave"
+		}
+	],
+	"correctChoiceId": "a"
+}

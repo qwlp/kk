@@ -1,0 +1,27 @@
+{
+	"slug": "loops-quiz-3",
+	"order": 8,
+	"title": "Quiz: Stopping a `while` Loop",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What makes a `while` loop stop?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Its condition becomes false."
+		},
+		{
+			"id": "b",
+			"label": "It always runs forever."
+		},
+		{
+			"id": "c",
+			"label": "A list becomes empty."
+		},
+		{
+			"id": "d",
+			"label": "A function is defined."
+		}
+	],
+	"correctChoiceId": "a"
+}

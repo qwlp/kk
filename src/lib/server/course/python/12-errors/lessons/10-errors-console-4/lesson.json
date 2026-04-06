@@ -1,0 +1,21 @@
+{
+	"slug": "errors-console-4",
+	"order": 10,
+	"title": "Checking Before Dividing",
+	"prompt": "Check for division by zero before dividing.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "cannot divide\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "cannot divide\n"
+		}
+	]
+}

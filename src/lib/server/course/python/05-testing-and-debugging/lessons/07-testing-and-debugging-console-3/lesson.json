@@ -1,0 +1,21 @@
+{
+	"slug": "testing-and-debugging-console-3",
+	"order": 7,
+	"title": "Fixing a Broken Function Call",
+	"prompt": "Write `greet(name)` and call it with \"Ada\".",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "Hello, Ada\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "Hello, Ada\n"
+		}
+	]
+}

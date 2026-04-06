@@ -1,0 +1,27 @@
+{
+	"slug": "lists-unit-2",
+	"order": 6,
+	"title": "Counting Even Numbers in a List",
+	"prompt": "Write `count_even` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "count_even",
+	"publicCases": [
+		{
+			"name": "public-mixed",
+			"args": [[1, 2, 4]],
+			"expected": 2
+		},
+		{
+			"name": "public-none",
+			"args": [[1, 3, 5]],
+			"expected": 0
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-empty",
+			"args": [[]],
+			"expected": 0
+		}
+	]
+}

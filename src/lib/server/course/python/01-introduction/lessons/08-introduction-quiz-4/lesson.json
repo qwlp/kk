@@ -1,0 +1,27 @@
+{
+	"slug": "introduction-quiz-4",
+	"order": 8,
+	"title": "Quiz: Execution Order",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "If line 1 prints `A` and line 2 prints `B`, what prints first?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "A"
+		},
+		{
+			"id": "b",
+			"label": "B"
+		},
+		{
+			"id": "c",
+			"label": "They print at the same time."
+		},
+		{
+			"id": "d",
+			"label": "Nothing prints."
+		}
+	],
+	"correctChoiceId": "a"
+}

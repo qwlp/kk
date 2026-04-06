@@ -1,0 +1,27 @@
+{
+	"slug": "quiz-quiz-3",
+	"order": 3,
+	"title": "Review Quiz: Functions",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What keyword defines a function in Python?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "def"
+		},
+		{
+			"id": "b",
+			"label": "func"
+		},
+		{
+			"id": "c",
+			"label": "return"
+		},
+		{
+			"id": "d",
+			"label": "loop"
+		}
+	],
+	"correctChoiceId": "a"
+}

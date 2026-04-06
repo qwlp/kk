@@ -1,0 +1,27 @@
+{
+	"slug": "introduction-quiz-1",
+	"order": 2,
+	"title": "Quiz: What `print()` Does",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What does `print()` do in Python?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "It displays a value in the console."
+		},
+		{
+			"id": "b",
+			"label": "It creates a variable."
+		},
+		{
+			"id": "c",
+			"label": "It repeats code forever."
+		},
+		{
+			"id": "d",
+			"label": "It turns text into a number."
+		}
+	],
+	"correctChoiceId": "a"
+}

@@ -1,0 +1,21 @@
+{
+	"slug": "scope-console-2",
+	"order": 3,
+	"title": "Parameters Belong to the Function",
+	"prompt": "Use the parameter inside `greet` and call the function with \"inside\".",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "inside\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "inside\n"
+		}
+	]
+}

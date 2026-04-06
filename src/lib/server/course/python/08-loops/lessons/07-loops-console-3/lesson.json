@@ -1,0 +1,21 @@
+{
+	"slug": "loops-console-3",
+	"order": 7,
+	"title": "Accumulating a Total",
+	"prompt": "Use a loop to add the values into `total`, then print `total`.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "9\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "9\n"
+		}
+	]
+}

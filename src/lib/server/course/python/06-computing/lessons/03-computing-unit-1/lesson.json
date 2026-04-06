@@ -1,0 +1,27 @@
+{
+	"slug": "computing-unit-1",
+	"order": 3,
+	"title": "Converting Bits to Bytes",
+	"prompt": "Write `bits_to_bytes` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "bits_to_bytes",
+	"publicCases": [
+		{
+			"name": "public-eight",
+			"args": [8],
+			"expected": 1
+		},
+		{
+			"name": "public-thirty-two",
+			"args": [32],
+			"expected": 4
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-sixty-four",
+			"args": [64],
+			"expected": 8
+		}
+	]
+}

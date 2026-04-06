@@ -1,0 +1,27 @@
+{
+	"slug": "scope-quiz-3",
+	"order": 6,
+	"title": "Quiz: Getting a Value Out",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What is the usual way to send a value out of a function?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Use `return`."
+		},
+		{
+			"id": "b",
+			"label": "Rename the function."
+		},
+		{
+			"id": "c",
+			"label": "Put the value in a comment."
+		},
+		{
+			"id": "d",
+			"label": "Use quotes around the function name."
+		}
+	],
+	"correctChoiceId": "a"
+}

@@ -1,0 +1,27 @@
+{
+	"slug": "computing-quiz-3",
+	"order": 8,
+	"title": "Quiz: Powers of Two",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What is `2 ** 5`?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "32"
+		},
+		{
+			"id": "b",
+			"label": "10"
+		},
+		{
+			"id": "c",
+			"label": "25"
+		},
+		{
+			"id": "d",
+			"label": "64"
+		}
+	],
+	"correctChoiceId": "a"
+}

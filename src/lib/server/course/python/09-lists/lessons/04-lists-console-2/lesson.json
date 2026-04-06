@@ -1,0 +1,21 @@
+{
+	"slug": "lists-console-2",
+	"order": 4,
+	"title": "Adding to a List",
+	"prompt": "Append a new item to `bag` and print the new length.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "2\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "2\n"
+		}
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"slug": "loops-unit-3",
+	"order": 9,
+	"title": "Repeating a Word",
+	"prompt": "Write `repeat_word` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "repeat_word",
+	"publicCases": [
+		{
+			"name": "public-two",
+			"args": ["ha", 2],
+			"expected": "haha"
+		},
+		{
+			"name": "public-zero",
+			"args": ["go", 0],
+			"expected": ""
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-three",
+			"args": ["x", 3],
+			"expected": "xxx"
+		}
+	]
+}

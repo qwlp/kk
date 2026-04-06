@@ -1,0 +1,27 @@
+{
+	"slug": "quiz-quiz-2",
+	"order": 2,
+	"title": "Review Quiz: Variables",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What is the main job of a variable?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "To store a value for later use."
+		},
+		{
+			"id": "b",
+			"label": "To define a loop automatically."
+		},
+		{
+			"id": "c",
+			"label": "To remove duplicates from data."
+		},
+		{
+			"id": "d",
+			"label": "To catch exceptions."
+		}
+	],
+	"correctChoiceId": "a"
+}

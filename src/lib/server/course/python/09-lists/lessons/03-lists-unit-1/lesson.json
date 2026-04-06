@@ -1,0 +1,27 @@
+{
+	"slug": "lists-unit-1",
+	"order": 3,
+	"title": "Getting the Last Item",
+	"prompt": "Write `get_last_item` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "get_last_item",
+	"publicCases": [
+		{
+			"name": "public-words",
+			"args": [["axe", "bow"]],
+			"expected": "bow"
+		},
+		{
+			"name": "public-numbers",
+			"args": [[1, 2, 3]],
+			"expected": 3
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-one",
+			"args": [["solo"]],
+			"expected": "solo"
+		}
+	]
+}

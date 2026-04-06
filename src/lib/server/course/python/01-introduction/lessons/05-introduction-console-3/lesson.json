@@ -1,0 +1,21 @@
+{
+	"slug": "introduction-console-3",
+	"order": 5,
+	"title": "Printing Numbers and Math",
+	"prompt": "Print the result of 4 + 6.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "10\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "10\n"
+		}
+	]
+}

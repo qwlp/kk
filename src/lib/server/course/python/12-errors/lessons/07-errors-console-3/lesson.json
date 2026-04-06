@@ -1,0 +1,21 @@
+{
+	"slug": "errors-console-3",
+	"order": 7,
+	"title": "Using `try` and `except`",
+	"prompt": "Try the conversion. If it fails, print the fallback message.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "invalid number\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "invalid number\n"
+		}
+	]
+}

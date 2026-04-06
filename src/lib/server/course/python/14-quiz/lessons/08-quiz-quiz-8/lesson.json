@@ -1,0 +1,27 @@
+{
+	"slug": "quiz-quiz-8",
+	"order": 8,
+	"title": "Review Quiz: Dictionaries",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Which collection stores key/value pairs?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "A dictionary."
+		},
+		{
+			"id": "b",
+			"label": "A set."
+		},
+		{
+			"id": "c",
+			"label": "A string."
+		},
+		{
+			"id": "d",
+			"label": "A comment."
+		}
+	],
+	"correctChoiceId": "a"
+}

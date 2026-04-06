@@ -1,0 +1,27 @@
+{
+	"slug": "variables-quiz-4",
+	"order": 8,
+	"title": "Quiz: Updating a Variable",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "After `coins = 10` and `coins = coins + 5`, what is stored in `coins`?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "15"
+		},
+		{
+			"id": "b",
+			"label": "10"
+		},
+		{
+			"id": "c",
+			"label": "5"
+		},
+		{
+			"id": "d",
+			"label": "105"
+		}
+	],
+	"correctChoiceId": "a"
+}

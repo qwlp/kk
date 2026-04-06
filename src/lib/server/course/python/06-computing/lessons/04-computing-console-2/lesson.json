@@ -1,0 +1,21 @@
+{
+	"slug": "computing-console-2",
+	"order": 4,
+	"title": "Powers of Two",
+	"prompt": "Print the result of 2 ** 5.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "32\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "32\n"
+		}
+	]
+}

@@ -1,0 +1,27 @@
+{
+	"slug": "dictionaries-quiz-1",
+	"order": 2,
+	"title": "Quiz: What a Dictionary Stores",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "What is a dictionary best for?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "Storing key/value pairs."
+		},
+		{
+			"id": "b",
+			"label": "Keeping values in strict index order only."
+		},
+		{
+			"id": "c",
+			"label": "Removing duplicates automatically from a list."
+		},
+		{
+			"id": "d",
+			"label": "Defining a function body."
+		}
+	],
+	"correctChoiceId": "a"
+}

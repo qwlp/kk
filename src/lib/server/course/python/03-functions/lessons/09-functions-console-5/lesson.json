@@ -1,0 +1,21 @@
+{
+	"slug": "functions-console-5",
+	"order": 9,
+	"title": "Using a Function to Reuse Code",
+	"prompt": "Call `area_of_circle` with `spear_length`, store the result in `spear_area`, and print it.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "12.56\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "12.56\n"
+		}
+	]
+}

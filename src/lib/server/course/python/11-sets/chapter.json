@@ -1,0 +1,6 @@
+{
+	"slug": "sets",
+	"order": 11,
+	"title": "Sets",
+	"description": "Use sets when you care about uniqueness and fast membership checks."
+}

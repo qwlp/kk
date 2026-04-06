@@ -1,0 +1,21 @@
+{
+	"slug": "testing-and-debugging-console-1",
+	"order": 1,
+	"title": "Fixing Exact Output Bugs",
+	"prompt": "Print the exact phrase \"All tests passed\".",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "All tests passed\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "All tests passed\n"
+		}
+	]
+}

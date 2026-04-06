@@ -1,0 +1,27 @@
+{
+	"slug": "quiz-quiz-9",
+	"order": 9,
+	"title": "Review Quiz: Sets",
+	"prompt": "Choose the best answer.",
+	"mode": "quiz",
+	"question": "Which data type is built for unique values?",
+	"choices": [
+		{
+			"id": "a",
+			"label": "A set."
+		},
+		{
+			"id": "b",
+			"label": "A list."
+		},
+		{
+			"id": "c",
+			"label": "A dictionary."
+		},
+		{
+			"id": "d",
+			"label": "An integer."
+		}
+	],
+	"correctChoiceId": "a"
+}

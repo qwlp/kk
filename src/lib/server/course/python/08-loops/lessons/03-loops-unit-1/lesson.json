@@ -1,0 +1,27 @@
+{
+	"slug": "loops-unit-1",
+	"order": 3,
+	"title": "Summing a List With a Loop",
+	"prompt": "Write `sum_coins` so it passes the tests.",
+	"mode": "unit",
+	"functionName": "sum_coins",
+	"publicCases": [
+		{
+			"name": "public-many",
+			"args": [[1, 2, 3]],
+			"expected": 6
+		},
+		{
+			"name": "public-empty",
+			"args": [[]],
+			"expected": 0
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-two",
+			"args": [[5, 5]],
+			"expected": 10
+		}
+	]
+}

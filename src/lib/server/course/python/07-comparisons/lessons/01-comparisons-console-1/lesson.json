@@ -1,0 +1,21 @@
+{
+	"slug": "comparisons-console-1",
+	"order": 1,
+	"title": "A Comparison Produces a Boolean",
+	"prompt": "Print the result of `5 > 3`.",
+	"mode": "console",
+	"publicCases": [
+		{
+			"name": "public-main",
+			"stdin": "",
+			"expectedStdout": "true\n"
+		}
+	],
+	"hiddenCases": [
+		{
+			"name": "hidden-main",
+			"stdin": "",
+			"expectedStdout": "true\n"
+		}
+	]
+}
