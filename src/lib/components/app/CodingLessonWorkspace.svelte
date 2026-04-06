@@ -104,7 +104,7 @@
 	>
 		<div class="flex min-h-0 flex-1 flex-col">
 			{#if lesson.mode === 'console' && lesson.sampleInput}
-				<div class="border-b border-white/8 bg-[rgba(21,27,39,0.92)] px-4 py-3">
+				<div class="border-b border-white/8 bg-transparent px-4 py-3">
 					<p
 						class="font-mono text-xs font-semibold tracking-[0.22em] text-[var(--kk-text-dim)] uppercase"
 					>
@@ -115,10 +115,10 @@
 				</div>
 			{/if}
 
-			<div class="code-surface relative min-h-0 flex-1 bg-[rgba(27,20,31,0.98)]">
+			<div class="relative min-h-0 flex-1 bg-transparent">
 				<CodeEditor value={editorValue} readOnly={false} vimMode={vimModeEnabled} {onValueChange} />
 				<div
-					class="pointer-events-none absolute inset-x-0 top-0 h-16 bg-[linear-gradient(180deg,rgba(12,16,25,0.12),transparent)]"
+					class="pointer-events-none absolute inset-x-0 top-0 h-16 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]"
 				></div>
 			</div>
 		</div>
@@ -127,7 +127,7 @@
 			role="separator"
 			aria-label="Resize editor and terminal panes"
 			aria-orientation="horizontal"
-			class="group relative h-3 shrink-0 cursor-row-resize bg-[rgba(12,16,25,0.92)]"
+			class="group relative h-3 shrink-0 cursor-row-resize bg-transparent"
 			onpointerdown={startVerticalResize}
 		>
 			<div
@@ -139,7 +139,7 @@
 		</div>
 
 		<div
-			class="flex min-h-0 shrink-0 basis-[var(--kk-terminal-pane-height)] flex-col border-t border-[var(--kk-border)] bg-[rgba(27,20,31,0.98)]"
+			class="flex min-h-0 shrink-0 basis-[var(--kk-terminal-pane-height)] flex-col border-t border-[var(--kk-border)] bg-transparent"
 		>
 			<div class="flex flex-wrap items-center gap-3 px-4 py-3">
 				<div class="flex flex-wrap items-center gap-3">
@@ -163,7 +163,7 @@
 			</div>
 
 			<div
-				class="min-h-0 flex-1 overflow-auto border-t border-[var(--kk-border)] bg-[rgba(27,20,31,0.98)] px-5 py-6"
+				class="min-h-0 flex-1 overflow-auto border-t border-[var(--kk-border)] bg-transparent px-5 py-6"
 			>
 				<pre
 					class="font-mono text-sm leading-8 whitespace-pre-wrap text-[var(--kk-text-soft)]">{terminalOutput ||

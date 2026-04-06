@@ -46,15 +46,14 @@
 						{
 							'&': {
 								height: '100%',
-								backgroundColor: '#1b141f',
+								backgroundColor: 'transparent',
 								fontSize: '1.06rem'
 							},
 							'.cm-scroller': {
 								fontFamily:
 									"'IBM Plex Mono', 'SFMono-Regular', 'SF Mono', 'Cascadia Code', 'Roboto Mono', Consolas, 'Liberation Mono', Menlo, monospace",
 								lineHeight: '2rem',
-								background:
-									'radial-gradient(circle at top left, rgba(223,79,143,0.04), transparent 22%), linear-gradient(180deg, rgba(29,20,33,0.99), rgba(24,17,28,0.995))'
+								background: 'transparent'
 							},
 							'.cm-gutters': {
 								background: 'transparent !important',
@@ -93,7 +92,7 @@
 								outline: 'none'
 							},
 							'.cm-editor': {
-								backgroundColor: '#1b141f',
+								backgroundColor: 'transparent',
 								color: '#f5edf3'
 							},
 							'.cm-selectionBackground, ::selection': {
