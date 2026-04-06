@@ -3,9 +3,18 @@ import { Cause, Data, Effect, Exit, Layer, ManagedRuntime } from 'effect';
 import { NodeServices } from '@effect/platform-node';
 import { error } from '@sveltejs/kit';
 import { ConvexError, ConvexPrivateService } from './services/convex';
-import { ClerkError, ClerkService } from './services/clerk';
+import {
+	DockerRunnerError,
+	RunnerBusyError,
+	RunnerRateLimitError,
+	DockerRunnerService
+} from './server/services/docker-runner';
 
-const appLayer = Layer.mergeAll(NodeServices.layer, ConvexPrivateService.layer, ClerkService.layer);
+const appLayer = Layer.mergeAll(
+	NodeServices.layer,
+	ConvexPrivateService.layer,
+	DockerRunnerService.layer
+);
 
 export const runtime = ManagedRuntime.make(appLayer);
 
@@ -67,7 +76,7 @@ const serializeUnknown = (value: unknown): unknown => {
 
 const toPublicError = (
 	errorValue: Pick<
-		GenericError | ConvexError | ClerkError,
+		GenericError | ConvexError | DockerRunnerError | RunnerBusyError | RunnerRateLimitError,
 		'message' | 'kind' | 'timestamp' | 'traceId'
 	>
 ) => ({
@@ -77,7 +86,14 @@ const toPublicError = (
 	traceId: errorValue.traceId
 });
 
-const logTaggedError = (errorValue: GenericError | ConvexError | ClerkError) => {
+const logTaggedError = (
+	errorValue:
+		| GenericError
+		| ConvexError
+		| DockerRunnerError
+		| RunnerBusyError
+		| RunnerRateLimitError
+) => {
 	if (errorValue instanceof ConvexError) {
 		console.error('Convex error', {
 			traceId: errorValue.traceId,
@@ -93,13 +109,25 @@ const logTaggedError = (errorValue: GenericError | ConvexError | ClerkError) => 
 		return;
 	}
 
-	if (errorValue instanceof ClerkError) {
-		console.error('Clerk error', {
+	if (errorValue instanceof DockerRunnerError) {
+		console.error('Docker runner error', {
 			traceId: errorValue.traceId,
 			kind: errorValue.kind,
 			timestamp: errorValue.timestamp,
+			command: errorValue.command,
 			message: errorValue.message,
 			cause: serializeUnknown(errorValue.cause)
+		});
+
+		return;
+	}
+
+	if (errorValue instanceof RunnerBusyError || errorValue instanceof RunnerRateLimitError) {
+		console.error('Runner admission error', {
+			traceId: errorValue.traceId,
+			kind: errorValue.kind,
+			timestamp: errorValue.timestamp,
+			message: errorValue.message
 		});
 
 		return;
@@ -118,8 +146,8 @@ const logTaggedError = (errorValue: GenericError | ConvexError | ClerkError) => 
 export const effectRunner = async <T>(
 	effect: Effect.Effect<
 		T,
-		GenericError | ConvexError | ClerkError,
-		NodeServices.NodeServices | ConvexPrivateService | ClerkService
+		GenericError | ConvexError | DockerRunnerError | RunnerBusyError | RunnerRateLimitError,
+		NodeServices.NodeServices | ConvexPrivateService | DockerRunnerService
 	>
 ) => {
 	const exit = await runtime.runPromiseExit(effect);
@@ -133,7 +161,9 @@ export const effectRunner = async <T>(
 				if (
 					reason.error instanceof GenericError ||
 					reason.error instanceof ConvexError ||
-					reason.error instanceof ClerkError
+					reason.error instanceof DockerRunnerError ||
+					reason.error instanceof RunnerBusyError ||
+					reason.error instanceof RunnerRateLimitError
 				) {
 					logTaggedError(reason.error);
 				} else {
@@ -159,8 +189,16 @@ export const effectRunner = async <T>(
 				return error(500, toPublicError(firstError.value));
 			}
 
-			if (firstError.value instanceof ClerkError) {
-				return error(401, toPublicError(firstError.value));
+			if (firstError.value instanceof RunnerBusyError) {
+				return error(429, toPublicError(firstError.value));
+			}
+
+			if (firstError.value instanceof RunnerRateLimitError) {
+				return error(429, toPublicError(firstError.value));
+			}
+
+			if (firstError.value instanceof DockerRunnerError) {
+				return error(500, toPublicError(firstError.value));
 			}
 
 			if (firstError.value instanceof GenericError) {

@@ -1,11 +1,25 @@
-# my sveltekit template
+# Python Practice Prototype
 
-Basically a little sveltekit demo built out with my current opinions
+Small SvelteKit app for teaching Python with:
 
-- sveltekit
-- tailwind
-- convex
-- effect v4
-- clerk auth
+- SvelteKit
+- Tailwind CSS
+- Convex for backend persistence
+- Effect v4 for server-side services
+- Docker-based Python sandbox execution
 
-See .env.example for the environment variables you need to set up.
+## Environment
+
+See [.env.example](/home/tsp/projects/kk/.env.example) for the required variables.
+
+For your current Convex deployment, these are the values to use locally:
+
+- `CONVEX_DEPLOYMENT=dev:sokpiseth-thin`
+- `PUBLIC_CONVEX_URL=https://canny-hawk-770.convex.cloud`
+- `PUBLIC_CONVEX_SITE_URL=https://canny-hawk-770.convex.site`
+
+`CONVEX_PRIVATE_BRIDGE_KEY` is optional in this prototype. If you set it, set the same value in both the SvelteKit app env and the Convex deployment env.
+
+## Development
+
+The Python runner expects a Linux machine with Docker available to the app process.

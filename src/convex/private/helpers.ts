@@ -1,5 +1,6 @@
-// "private" queries/mutations/actions are ones that get called from the sveltekit backend, not the client
-// they're all protected by the CONVEX_PRIVATE_BRIDGE_KEY
+// "private" queries/mutations/actions are ones that get called from the SvelteKit backend.
+// If CONVEX_PRIVATE_BRIDGE_KEY is configured on the Convex deployment, enforce it.
+// If it is unset, allow calls through for a simpler development setup.
 
 import { v } from 'convex/values';
 import {
@@ -11,11 +12,14 @@ import {
 import { action, mutation, query } from '../_generated/server';
 
 const apiKeyGuard = customCtxAndArgs({
-	args: { apiKey: v.string() },
+	args: { apiKey: v.optional(v.string()) },
 	input: async (ctx, { apiKey }) => {
-		if (apiKey !== process.env.CONVEX_PRIVATE_BRIDGE_KEY) {
+		const expectedApiKey = process.env.CONVEX_PRIVATE_BRIDGE_KEY;
+
+		if (expectedApiKey && apiKey !== expectedApiKey) {
 			throw new Error('Invalid API key');
 		}
+
 		return { ctx, args: {} };
 	}
 });

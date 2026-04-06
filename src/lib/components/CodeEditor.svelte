@@ -1,0 +1,167 @@
+<script lang="ts">
+	import { basicSetup } from 'codemirror';
+	import { python } from '@codemirror/lang-python';
+	import { Compartment, EditorState } from '@codemirror/state';
+	import { oneDark } from '@codemirror/theme-one-dark';
+	import { EditorView } from '@codemirror/view';
+	import { vim } from '@replit/codemirror-vim';
+	import { onMount } from 'svelte';
+
+	interface Props {
+		value: string;
+		readOnly?: boolean;
+		vimMode?: boolean;
+		onValueChange?: (value: string) => void;
+	}
+
+	let { value, readOnly = false, vimMode = false, onValueChange }: Props = $props();
+
+	let container = $state<HTMLDivElement | null>(null);
+	let editorView = $state<EditorView | null>(null);
+
+	const editableCompartment = new Compartment();
+	const vimCompartment = new Compartment();
+
+	const editableExtension = (isReadOnly: boolean) => [
+		EditorState.readOnly.of(isReadOnly),
+		EditorView.editable.of(!isReadOnly)
+	];
+
+	onMount(() => {
+		if (!container) return;
+
+		editorView = new EditorView({
+			state: EditorState.create({
+				doc: value,
+				extensions: [
+					vimCompartment.of(vimMode ? vim() : []),
+					basicSetup,
+					python(),
+					oneDark,
+					EditorState.tabSize.of(4),
+					EditorView.lineWrapping,
+					editableCompartment.of(editableExtension(readOnly)),
+					EditorView.theme(
+						{
+							'&': {
+								height: '100%',
+								backgroundColor: '#1b141f',
+								fontSize: '1.06rem'
+							},
+							'.cm-scroller': {
+								fontFamily:
+									"'IBM Plex Mono', 'SFMono-Regular', 'SF Mono', 'Cascadia Code', 'Roboto Mono', Consolas, 'Liberation Mono', Menlo, monospace",
+								lineHeight: '2rem',
+								background:
+									'radial-gradient(circle at top left, rgba(223,79,143,0.04), transparent 22%), linear-gradient(180deg, rgba(29,20,33,0.99), rgba(24,17,28,0.995))'
+							},
+							'.cm-gutters': {
+								background: 'linear-gradient(180deg, rgba(44,31,47,0.98), rgba(36,26,40,0.98))',
+								color: '#9b7f92',
+								borderRight: '1px solid rgba(255, 214, 236, 0.08)',
+								paddingTop: '0.15rem'
+							},
+							'.cm-activeLineGutter': {
+								backgroundColor: 'rgba(240, 106, 165, 0.04)',
+								color: '#dcb7c8'
+							},
+							'.cm-activeLine': {
+								backgroundColor: 'rgba(240, 106, 165, 0.045)'
+							},
+							'.cm-content': {
+								padding: '0.15rem 0 5rem'
+							},
+							'.cm-line': {
+								padding: '0'
+							},
+							'.cm-focused': {
+								outline: 'none'
+							},
+							'.cm-editor': {
+								backgroundColor: '#1b141f',
+								color: '#f5edf3'
+							},
+							'.cm-selectionBackground, ::selection': {
+								backgroundColor: 'rgba(241, 107, 166, 0.24) !important'
+							},
+							'.cm-cursor, .cm-dropCursor': {
+								borderLeftColor: '#f16ba6'
+							},
+							'.cm-matchingBracket': {
+								backgroundColor: 'rgba(241, 107, 166, 0.15)',
+								color: '#fff4fa'
+							},
+							'.cm-panels': {
+								backgroundColor: '#161019',
+								color: '#f5edf3',
+								borderBottom: '1px solid rgba(255,214,236,0.08)'
+							},
+							'.cm-panels-bottom': {
+								borderTop: '1px solid rgba(255,214,236,0.08)'
+							},
+							'.cm-search > label': {
+								fontFamily:
+									"'IBM Plex Mono', 'SFMono-Regular', 'SF Mono', 'Cascadia Code', 'Roboto Mono', Consolas, 'Liberation Mono', Menlo, monospace"
+							},
+							'.cm-button': {
+								backgroundImage: 'none',
+								backgroundColor: '#2c1e2f',
+								color: '#f5edf3',
+								border: '1px solid rgba(255,214,236,0.08)'
+							},
+							'.cm-textfield': {
+								backgroundColor: '#211724',
+								color: '#f5edf3',
+								border: '1px solid rgba(255,214,236,0.08)'
+							}
+						},
+						{ dark: true }
+					),
+					EditorView.updateListener.of((update) => {
+						if (!update.docChanged) return;
+						onValueChange?.(update.state.doc.toString());
+					})
+				]
+			}),
+			parent: container
+		});
+
+		return () => {
+			editorView?.destroy();
+			editorView = null;
+		};
+	});
+
+	$effect(() => {
+		if (!editorView) return;
+
+		const currentValue = editorView.state.doc.toString();
+		if (currentValue === value) return;
+
+		editorView.dispatch({
+			changes: {
+				from: 0,
+				to: editorView.state.doc.length,
+				insert: value
+			}
+		});
+	});
+
+	$effect(() => {
+		if (!editorView) return;
+
+		editorView.dispatch({
+			effects: editableCompartment.reconfigure(editableExtension(readOnly))
+		});
+	});
+
+	$effect(() => {
+		if (!editorView) return;
+
+		editorView.dispatch({
+			effects: vimCompartment.reconfigure(vimMode ? vim() : [])
+		});
+	});
+</script>
+
+<div bind:this={container} class="h-full min-h-[18rem] w-full"></div>
