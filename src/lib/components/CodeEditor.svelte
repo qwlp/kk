@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { basicSetup } from 'codemirror';
 	import { python } from '@codemirror/lang-python';
+	import { HighlightStyle, syntaxHighlighting } from '@codemirror/language';
 	import { Compartment, EditorState } from '@codemirror/state';
-	import { oneDark } from '@codemirror/theme-one-dark';
 	import { EditorView } from '@codemirror/view';
+	import { tags } from '@lezer/highlight';
 	import { vim } from '@replit/codemirror-vim';
 	import { onMount } from 'svelte';
 
@@ -28,6 +29,33 @@
 		EditorView.editable.of(!isReadOnly)
 	];
 
+	const pinkSyntax = HighlightStyle.define([
+		{ tag: [tags.keyword, tags.modifier], color: '#ff7fb6', fontWeight: '700' },
+		{ tag: [tags.controlKeyword, tags.operatorKeyword], color: '#ff93c1', fontWeight: '700' },
+		{ tag: [tags.definitionKeyword, tags.moduleKeyword], color: '#f889ff', fontWeight: '700' },
+		{ tag: [tags.name, tags.variableName], color: '#f5edf3' },
+		{
+			tag: [tags.definition(tags.variableName), tags.definition(tags.propertyName)],
+			color: '#ffd5e6'
+		},
+		{ tag: [tags.function(tags.variableName), tags.labelName], color: '#ffb7d3' },
+		{ tag: [tags.propertyName, tags.attributeName], color: '#f3bad2' },
+		{ tag: [tags.typeName, tags.className, tags.namespace], color: '#f1a8ff' },
+		{ tag: [tags.number, tags.integer, tags.float], color: '#ffcf7d' },
+		{ tag: [tags.string, tags.special(tags.string)], color: '#ffd0de' },
+		{ tag: [tags.bool, tags.null, tags.atom], color: '#ff9fc4', fontWeight: '700' },
+		{
+			tag: [tags.comment, tags.lineComment, tags.blockComment],
+			color: '#8f7587',
+			fontStyle: 'italic'
+		},
+		{ tag: [tags.punctuation, tags.separator], color: '#cfaec0' },
+		{ tag: tags.bracket, color: '#f8d4e4' },
+		{ tag: [tags.operator, tags.compareOperator, tags.logicOperator], color: '#f06ca4' },
+		{ tag: [tags.meta, tags.annotation], color: '#c899ff' },
+		{ tag: tags.invalid, color: '#ffe7ef', backgroundColor: 'rgba(217, 79, 139, 0.35)' }
+	]);
+
 	onMount(() => {
 		if (!container) return;
 
@@ -38,7 +66,7 @@
 					vimCompartment.of(vimMode ? vim() : []),
 					basicSetup,
 					python(),
-					oneDark,
+					syntaxHighlighting(pinkSyntax),
 					EditorState.tabSize.of(4),
 					EditorView.lineWrapping,
 					editableCompartment.of(editableExtension(readOnly)),
@@ -58,7 +86,7 @@
 							'.cm-gutters': {
 								background: 'transparent !important',
 								backgroundColor: 'transparent !important',
-								color: '#9b7f92',
+								color: '#b28ea5',
 								borderRight: '1px solid rgba(255, 214, 236, 0.05)',
 								paddingTop: '0.15rem'
 							},
@@ -77,10 +105,10 @@
 							'.cm-activeLineGutter': {
 								background: 'transparent !important',
 								backgroundColor: 'transparent !important',
-								color: '#dcb7c8'
+								color: '#ffd1e3'
 							},
 							'.cm-activeLine': {
-								backgroundColor: 'rgba(240, 106, 165, 0.045)'
+								backgroundColor: 'rgba(240, 106, 165, 0.07)'
 							},
 							'.cm-content': {
 								padding: '0.15rem 0 5rem'
@@ -101,9 +129,13 @@
 							'.cm-cursor, .cm-dropCursor': {
 								borderLeftColor: '#f16ba6'
 							},
+							'.cm-selectionMatch': {
+								backgroundColor: 'rgba(255, 127, 182, 0.14)'
+							},
 							'.cm-matchingBracket': {
-								backgroundColor: 'rgba(241, 107, 166, 0.15)',
-								color: '#fff4fa'
+								backgroundColor: 'rgba(241, 107, 166, 0.18)',
+								color: '#fff4fa',
+								outline: '1px solid rgba(255, 182, 217, 0.28)'
 							},
 							'.cm-panels': {
 								backgroundColor: '#161019',
