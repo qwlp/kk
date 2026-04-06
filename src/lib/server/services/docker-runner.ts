@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { spawn } from 'node:child_process';
-import { mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { chmod, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { Data } from 'effect';
@@ -381,21 +381,27 @@ const writeRunnerFiles = async (
 		functionName: lesson.mode === 'unit' ? lesson.functionName : undefined
 	};
 
+	const mainPath = path.join(runDir, 'main.py');
+	const manifestPath = path.join(runDir, 'challenge_manifest.json');
+	const harnessPath = path.join(runDir, 'run_harness.py');
+	const testFilePath = lesson.mode === 'unit' ? path.join(runDir, lesson.testFileName) : null;
+	const testFileContent = lesson.mode === 'unit' ? lesson.testFileContent : null;
+
 	await Promise.all([
-		writeFile(path.join(runDir, 'main.py'), code, 'utf8'),
-		writeFile(
-			path.join(runDir, 'challenge_manifest.json'),
-			JSON.stringify(manifest, null, 2),
-			'utf8'
-		),
-		writeFile(path.join(runDir, 'run_harness.py'), PYTHON_HARNESS, 'utf8'),
-		lesson.mode === 'unit'
-			? writeFile(
-					path.join(runDir, lesson.testFileName ?? 'main_test.py'),
-					lesson.testFileContent,
-					'utf8'
-				)
+		chmod(runDir, 0o755),
+		writeFile(mainPath, code, 'utf8'),
+		writeFile(manifestPath, JSON.stringify(manifest, null, 2), 'utf8'),
+		writeFile(harnessPath, PYTHON_HARNESS, 'utf8'),
+		testFilePath && testFileContent
+			? writeFile(testFilePath, testFileContent, 'utf8')
 			: Promise.resolve()
+	]);
+
+	await Promise.all([
+		chmod(mainPath, 0o644),
+		chmod(manifestPath, 0o644),
+		chmod(harnessPath, 0o644),
+		testFilePath ? chmod(testFilePath, 0o644) : Promise.resolve()
 	]);
 };
 
