@@ -1,12 +1,11 @@
 import { randomUUID } from 'node:crypto';
+import { spawn } from 'node:child_process';
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { spawn } from 'node:child_process';
-import { Data, Effect, Layer, ServiceMap } from 'effect';
-import { env } from '$env/dynamic/private';
-import type { LessonRunResponse, RunIntent, SubmissionTestResult } from '$lib/types';
-import type { ConsoleLessonDefinition, UnitLessonDefinition } from '../course/types';
+import { Data } from 'effect';
+import type { LessonRunResponse, SubmissionTestResult } from '$lib/types';
+import type { RunSubmissionInput } from './runner-contract';
 
 const RUN_TIMEOUT_MS = 12_000;
 const IMAGE_PREP_TIMEOUT_MS = 120_000;
@@ -46,21 +45,7 @@ export class RunnerRateLimitError extends Data.TaggedError('RunnerRateLimitError
 	readonly timestamp: number;
 }> {}
 
-type RunSubmissionInput = {
-	lesson: ConsoleLessonDefinition | UnitLessonDefinition;
-	code: string;
-	clientIp: string;
-	intent: RunIntent;
-	stdin?: string;
-};
-
 type FinalRunResult = LessonRunResponse;
-
-interface DockerRunnerDef {
-	runSubmission: (
-		input: RunSubmissionInput
-	) => Effect.Effect<FinalRunResult, DockerRunnerError | RunnerBusyError | RunnerRateLimitError>;
-}
 
 type HarnessTestResult = SubmissionTestResult;
 
@@ -360,48 +345,40 @@ const createTrace = () => ({
 	timestamp: Date.now()
 });
 
-const toCasePayload = ({
-	challenge,
-	intent,
-	stdin
-}: {
-	challenge: ConsoleLessonDefinition | UnitLessonDefinition;
-	intent: RunIntent;
-	stdin?: string;
-}) => {
-	if (challenge.mode === 'unit') {
+const toCasePayload = ({ lesson, intent, stdin }: RunSubmissionInput) => {
+	if (lesson.mode === 'unit') {
 		return {
 			intent,
-			mode: challenge.mode,
-			functionName: challenge.functionName,
+			mode: lesson.mode,
+			functionName: lesson.functionName,
 			stdin: stdin ?? '',
 			tests: [
-				...challenge.publicCases.map((test) => ({ ...test, visibility: 'public' as const })),
-				...challenge.hiddenCases.map((test) => ({ ...test, visibility: 'hidden' as const }))
+				...lesson.publicCases.map((test) => ({ ...test, visibility: 'public' as const })),
+				...lesson.hiddenCases.map((test) => ({ ...test, visibility: 'hidden' as const }))
 			]
 		};
 	}
 
 	return {
 		intent,
-		mode: challenge.mode,
+		mode: lesson.mode,
 		stdin: stdin ?? '',
 		tests: [
-			...challenge.publicCases.map((test) => ({ ...test, visibility: 'public' as const })),
-			...challenge.hiddenCases.map((test) => ({ ...test, visibility: 'hidden' as const }))
+			...lesson.publicCases.map((test) => ({ ...test, visibility: 'public' as const })),
+			...lesson.hiddenCases.map((test) => ({ ...test, visibility: 'hidden' as const }))
 		]
 	};
 };
 
 const writeRunnerFiles = async (
 	runDir: string,
-	challenge: ConsoleLessonDefinition | UnitLessonDefinition,
+	lesson: RunSubmissionInput['lesson'],
 	code: string
 ) => {
 	const manifest = {
-		slug: challenge.slug,
-		mode: challenge.mode,
-		functionName: challenge.mode === 'unit' ? challenge.functionName : undefined
+		slug: lesson.slug,
+		mode: lesson.mode,
+		functionName: lesson.mode === 'unit' ? lesson.functionName : undefined
 	};
 
 	await Promise.all([
@@ -412,10 +389,10 @@ const writeRunnerFiles = async (
 			'utf8'
 		),
 		writeFile(path.join(runDir, 'run_harness.py'), PYTHON_HARNESS, 'utf8'),
-		challenge.mode === 'unit' && challenge.testFileContent
+		lesson.mode === 'unit'
 			? writeFile(
-					path.join(runDir, challenge.testFileName ?? 'main_test.py'),
-					challenge.testFileContent,
+					path.join(runDir, lesson.testFileName ?? 'main_test.py'),
+					lesson.testFileContent,
 					'utf8'
 				)
 			: Promise.resolve()
@@ -527,7 +504,7 @@ const ensureRunnerImageReady = async (image: string) => {
 };
 
 const runDockerHarness = async (runDir: string, payload: ReturnType<typeof toCasePayload>) => {
-	const image = env.PYTHON_RUNNER_IMAGE || DEFAULT_IMAGE;
+	const image = process.env.PYTHON_RUNNER_IMAGE || DEFAULT_IMAGE;
 	await ensureRunnerImageReady(image);
 
 	const args = [
@@ -600,117 +577,122 @@ const formatDockerFailureMessage = (cause: unknown) => {
 	return causeMessage || 'Failed to run Docker sandbox';
 };
 
-export class DockerRunnerService extends ServiceMap.Service<DockerRunnerService, DockerRunnerDef>()(
-	'DockerRunnerService'
-) {
-	static readonly layer = Layer.sync(DockerRunnerService, () => {
-		const runHistory = new Map<string, number[]>();
-		let activeRuns = 0;
+const toRunnerError = (cause: unknown) => {
+	if (
+		cause instanceof DockerRunnerError ||
+		cause instanceof RunnerBusyError ||
+		cause instanceof RunnerRateLimitError
+	) {
+		return cause;
+	}
 
-		const acquireSlot = (clientIp: string) =>
-			Effect.sync(() => {
-				const now = Date.now();
-				const existingRuns = runHistory.get(clientIp) ?? [];
-				const recentRuns = existingRuns.filter(
-					(timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS
-				);
-
-				runHistory.set(clientIp, recentRuns);
-
-				if (recentRuns.length >= MAX_RUNS_PER_WINDOW) {
-					const trace = createTrace();
-					throw new RunnerRateLimitError({
-						message: 'runner_rate_limited',
-						kind: 'runner_rate_limited',
-						...trace
-					});
-				}
-
-				if (activeRuns >= MAX_CONCURRENT_RUNS) {
-					const trace = createTrace();
-					throw new RunnerBusyError({
-						message: 'runner_busy',
-						kind: 'runner_busy',
-						...trace
-					});
-				}
-
-				recentRuns.push(now);
-				runHistory.set(clientIp, recentRuns);
-				activeRuns += 1;
-			});
-
-		const releaseSlot = () =>
-			Effect.sync(() => {
-				activeRuns = Math.max(0, activeRuns - 1);
-			});
-
-		const runSubmission = ({ lesson, code, clientIp, intent, stdin }: RunSubmissionInput) =>
-			Effect.acquireUseRelease(
-				acquireSlot(clientIp),
-				() =>
-					Effect.tryPromise({
-						try: async () => {
-							const runDir = await mkdtemp(path.join(tmpdir(), 'kk-runner-'));
-							const startedAt = Date.now();
-
-							try {
-								await writeRunnerFiles(runDir, lesson, code);
-								const harnessPayload = toCasePayload({ challenge: lesson, intent, stdin });
-								const result = await runDockerHarness(runDir, harnessPayload);
-
-								if (result.timedOut) {
-									return {
-										status: 'timeout',
-										durationMs: Date.now() - startedAt,
-										stdout: '',
-										stderr: 'Execution timed out before the runner completed.',
-										tests: []
-									} satisfies FinalRunResult;
-								}
-
-								if (result.exitCode !== 0) {
-									const dockerFailureMessage = isDockerUnavailableMessage(result.stderr)
-										? DOCKER_UNAVAILABLE_MESSAGE
-										: normalizeOutput(result.stderr || 'Docker exited with a non-zero status.');
-
-									return {
-										status: 'runner_error',
-										durationMs: Date.now() - startedAt,
-										stdout: '',
-										stderr: dockerFailureMessage,
-										tests: []
-									} satisfies FinalRunResult;
-								}
-
-								const parsed = JSON.parse(result.stdout) as HarnessOutput;
-								return {
-									status: parsed.status,
-									durationMs: parsed.durationMs,
-									stdout: normalizeOutput(parsed.stdout),
-									stderr: normalizeOutput(parsed.stderr),
-									tests: parsed.tests
-								} satisfies FinalRunResult;
-							} finally {
-								await rm(runDir, { recursive: true, force: true });
-							}
-						},
-						catch: (cause) => {
-							const trace = createTrace();
-							return new DockerRunnerError({
-								message: formatDockerFailureMessage(cause),
-								kind: 'docker_runner_error',
-								command: 'docker run',
-								cause,
-								...trace
-							});
-						}
-					}),
-				releaseSlot
-			);
-
-		return {
-			runSubmission
-		};
+	const trace = createTrace();
+	return new DockerRunnerError({
+		message: formatDockerFailureMessage(cause),
+		kind: 'docker_runner_error',
+		command: 'docker run',
+		cause,
+		...trace
 	});
-}
+};
+
+export const createDockerSubmissionRunner = () => {
+	const runHistory = new Map<string, number[]>();
+	let activeRuns = 0;
+
+	const acquireSlot = (clientIp: string) => {
+		const now = Date.now();
+		const existingRuns = runHistory.get(clientIp) ?? [];
+		const recentRuns = existingRuns.filter((timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS);
+
+		runHistory.set(clientIp, recentRuns);
+
+		if (recentRuns.length >= MAX_RUNS_PER_WINDOW) {
+			const trace = createTrace();
+			throw new RunnerRateLimitError({
+				message: 'runner_rate_limited',
+				kind: 'runner_rate_limited',
+				...trace
+			});
+		}
+
+		if (activeRuns >= MAX_CONCURRENT_RUNS) {
+			const trace = createTrace();
+			throw new RunnerBusyError({
+				message: 'runner_busy',
+				kind: 'runner_busy',
+				...trace
+			});
+		}
+
+		recentRuns.push(now);
+		runHistory.set(clientIp, recentRuns);
+		activeRuns += 1;
+	};
+
+	const releaseSlot = () => {
+		activeRuns = Math.max(0, activeRuns - 1);
+	};
+
+	return {
+		runSubmission: async ({
+			lesson,
+			code,
+			clientIp,
+			intent,
+			stdin
+		}: RunSubmissionInput): Promise<FinalRunResult> => {
+			acquireSlot(clientIp);
+
+			try {
+				const runDir = await mkdtemp(path.join(tmpdir(), 'kk-runner-'));
+				const startedAt = Date.now();
+
+				try {
+					await writeRunnerFiles(runDir, lesson, code);
+					const harnessPayload = toCasePayload({ lesson, code, clientIp, intent, stdin });
+					const result = await runDockerHarness(runDir, harnessPayload);
+
+					if (result.timedOut) {
+						return {
+							status: 'timeout',
+							durationMs: Date.now() - startedAt,
+							stdout: '',
+							stderr: 'Execution timed out before the runner completed.',
+							tests: []
+						} satisfies FinalRunResult;
+					}
+
+					if (result.exitCode !== 0) {
+						const dockerFailureMessage = isDockerUnavailableMessage(result.stderr)
+							? DOCKER_UNAVAILABLE_MESSAGE
+							: normalizeOutput(result.stderr || 'Docker exited with a non-zero status.');
+
+						return {
+							status: 'runner_error',
+							durationMs: Date.now() - startedAt,
+							stdout: '',
+							stderr: dockerFailureMessage,
+							tests: []
+						} satisfies FinalRunResult;
+					}
+
+					const parsed = JSON.parse(result.stdout) as HarnessOutput;
+					return {
+						status: parsed.status,
+						durationMs: parsed.durationMs,
+						stdout: normalizeOutput(parsed.stdout),
+						stderr: normalizeOutput(parsed.stderr),
+						tests: parsed.tests
+					} satisfies FinalRunResult;
+				} finally {
+					await rm(runDir, { recursive: true, force: true });
+				}
+			} catch (cause) {
+				throw toRunnerError(cause);
+			} finally {
+				releaseSlot();
+			}
+		}
+	};
+};

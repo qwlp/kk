@@ -3,7 +3,8 @@ import { Effect } from 'effect';
 import { api } from '../../../../convex/_generated/api';
 import { effectRunner } from '$lib/runtime';
 import { getLessonDefinition } from '$lib/server/course';
-import { DockerRunnerService } from '$lib/server/services/docker-runner';
+import { LessonRunnerService } from '$lib/server/services/lesson-runner';
+import { toRunnerLessonDefinition } from '$lib/server/services/runner-contract';
 import { ConvexPrivateService } from '$lib/services/convex';
 import type { LessonSubmitResponse } from '$lib/types';
 
@@ -95,9 +96,9 @@ export const POST = async (event) => {
 				selectedChoiceId
 			};
 		} else {
-			const runner = yield* DockerRunnerService;
+			const runner = yield* LessonRunnerService;
 			const runResult = yield* runner.runSubmission({
-				lesson,
+				lesson: toRunnerLessonDefinition(lesson),
 				code,
 				clientIp,
 				intent: 'submit',

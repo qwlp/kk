@@ -6,14 +6,14 @@ import { ConvexError, ConvexPrivateService } from './services/convex';
 import {
 	DockerRunnerError,
 	RunnerBusyError,
-	RunnerRateLimitError,
-	DockerRunnerService
+	RunnerRateLimitError
 } from './server/services/docker-runner';
+import { LessonRunnerService } from './server/services/lesson-runner';
 
 const appLayer = Layer.mergeAll(
 	NodeServices.layer,
 	ConvexPrivateService.layer,
-	DockerRunnerService.layer
+	LessonRunnerService.layer
 );
 
 export const runtime = ManagedRuntime.make(appLayer);
@@ -147,7 +147,7 @@ export const effectRunner = async <T>(
 	effect: Effect.Effect<
 		T,
 		GenericError | ConvexError | DockerRunnerError | RunnerBusyError | RunnerRateLimitError,
-		NodeServices.NodeServices | ConvexPrivateService | DockerRunnerService
+		NodeServices.NodeServices | ConvexPrivateService | LessonRunnerService
 	>
 ) => {
 	const exit = await runtime.runPromiseExit(effect);

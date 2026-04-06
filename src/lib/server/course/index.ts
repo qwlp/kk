@@ -1,6 +1,4 @@
 import type { ChapterSummary, CourseSequenceItem, LessonSummary, PublicLesson } from '$lib/types';
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import path from 'node:path';
 import { renderLessonMarkdown, renderMarkdownFragment } from './markdown';
 import type {
 	ChapterDefinition,
@@ -15,24 +13,61 @@ import type {
 	UnitLessonManifest
 } from './types';
 
-const COURSE_ROOT = path.join(process.cwd(), 'src/lib/server/course/python');
 const CHAPTER_COUNT = 14;
 const LESSONS_PER_CHAPTER = 10;
 
-const readJson = <T>(filePath: string): T => JSON.parse(readFileSync(filePath, 'utf8')) as T;
+const chapterManifestModules = import.meta.glob('./python/*/chapter.json', {
+	eager: true,
+	import: 'default'
+}) as Record<string, ChapterManifest>;
 
-const readRequiredText = (filePath: string) => readFileSync(filePath, 'utf8');
+const lessonManifestModules = import.meta.glob('./python/*/lessons/*/lesson.json', {
+	eager: true,
+	import: 'default'
+}) as Record<string, LessonManifest>;
 
-const listDirectories = (dirPath: string) =>
-	readdirSync(dirPath, { withFileTypes: true })
-		.filter((entry) => entry.isDirectory())
-		.map((entry) => entry.name)
-		.sort();
+const lessonReadmeModules = import.meta.glob('./python/*/lessons/*/readme.md', {
+	eager: true,
+	query: '?raw',
+	import: 'default'
+}) as Record<string, string>;
+
+const starterCodeModules = import.meta.glob('./python/*/lessons/*/code.py', {
+	eager: true,
+	query: '?raw',
+	import: 'default'
+}) as Record<string, string>;
+
+const solutionCodeModules = import.meta.glob('./python/*/lessons/*/complete.py', {
+	eager: true,
+	query: '?raw',
+	import: 'default'
+}) as Record<string, string>;
+
+const testFileModules = import.meta.glob('./python/*/lessons/*/main_test.py', {
+	eager: true,
+	query: '?raw',
+	import: 'default'
+}) as Record<string, string>;
 
 const invariant = (condition: boolean, message: string): void => {
 	if (!condition) {
 		throw new Error(`Course validation failed: ${message}`);
 	}
+};
+
+const getParentDirectory = (modulePath: string) => {
+	const separatorIndex = modulePath.lastIndexOf('/');
+	return separatorIndex >= 0 ? modulePath.slice(0, separatorIndex) : modulePath;
+};
+
+const toAssetDirectory = (lessonDirectory: string) =>
+	`src/lib/server/course/${lessonDirectory.replace(/^\.\//, '')}`;
+
+const getRequiredModule = (modules: Record<string, string>, modulePath: string, label: string) => {
+	const value = modules[modulePath];
+	invariant(typeof value === 'string', `${modulePath} is missing ${label}`);
+	return value;
 };
 
 const toLessonSummary = (lesson: LessonDefinition): LessonSummary => ({
@@ -108,94 +143,86 @@ const toPublicLesson = (lesson: LessonDefinition): PublicLesson => {
 const parseConsoleLesson = ({
 	chapter,
 	manifest,
-	lessonDir,
+	lessonDirectory,
 	globalOrder
 }: {
 	chapter: ChapterManifest;
 	manifest: ConsoleLessonManifest;
-	lessonDir: string;
+	lessonDirectory: string;
 	globalOrder: number;
-}): ConsoleLessonDefinition => {
-	const starterCodePath = path.join(lessonDir, 'code.py');
-	const solutionCodePath = path.join(lessonDir, 'complete.py');
-
-	invariant(existsSync(starterCodePath), `${chapter.slug}/${manifest.slug} is missing code.py`);
-	invariant(
-		existsSync(solutionCodePath),
-		`${chapter.slug}/${manifest.slug} is missing complete.py`
-	);
-
-	return {
-		slug: manifest.slug,
-		chapterSlug: chapter.slug,
-		chapterTitle: chapter.title,
-		order: manifest.order,
-		globalOrder,
-		title: manifest.title,
-		prompt: manifest.prompt,
-		lessonHtml: renderLessonMarkdown(readRequiredText(path.join(lessonDir, 'readme.md'))),
-		mode: 'console',
-		starterCode: readRequiredText(starterCodePath),
-		solutionCode: readRequiredText(solutionCodePath),
-		sampleInput: manifest.sampleInput,
-		publicCases: manifest.publicCases,
-		hiddenCases: manifest.hiddenCases,
-		assetDir: path.relative(process.cwd(), lessonDir)
-	};
-};
+}): ConsoleLessonDefinition => ({
+	slug: manifest.slug,
+	chapterSlug: chapter.slug,
+	chapterTitle: chapter.title,
+	order: manifest.order,
+	globalOrder,
+	title: manifest.title,
+	prompt: manifest.prompt,
+	lessonHtml: renderLessonMarkdown(
+		getRequiredModule(lessonReadmeModules, `${lessonDirectory}/readme.md`, 'readme.md')
+	),
+	mode: 'console',
+	starterCode: getRequiredModule(starterCodeModules, `${lessonDirectory}/code.py`, 'code.py'),
+	solutionCode: getRequiredModule(
+		solutionCodeModules,
+		`${lessonDirectory}/complete.py`,
+		'complete.py'
+	),
+	sampleInput: manifest.sampleInput,
+	publicCases: manifest.publicCases,
+	hiddenCases: manifest.hiddenCases,
+	assetDir: toAssetDirectory(lessonDirectory)
+});
 
 const parseUnitLesson = ({
 	chapter,
 	manifest,
-	lessonDir,
+	lessonDirectory,
 	globalOrder
 }: {
 	chapter: ChapterManifest;
 	manifest: UnitLessonManifest;
-	lessonDir: string;
+	lessonDirectory: string;
 	globalOrder: number;
-}): UnitLessonDefinition => {
-	const starterCodePath = path.join(lessonDir, 'code.py');
-	const solutionCodePath = path.join(lessonDir, 'complete.py');
-	const testFilePath = path.join(lessonDir, 'main_test.py');
-
-	invariant(existsSync(starterCodePath), `${chapter.slug}/${manifest.slug} is missing code.py`);
-	invariant(
-		existsSync(solutionCodePath),
-		`${chapter.slug}/${manifest.slug} is missing complete.py`
-	);
-	invariant(existsSync(testFilePath), `${chapter.slug}/${manifest.slug} is missing main_test.py`);
-
-	return {
-		slug: manifest.slug,
-		chapterSlug: chapter.slug,
-		chapterTitle: chapter.title,
-		order: manifest.order,
-		globalOrder,
-		title: manifest.title,
-		prompt: manifest.prompt,
-		lessonHtml: renderLessonMarkdown(readRequiredText(path.join(lessonDir, 'readme.md'))),
-		mode: 'unit',
-		starterCode: readRequiredText(starterCodePath),
-		solutionCode: readRequiredText(solutionCodePath),
-		testFileName: 'main_test.py',
-		testFileContent: readRequiredText(testFilePath),
-		functionName: manifest.functionName,
-		publicCases: manifest.publicCases,
-		hiddenCases: manifest.hiddenCases,
-		assetDir: path.relative(process.cwd(), lessonDir)
-	};
-};
+}): UnitLessonDefinition => ({
+	slug: manifest.slug,
+	chapterSlug: chapter.slug,
+	chapterTitle: chapter.title,
+	order: manifest.order,
+	globalOrder,
+	title: manifest.title,
+	prompt: manifest.prompt,
+	lessonHtml: renderLessonMarkdown(
+		getRequiredModule(lessonReadmeModules, `${lessonDirectory}/readme.md`, 'readme.md')
+	),
+	mode: 'unit',
+	starterCode: getRequiredModule(starterCodeModules, `${lessonDirectory}/code.py`, 'code.py'),
+	solutionCode: getRequiredModule(
+		solutionCodeModules,
+		`${lessonDirectory}/complete.py`,
+		'complete.py'
+	),
+	testFileName: 'main_test.py',
+	testFileContent: getRequiredModule(
+		testFileModules,
+		`${lessonDirectory}/main_test.py`,
+		'main_test.py'
+	),
+	functionName: manifest.functionName,
+	publicCases: manifest.publicCases,
+	hiddenCases: manifest.hiddenCases,
+	assetDir: toAssetDirectory(lessonDirectory)
+});
 
 const parseQuizLesson = ({
 	chapter,
 	manifest,
-	lessonDir,
+	lessonDirectory,
 	globalOrder
 }: {
 	chapter: ChapterManifest;
 	manifest: QuizLessonManifest;
-	lessonDir: string;
+	lessonDirectory: string;
 	globalOrder: number;
 }): QuizLessonDefinition => {
 	invariant(
@@ -215,7 +242,9 @@ const parseQuizLesson = ({
 		globalOrder,
 		title: manifest.title,
 		prompt: manifest.prompt,
-		lessonHtml: renderLessonMarkdown(readRequiredText(path.join(lessonDir, 'readme.md'))),
+		lessonHtml: renderLessonMarkdown(
+			getRequiredModule(lessonReadmeModules, `${lessonDirectory}/readme.md`, 'readme.md')
+		),
 		mode: 'quiz',
 		question: manifest.question,
 		questionHtml: renderMarkdownFragment(manifest.question),
@@ -224,38 +253,26 @@ const parseQuizLesson = ({
 			labelHtml: renderMarkdownFragment(choice.label)
 		})),
 		correctChoiceId: manifest.correctChoiceId,
-		assetDir: path.relative(process.cwd(), lessonDir)
+		assetDir: toAssetDirectory(lessonDirectory)
 	};
 };
 
 const parseLesson = ({
 	chapter,
-	lessonDir,
+	lessonDirectory,
+	manifest,
 	globalOrder
 }: {
 	chapter: ChapterManifest;
-	lessonDir: string;
+	lessonDirectory: string;
+	manifest: LessonManifest;
 	globalOrder: number;
 }): LessonDefinition => {
-	const manifestPath = path.join(lessonDir, 'lesson.json');
-	const markdownPath = path.join(lessonDir, 'readme.md');
-
-	invariant(
-		existsSync(manifestPath),
-		`${chapter.slug}/${path.basename(lessonDir)} is missing lesson.json`
-	);
-	invariant(
-		existsSync(markdownPath),
-		`${chapter.slug}/${path.basename(lessonDir)} is missing readme.md`
-	);
-
-	const manifest = readJson<LessonManifest>(manifestPath);
-
 	if (manifest.mode === 'console') {
 		return parseConsoleLesson({
 			chapter,
 			manifest,
-			lessonDir,
+			lessonDirectory,
 			globalOrder
 		});
 	}
@@ -264,7 +281,7 @@ const parseLesson = ({
 		return parseUnitLesson({
 			chapter,
 			manifest,
-			lessonDir,
+			lessonDirectory,
 			globalOrder
 		});
 	}
@@ -272,7 +289,7 @@ const parseLesson = ({
 	return parseQuizLesson({
 		chapter,
 		manifest,
-		lessonDir,
+		lessonDirectory,
 		globalOrder
 	});
 };
@@ -297,12 +314,17 @@ const validateChapterModeRules = (chapter: ChapterDefinition) => {
 };
 
 const buildCourse = () => {
-	invariant(existsSync(COURSE_ROOT), `course root not found at ${COURSE_ROOT}`);
+	const chapterEntries = Object.entries(chapterManifestModules)
+		.map(([modulePath, manifest]) => ({
+			modulePath,
+			chapterDirectory: getParentDirectory(modulePath),
+			manifest
+		}))
+		.sort((left, right) => left.manifest.order - right.manifest.order);
 
-	const chapterDirs = listDirectories(COURSE_ROOT);
 	invariant(
-		chapterDirs.length === CHAPTER_COUNT,
-		`expected ${CHAPTER_COUNT} chapters, found ${chapterDirs.length}`
+		chapterEntries.length === CHAPTER_COUNT,
+		`expected ${CHAPTER_COUNT} chapters, found ${chapterEntries.length}`
 	);
 
 	const chapterSlugSet = new Set<string>();
@@ -314,42 +336,41 @@ const buildCourse = () => {
 
 	let globalOrder = 1;
 
-	for (const [chapterIndex, chapterDirName] of chapterDirs.entries()) {
-		const chapterDir = path.join(COURSE_ROOT, chapterDirName);
-		const chapterManifest = readJson<ChapterManifest>(path.join(chapterDir, 'chapter.json'));
-
+	for (const [chapterIndex, chapterEntry] of chapterEntries.entries()) {
 		invariant(
-			chapterManifest.order === chapterIndex + 1,
-			`chapter ${chapterDirName} has order ${chapterManifest.order}, expected ${chapterIndex + 1}`
+			chapterEntry.manifest.order === chapterIndex + 1,
+			`chapter ${chapterEntry.chapterDirectory} has order ${chapterEntry.manifest.order}, expected ${chapterIndex + 1}`
 		);
 		invariant(
-			!chapterSlugSet.has(chapterManifest.slug),
-			`duplicate chapter slug ${chapterManifest.slug}`
+			!chapterSlugSet.has(chapterEntry.manifest.slug),
+			`duplicate chapter slug ${chapterEntry.manifest.slug}`
 		);
-		chapterSlugSet.add(chapterManifest.slug);
+		chapterSlugSet.add(chapterEntry.manifest.slug);
 
-		const lessonsDir = path.join(chapterDir, 'lessons');
+		const lessonEntries = Object.entries(lessonManifestModules)
+			.filter(([modulePath]) => modulePath.startsWith(`${chapterEntry.chapterDirectory}/lessons/`))
+			.map(([modulePath, manifest]) => ({
+				lessonDirectory: getParentDirectory(modulePath),
+				manifest
+			}))
+			.sort((left, right) => left.manifest.order - right.manifest.order);
+
 		invariant(
-			existsSync(lessonsDir),
-			`chapter ${chapterManifest.slug} is missing lessons directory`
+			lessonEntries.length === LESSONS_PER_CHAPTER,
+			`chapter ${chapterEntry.manifest.slug} must contain exactly ${LESSONS_PER_CHAPTER} lessons`
 		);
 
-		const lessonDirs = listDirectories(lessonsDir);
-		invariant(
-			lessonDirs.length === LESSONS_PER_CHAPTER,
-			`chapter ${chapterManifest.slug} must contain exactly ${LESSONS_PER_CHAPTER} lessons`
-		);
-
-		const lessons = lessonDirs.map((lessonDirName, lessonIndex) => {
+		const lessons = lessonEntries.map((lessonEntry, lessonIndex) => {
 			const lesson = parseLesson({
-				chapter: chapterManifest,
-				lessonDir: path.join(lessonsDir, lessonDirName),
+				chapter: chapterEntry.manifest,
+				lessonDirectory: lessonEntry.lessonDirectory,
+				manifest: lessonEntry.manifest,
 				globalOrder
 			});
 
 			invariant(
 				lesson.order === lessonIndex + 1,
-				`lesson ${chapterManifest.slug}/${lesson.slug} has order ${lesson.order}, expected ${lessonIndex + 1}`
+				`lesson ${chapterEntry.manifest.slug}/${lesson.slug} has order ${lesson.order}, expected ${lessonIndex + 1}`
 			);
 			invariant(!lessonSlugSet.has(lesson.slug), `duplicate lesson slug ${lesson.slug}`);
 
@@ -362,7 +383,7 @@ const buildCourse = () => {
 		});
 
 		const chapter: ChapterDefinition = {
-			...chapterManifest,
+			...chapterEntry.manifest,
 			lessonCount: lessons.length,
 			lessons
 		};

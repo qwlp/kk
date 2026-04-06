@@ -2,7 +2,8 @@ import { error, json } from '@sveltejs/kit';
 import { Effect } from 'effect';
 import { effectRunner } from '$lib/runtime';
 import { getLessonDefinition } from '$lib/server/course';
-import { DockerRunnerService } from '$lib/server/services/docker-runner';
+import { LessonRunnerService } from '$lib/server/services/lesson-runner';
+import { toRunnerLessonDefinition } from '$lib/server/services/runner-contract';
 
 const getClientIp = (requestEvent: { request: Request; getClientAddress: () => string }) => {
 	const forwardedFor = requestEvent.request.headers.get('x-forwarded-for');
@@ -66,10 +67,10 @@ export const POST = async (event) => {
 	const clientIp = getClientIp(event);
 
 	const runEffect = Effect.gen(function* () {
-		const runner = yield* DockerRunnerService;
+		const runner = yield* LessonRunnerService;
 
 		return yield* runner.runSubmission({
-			lesson,
+			lesson: toRunnerLessonDefinition(lesson),
 			code,
 			clientIp,
 			intent: 'run',
