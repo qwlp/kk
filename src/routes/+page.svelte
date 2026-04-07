@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { resolve } from '$app/paths';
 	import { authActions, authState } from '$lib/auth';
 	import GoogleSignInButton from '$lib/components/auth/GoogleSignInButton.svelte';
@@ -76,10 +75,6 @@
 	});
 
 	const formatOrder = (value: number) => String(value).padStart(2, '0');
-
-	onMount(() => {
-		void authActions.prompt();
-	});
 </script>
 
 <div
@@ -94,46 +89,15 @@
 			style:background={panelBackground}
 			style:border-color="var(--kk-border)"
 		>
-			<div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-start">
+			<div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
 				<div class="max-w-2xl">
-					<p
-						class="inline-flex rounded-full border px-3 py-1 text-[0.7rem] font-semibold tracking-[0.24em] text-[var(--kk-highlight)] uppercase"
-						style:border-color="rgba(255,255,255,0.08)"
-					>
-						Python Course
+					<h1 class="max-w-xl text-4xl font-semibold tracking-tight sm:text-6xl">Learn Python.</h1>
+					<p class="mt-4 text-base text-[var(--kk-text-soft)] sm:text-lg">
+						{totalLessons} short lessons.
 					</p>
-					<h1 class="mt-5 max-w-xl text-4xl font-semibold tracking-tight sm:text-6xl">
-						Learn Python by doing.
-					</h1>
-					<p class="mt-4 max-w-xl text-base leading-7 text-[var(--kk-text-soft)] sm:text-lg">
-						Short lessons, real coding practice, and a clear path from basics to confidence.
-					</p>
-
-					<div class="mt-6 flex flex-wrap gap-3 text-sm">
-						<div
-							class="rounded-full border px-4 py-2 text-[var(--kk-text-soft)]"
-							style:border-color="var(--kk-border)"
-						>
-							{data.chapters.length} chapters
-						</div>
-						<div
-							class="rounded-full border px-4 py-2 text-[var(--kk-text-soft)]"
-							style:border-color="var(--kk-border)"
-						>
-							{totalLessons} lessons
-						</div>
-						{#if signedIn}
-							<div
-								class="rounded-full border px-4 py-2 text-[var(--kk-text-soft)]"
-								style:border-color="var(--kk-border)"
-							>
-								{completedLessonsCount} complete
-							</div>
-						{/if}
-					</div>
 
 					{#if resumeTarget}
-						<div class="mt-8">
+						<div class="mt-6">
 							<a
 								href={resolve('/app/[chapterSlug]/[lessonSlug]', {
 									chapterSlug: resumeTarget.chapterSlug,
@@ -188,10 +152,7 @@
 									style:width={`${progressPercent}%`}
 								></div>
 							</div>
-							<p class="mt-3 text-sm text-[var(--kk-text-soft)]">
-								{completedLessonsCount} of {totalLessons} lessons done. Your progress and editor settings
-								stay synced.
-							</p>
+							<p class="mt-3 text-sm text-[var(--kk-text-soft)]">{completedLessonsCount} complete</p>
 						</div>
 
 						{#if resumeTarget}
@@ -207,26 +168,11 @@
 							</a>
 						{/if}
 					{:else}
-						<div
-							class="inline-flex rounded-full border px-3 py-1 text-[0.68rem] font-semibold tracking-[0.2em] text-[var(--kk-text-dim)] uppercase"
-							style:border-color="rgba(255,255,255,0.08)"
-						>
-							Save Progress
-						</div>
-						<h2 class="mt-4 text-xl font-semibold tracking-tight text-[var(--kk-text)]">
-							Sign in with Google
-						</h2>
-						<p class="mt-2 text-sm leading-6 text-[var(--kk-text-soft)]">
-							Keep your place and come back exactly where you left off.
-						</p>
+						<p class="text-sm font-medium text-[var(--kk-text-soft)]">Save progress</p>
 
-						<div class="mt-5">
-							<GoogleSignInButton theme="outline" size="medium" text="signin_with" width={260} />
+						<div class="mt-4">
+							<GoogleSignInButton width={240} label="Continue with Google" />
 						</div>
-
-						<p class="mt-3 text-xs leading-5 text-[var(--kk-text-dim)]">
-							Optional for browsing. Useful for saving progress.
-						</p>
 
 						{#if $authState.status === 'error' && $authState.errorMessage}
 							<p class="mt-4 text-sm text-[#ffd8df]">{$authState.errorMessage}</p>
@@ -242,25 +188,7 @@
 			style:border-color="var(--kk-border)"
 		>
 			<div class="border-b px-6 py-6 sm:px-8" style:border-color="var(--kk-border)">
-				<div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-					<div class="max-w-2xl">
-						<p class="text-xs font-semibold tracking-[0.24em] text-[var(--kk-text-dim)] uppercase">
-							Course Path
-						</p>
-						<h2 class="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">Python</h2>
-						<p class="mt-2 text-sm leading-6 text-[var(--kk-text-soft)]">
-							Pick a chapter and move through the course one lesson at a time.
-						</p>
-					</div>
-				</div>
-
-				<div class="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-[var(--kk-text-dim)]">
-					<span>{data.chapters.length} chapters</span>
-					<span>{totalLessons} lessons</span>
-					{#if signedIn}
-						<span>{completedLessonsCount} completed</span>
-					{/if}
-				</div>
+				<h2 class="text-2xl font-semibold tracking-tight sm:text-3xl">Chapters</h2>
 			</div>
 
 			<ul class="grid gap-px bg-white/4 md:grid-cols-2">
