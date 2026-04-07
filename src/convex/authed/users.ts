@@ -7,6 +7,13 @@ import { authedMutation, authedQuery } from './helpers';
 type UserDoc = Doc<'users'>;
 type UserCourseStateDoc = Doc<'userCourseStates'>;
 
+const omitUndefined = <T extends Record<string, unknown>>(value: T) =>
+	Object.fromEntries(
+		Object.entries(value).filter(
+			(entry): entry is [string, Exclude<T[keyof T], undefined>] => entry[1] !== undefined
+		)
+	);
+
 const formatProfile = (
 	user: Pick<UserDoc, '_id' | 'name' | 'email' | 'imageUrl'> | null,
 	identity: UserIdentity
@@ -56,17 +63,20 @@ const ensureCurrentUserRecord = async (
 	const existingUser = await getUserByTokenIdentifier(ctx.db, ctx.identity.tokenIdentifier);
 	const nextFields = {
 		subject: ctx.identity.subject,
-		issuer: ctx.identity.issuer,
+		issuer: ctx.identity.issuer
+	};
+	const optionalProfileFields = omitUndefined({
 		name: ctx.identity.name,
 		email: ctx.identity.email,
 		imageUrl: ctx.identity.pictureUrl
-	};
+	});
 	const now = Date.now();
 
 	if (!existingUser) {
 		const userId = await ctx.db.insert('users', {
 			tokenIdentifier: ctx.identity.tokenIdentifier,
 			...nextFields,
+			...optionalProfileFields,
 			createdAt: now,
 			updatedAt: now
 		});
@@ -82,13 +92,14 @@ const ensureCurrentUserRecord = async (
 	const hasChanges =
 		existingUser.subject !== nextFields.subject ||
 		existingUser.issuer !== nextFields.issuer ||
-		existingUser.name !== nextFields.name ||
-		existingUser.email !== nextFields.email ||
-		existingUser.imageUrl !== nextFields.imageUrl;
+		existingUser.name !== optionalProfileFields.name ||
+		existingUser.email !== optionalProfileFields.email ||
+		existingUser.imageUrl !== optionalProfileFields.imageUrl;
 
 	if (hasChanges) {
 		await ctx.db.patch(existingUser._id, {
 			...nextFields,
+			...optionalProfileFields,
 			updatedAt: now
 		});
 	}
@@ -96,8 +107,9 @@ const ensureCurrentUserRecord = async (
 	return {
 		...existingUser,
 		...nextFields,
+		...optionalProfileFields,
 		updatedAt: hasChanges ? now : existingUser.updatedAt
-	};
+	} as UserDoc;
 };
 
 export const upsertCurrentUser = authedMutation({
@@ -143,8 +155,10 @@ export const setCurrentCoursePreferences = authedMutation({
 				userId: user._id,
 				courseSlug: args.courseSlug,
 				completedLessonSlugs: [],
-				vimModeEnabled: args.vimModeEnabled,
-				lessonPaneRatio: args.lessonPaneRatio,
+				...omitUndefined({
+					vimModeEnabled: args.vimModeEnabled,
+					lessonPaneRatio: args.lessonPaneRatio
+				}),
 				createdAt: now,
 				updatedAt: now
 			});

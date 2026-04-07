@@ -8,6 +8,8 @@
  * @module
  */
 
+import type * as authed_helpers from '../authed/helpers.js';
+import type * as authed_users from '../authed/users.js';
 import type * as private_courseDrafts from '../private/courseDrafts.js';
 import type * as private_courseHelpers from '../private/courseHelpers.js';
 import type * as private_courseImport from '../private/courseImport.js';
@@ -16,11 +18,11 @@ import type * as private_courseValidators from '../private/courseValidators.js';
 import type * as private_courses from '../private/courses.js';
 import type * as private_helpers from '../private/helpers.js';
 import type * as private_submissions from '../private/submissions.js';
-import type * as authed_users from '../authed/users.js';
 
 import type { ApiFromModules, FilterApi, FunctionReference } from 'convex/server';
 
 declare const fullApi: ApiFromModules<{
+	'authed/helpers': typeof authed_helpers;
 	'authed/users': typeof authed_users;
 	'private/courseDrafts': typeof private_courseDrafts;
 	'private/courseHelpers': typeof private_courseHelpers;
