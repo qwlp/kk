@@ -46,6 +46,30 @@
 	let activeEditorFile = $state<EditorFile>('main.py');
 
 	const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+	const normalizeUnitTestFileName = (value: string | null | undefined) => {
+		const trimmed = value?.trim() ?? '';
+		return trimmed.length > 0 ? trimmed : 'main_test.py';
+	};
+	const normalizeUnitTestFileContent = (value: string | null | undefined) => {
+		const content = value ?? '';
+		if (content.trim().length > 0) {
+			return content;
+		}
+
+		return [
+			'from main import *',
+			'',
+			'# Test file unavailable for this lesson.',
+			'# Run and Submit still use the lesson test cases.'
+		].join('\n');
+	};
+
+	const unitTestFileName = $derived.by(() =>
+		lesson.mode === 'unit' ? normalizeUnitTestFileName(lesson.testFileName) : 'main_test.py'
+	);
+	const unitTestFileContent = $derived.by(() =>
+		lesson.mode === 'unit' ? normalizeUnitTestFileContent(lesson.testFileContent) : ''
+	);
 
 	const editorFileItems = $derived.by(() => {
 		if (lesson.mode !== 'unit') {
@@ -54,13 +78,17 @@
 
 		return [
 			{ id: 'main.py' as const, label: 'main.py', readOnly: false },
-			{ id: 'main_test.py' as const, label: lesson.testFileName, readOnly: true }
+			{
+				id: 'main_test.py' as const,
+				label: unitTestFileName,
+				readOnly: true
+			}
 		];
 	});
 
 	const activeEditorValue = $derived.by(() => {
 		if (lesson.mode === 'unit' && activeEditorFile === 'main_test.py') {
-			return lesson.testFileContent;
+			return unitTestFileContent;
 		}
 
 		return editorValue;

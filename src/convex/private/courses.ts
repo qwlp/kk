@@ -176,7 +176,7 @@ export const getPublishedLessonBySlugs = privateQuery({
 			),
 			starterCode: lesson.starterCode ?? '',
 			functionName: lesson.functionName ?? '',
-			testFileName: evaluator?.testFileName ?? 'main_test.py',
+			testFileName: evaluator?.testFileName?.trim() || 'main_test.py',
 			testFileContent: evaluator?.testFileContent ?? ''
 		};
 	}

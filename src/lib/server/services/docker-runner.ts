@@ -233,16 +233,82 @@ def main() -> None:
 
     if intent == "run":
         if mode == "unit":
-            stdout, stderr, exit_code = run_visible_tests()
-            if exit_code == 0:
-                status = "passed"
-            elif stderr.strip():
+            collected_stdout = ""
+            collected_stderr = ""
+            test_results: list[dict] = []
+            status = "passed"
+
+            for case in tests:
+                try:
+                    outcome, case_stdout, case_stderr = run_function_case(function_name, case)
+                except subprocess.TimeoutExpired:
+                    status = "timeout"
+                    test_results.append(
+                        {
+                            "name": case["name"],
+                            "visibility": case["visibility"],
+                            "status": "error",
+                            "message": "Execution timed out",
+                        }
+                    )
+                    collected_stdout, collected_stderr = join_logs(collected_stdout, collected_stderr, "", "Execution timed out\n")
+                    break
+                except Exception as exc:
+                    status = "error"
+                    test_results.append(
+                        {
+                            "name": case["name"],
+                            "visibility": case["visibility"],
+                            "status": "error",
+                            "message": "Runner failed while grading this case",
+                        }
+                    )
+                    collected_stdout, collected_stderr = join_logs(collected_stdout, collected_stderr, "", f"{exc}\n")
+                    break
+
+                collected_stdout, collected_stderr = join_logs(
+                    collected_stdout, collected_stderr, case_stdout, case_stderr
+                )
+
+                if outcome["kind"] == "passed":
+                    test_results.append(
+                        {
+                            "name": case["name"],
+                            "visibility": case["visibility"],
+                            "status": "passed",
+                        }
+                    )
+                    continue
+
+                if outcome["kind"] == "failed":
+                    status = "failed"
+                    test_results.append(
+                        {
+                            "name": case["name"],
+                            "visibility": case["visibility"],
+                            "status": "failed",
+                            "message": outcome["message"],
+                        }
+                    )
+                    break
+
                 status = "error"
-            else:
-                status = "failed"
+                test_results.append(
+                    {
+                        "name": case["name"],
+                        "visibility": case["visibility"],
+                        "status": "error",
+                        "message": outcome["message"],
+                    }
+                )
+                break
+
+            stdout = ""
+            stderr = collected_stderr
         else:
             stdout, stderr, exit_code = run_sample_stdin(payload.get("stdin", ""))
             status = "error" if exit_code != 0 else "passed"
+            test_results = []
 
         duration_ms = int((time.perf_counter() - started) * 1000)
         stdout, stderr = trim_to_limit(stdout, stderr)
@@ -254,7 +320,7 @@ def main() -> None:
                     "durationMs": duration_ms,
                     "stdout": stdout,
                     "stderr": stderr,
-                    "tests": [],
+                    "tests": test_results,
                 }
             )
         )
@@ -366,10 +432,13 @@ const toCasePayload = ({ lesson, intent, stdin }: RunSubmissionInput) => {
 			mode: lesson.mode,
 			functionName: lesson.functionName,
 			stdin: stdin ?? '',
-			tests: [
-				...lesson.publicCases.map((test) => ({ ...test, visibility: 'public' as const })),
-				...lesson.hiddenCases.map((test) => ({ ...test, visibility: 'hidden' as const }))
-			]
+			tests:
+				intent === 'run'
+					? lesson.publicCases.map((test) => ({ ...test, visibility: 'public' as const }))
+					: [
+							...lesson.publicCases.map((test) => ({ ...test, visibility: 'public' as const })),
+							...lesson.hiddenCases.map((test) => ({ ...test, visibility: 'hidden' as const }))
+						]
 		};
 	}
 

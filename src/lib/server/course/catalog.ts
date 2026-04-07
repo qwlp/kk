@@ -13,6 +13,7 @@ import type {
 	PublishedLessonEvaluator,
 	PublishedLessonRuntime
 } from './types';
+import { getFilesystemLessonDefinition } from './filesystem';
 
 export const DEFAULT_COURSE_SLUG = 'python';
 
@@ -113,8 +114,26 @@ export const loadPublishedLessonRuntime = ({
 			);
 		}
 
+		const lessonWithUnitFallback =
+			currentLesson.mode === 'unit' &&
+			((currentLesson.testFileName ?? '').trim().length === 0 ||
+				(currentLesson.testFileContent ?? '').trim().length === 0)
+				? (() => {
+						const filesystemLesson = getFilesystemLessonDefinition(lessonSlug);
+						if (!filesystemLesson || filesystemLesson.mode !== 'unit') {
+							return currentLesson;
+						}
+
+						return {
+							...currentLesson,
+							testFileName: filesystemLesson.testFileName,
+							testFileContent: filesystemLesson.testFileContent
+						};
+					})()
+				: currentLesson;
+
 		return {
-			currentLesson: currentLesson as PublishedLessonRuntime
+			currentLesson: lessonWithUnitFallback as PublishedLessonRuntime
 		};
 	});
 
