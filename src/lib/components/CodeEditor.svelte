@@ -215,4 +215,4 @@
 	});
 </script>
 
-<div bind:this={container} class="h-full min-h-[18rem] w-full"></div>
+<div bind:this={container} class="h-full min-h-0 w-full"></div>

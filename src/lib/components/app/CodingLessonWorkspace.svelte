@@ -45,7 +45,28 @@
 	let verticalResizeState = $state<VerticalResizeState | null>(null);
 	let activeEditorFile = $state<EditorFile>('main.py');
 
+	const MIN_EDITOR_PANE_PX = 224;
+	const MIN_TERMINAL_PANE_PX = 176;
+	const SEPARATOR_PANE_PX = 28;
 	const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+	const getTerminalPaneRatioBounds = (totalHeight: number) => {
+		if (totalHeight <= 0) {
+			return { min: 0.2, max: 0.6 };
+		}
+
+		const min = Math.max(0.2, MIN_TERMINAL_PANE_PX / totalHeight);
+		const max = Math.min(0.6, (totalHeight - MIN_EDITOR_PANE_PX - SEPARATOR_PANE_PX) / totalHeight);
+
+		if (max <= min) {
+			return { min, max: min };
+		}
+
+		return { min, max };
+	};
+	const clampTerminalPaneRatio = (value: number, totalHeight: number) => {
+		const bounds = getTerminalPaneRatioBounds(totalHeight);
+		return clamp(value, bounds.min, bounds.max);
+	};
 	const normalizeUnitTestFileName = (value: string | null | undefined) => {
 		const trimmed = value?.trim() ?? '';
 		return trimmed.length > 0 ? trimmed : 'main_test.py';
@@ -110,11 +131,14 @@
 		if (!browser) return;
 
 		const storedTerminalPaneRatio = window.localStorage.getItem('kk-terminal-pane-ratio');
-		if (!storedTerminalPaneRatio) return;
-
-		const parsed = Number.parseFloat(storedTerminalPaneRatio);
-		if (Number.isFinite(parsed)) {
-			terminalPaneRatio = clamp(parsed, 0.2, 0.6);
+		const paneHeight = workspacePaneElement?.getBoundingClientRect().height ?? 0;
+		if (storedTerminalPaneRatio) {
+			const parsed = Number.parseFloat(storedTerminalPaneRatio);
+			if (Number.isFinite(parsed)) {
+				terminalPaneRatio = clampTerminalPaneRatio(parsed, paneHeight);
+			}
+		} else {
+			terminalPaneRatio = clampTerminalPaneRatio(terminalPaneRatio, paneHeight);
 		}
 	});
 
@@ -145,7 +169,10 @@
 		const bounds = workspacePaneElement.getBoundingClientRect();
 		if (bounds.height <= 0) return;
 
-		const nextRatio = clamp((bounds.bottom - event.clientY) / bounds.height, 0.2, 0.6);
+		const nextRatio = clampTerminalPaneRatio(
+			(bounds.bottom - event.clientY) / bounds.height,
+			bounds.height
+		);
 		terminalPaneRatio = nextRatio;
 	}
 
@@ -160,6 +187,11 @@
 	onpointermove={handleWindowPointerMove}
 	onpointerup={stopVerticalResize}
 	onpointercancel={stopVerticalResize}
+	onresize={() => {
+		if (!workspacePaneElement) return;
+		const bounds = workspacePaneElement.getBoundingClientRect();
+		terminalPaneRatio = clampTerminalPaneRatio(terminalPaneRatio, bounds.height);
+	}}
 />
 
 <section class="stone-panel flex h-full min-h-0 w-full flex-1 flex-col">
@@ -169,7 +201,7 @@
 		class:select-none={verticalResizeState !== null}
 		style={`--kk-terminal-pane-height:${terminalPaneRatio * 100}%;`}
 	>
-		<div class="flex min-h-0 flex-1 flex-col">
+		<div class="flex min-h-[14rem] flex-1 flex-col overflow-hidden">
 			{#if lesson.mode === 'console' && lesson.sampleInput}
 				<div class="border-b border-white/8 bg-transparent px-4 py-3">
 					<p
@@ -235,7 +267,7 @@
 		</div>
 
 		<div
-			class="flex min-h-[9rem] shrink-0 basis-[var(--kk-terminal-pane-height)] flex-col border-t border-[var(--kk-border)] bg-transparent"
+			class="flex min-h-[11rem] shrink-0 basis-[var(--kk-terminal-pane-height)] flex-col border-t border-[var(--kk-border)] bg-transparent"
 		>
 			<div class="flex flex-wrap items-center gap-3 px-4 py-3">
 				<div class="flex flex-wrap items-center gap-3">
