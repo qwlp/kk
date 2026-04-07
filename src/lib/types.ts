@@ -37,6 +37,16 @@ export interface CourseSequenceItem {
 	mode: LessonMode;
 }
 
+export interface LessonRouteTarget {
+	chapterSlug: string;
+	lessonSlug: string;
+}
+
+export type LessonNavigationTarget =
+	| LessonRouteTarget
+	| Pick<CourseSequenceItem, 'chapterSlug' | 'slug'>;
+export type ChapterLessonTargetMap = Record<string, LessonRouteTarget | null>;
+
 export interface BasePublicLesson extends CourseSequenceItem {
 	chapterTitle: string;
 	prompt: string;

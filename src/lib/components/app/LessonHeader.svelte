@@ -1,8 +1,16 @@
 <script lang="ts">
-	import type { ChapterSummary, CourseSequenceItem, LessonSummary, PublicLesson } from '$lib/types';
+	import type {
+		ChapterLessonTargetMap,
+		CourseSequenceItem,
+		LessonNavigationTarget,
+		ChapterSummary,
+		LessonSummary,
+		PublicLesson
+	} from '$lib/types';
 
 	interface Props {
 		chapters: ChapterSummary[];
+		chapterTargets: ChapterLessonTargetMap;
 		currentChapter: ChapterSummary;
 		lessonsInChapter: LessonSummary[];
 		completedLessonSlugs: string[];
@@ -15,10 +23,12 @@
 		onChapterSelect: (chapterSlug: string) => void;
 		onLessonSelect: (lessonSlug: string) => void;
 		onNavigateLesson: (lesson: CourseSequenceItem | null) => void;
+		onPrefetchLesson: (lesson: LessonNavigationTarget | null) => void;
 	}
 
 	let {
 		chapters,
+		chapterTargets,
 		currentChapter,
 		lessonsInChapter,
 		completedLessonSlugs,
@@ -30,7 +40,8 @@
 		onToggleVim,
 		onChapterSelect,
 		onLessonSelect,
-		onNavigateLesson
+		onNavigateLesson,
+		onPrefetchLesson
 	}: Props = $props();
 
 	let settingsOpen = $state(false);
@@ -99,6 +110,11 @@
 			activeMenu = null;
 		}
 	}
+
+	const toCurrentChapterLessonTarget = (lessonSlug: string): LessonNavigationTarget => ({
+		chapterSlug: currentChapter.slug,
+		lessonSlug
+	});
 </script>
 
 <svelte:window onpointerdown={handleWindowPointerDown} onkeydown={handleWindowKeydown} />
@@ -182,6 +198,8 @@
 						<button
 							type="button"
 							onclick={() => onLessonSelect(lesson.slug)}
+							onpointerenter={() => onPrefetchLesson(toCurrentChapterLessonTarget(lesson.slug))}
+							onfocus={() => onPrefetchLesson(toCurrentChapterLessonTarget(lesson.slug))}
 							class={`topbar-progress-dot ${
 								completedLessonSlugSet.has(lesson.slug)
 									? 'topbar-progress-dot-complete'
@@ -236,6 +254,8 @@
 										role="menuitemradio"
 										aria-checked={currentChapter.slug === chapter.slug}
 										class={`topbar-menu-option ${currentChapter.slug === chapter.slug ? 'topbar-menu-option-current' : ''}`}
+										onpointerenter={() => onPrefetchLesson(chapterTargets[chapter.slug] ?? null)}
+										onfocus={() => onPrefetchLesson(chapterTargets[chapter.slug] ?? null)}
 										onclick={() => {
 											activeMenu = null;
 											onChapterSelect(chapter.slug);
@@ -293,6 +313,9 @@
 										role="menuitemradio"
 										aria-checked={currentLesson.slug === lesson.slug}
 										class={`topbar-menu-option ${currentLesson.slug === lesson.slug ? 'topbar-menu-option-current' : ''}`}
+										onpointerenter={() =>
+											onPrefetchLesson(toCurrentChapterLessonTarget(lesson.slug))}
+										onfocus={() => onPrefetchLesson(toCurrentChapterLessonTarget(lesson.slug))}
 										onclick={() => {
 											activeMenu = null;
 											onLessonSelect(lesson.slug);
@@ -323,6 +346,8 @@
 				<button
 					type="button"
 					onclick={() => onNavigateLesson(previousLesson)}
+					onpointerenter={() => onPrefetchLesson(previousLesson)}
+					onfocus={() => onPrefetchLesson(previousLesson)}
 					class="topbar-nav-button"
 					aria-label={previousLesson
 						? `Go to previous lesson: ${previousLesson.title}`
@@ -351,6 +376,8 @@
 				<button
 					type="button"
 					onclick={() => onNavigateLesson(nextLesson)}
+					onpointerenter={() => onPrefetchLesson(nextLesson)}
+					onfocus={() => onPrefetchLesson(nextLesson)}
 					class="topbar-nav-button topbar-nav-button-accent"
 					aria-label={nextLesson ? `Go to next lesson: ${nextLesson.title}` : 'No next lesson'}
 					title={nextLesson ? nextLesson.title : 'Last lesson'}

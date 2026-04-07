@@ -2,7 +2,12 @@ import { Effect } from 'effect';
 import { api } from '../../../convex/_generated/api';
 import { createGenericError } from '$lib/runtime';
 import { ConvexPrivateService } from '$lib/services/convex';
-import type { ChapterSummary, CourseSequenceItem, LessonSummary } from '$lib/types';
+import type {
+	ChapterLessonTargetMap,
+	ChapterSummary,
+	CourseSequenceItem,
+	LessonRouteTarget
+} from '$lib/types';
 import type {
 	PublishedCourseNavigation,
 	PublishedLessonEvaluator,
@@ -11,13 +16,22 @@ import type {
 
 export const DEFAULT_COURSE_SLUG = 'python';
 
-const toLessonSummary = (lesson: CourseSequenceItem): LessonSummary => ({
-	slug: lesson.slug,
-	chapterSlug: lesson.chapterSlug,
-	order: lesson.order,
-	title: lesson.title,
-	mode: lesson.mode
-});
+const buildChapterTargets = (navigation: PublishedCourseNavigation): ChapterLessonTargetMap =>
+	Object.fromEntries(
+		navigation.chapters.map((chapter: ChapterSummary) => {
+			const firstLesson = navigation.sequence.find(
+				(item: CourseSequenceItem) => item.chapterSlug === chapter.slug
+			);
+			const target: LessonRouteTarget | null = firstLesson
+				? {
+						chapterSlug: chapter.slug,
+						lessonSlug: firstLesson.slug
+					}
+				: null;
+
+			return [chapter.slug, target];
+		})
+	);
 
 const getPublishedNavigation = (courseSlug: string) =>
 	Effect.gen(function* () {
@@ -58,7 +72,18 @@ export const getAppEntryLesson = (courseSlug = DEFAULT_COURSE_SLUG) =>
 		return firstLesson;
 	});
 
-export const loadCoursePageData = ({
+export const loadAppNavigationData = (courseSlug = DEFAULT_COURSE_SLUG) =>
+	Effect.gen(function* () {
+		const navigation = yield* getPublishedNavigation(courseSlug);
+
+		return {
+			chapters: navigation.chapters as ChapterSummary[],
+			sequence: navigation.sequence as CourseSequenceItem[],
+			chapterTargets: buildChapterTargets(navigation)
+		};
+	});
+
+export const loadPublishedLessonRuntime = ({
 	courseSlug = DEFAULT_COURSE_SLUG,
 	chapterSlug,
 	lessonSlug
@@ -69,7 +94,6 @@ export const loadCoursePageData = ({
 }) =>
 	Effect.gen(function* () {
 		const convex = yield* ConvexPrivateService;
-		const navigation = yield* getPublishedNavigation(courseSlug);
 		const currentLesson = (yield* convex.query({
 			func: api.private.courses.getPublishedLessonBySlugs,
 			args: {
@@ -89,62 +113,8 @@ export const loadCoursePageData = ({
 			);
 		}
 
-		const currentChapter = navigation.chapters.find(
-			(chapter: ChapterSummary) => chapter.slug === chapterSlug
-		);
-
-		if (!currentChapter) {
-			return yield* Effect.fail(
-				createGenericError({
-					message: 'Chapter not found',
-					status: 404,
-					kind: 'chapter_not_found'
-				})
-			);
-		}
-
-		const lessonsInChapter = navigation.sequence
-			.filter((lesson: CourseSequenceItem) => lesson.chapterSlug === chapterSlug)
-			.map(toLessonSummary);
-		const currentIndex = navigation.sequence.findIndex(
-			(item: CourseSequenceItem) => item.chapterSlug === chapterSlug && item.slug === lessonSlug
-		);
-
-		if (currentIndex < 0) {
-			return yield* Effect.fail(
-				createGenericError({
-					message: 'Lesson not found in navigation',
-					status: 404,
-					kind: 'lesson_not_found'
-				})
-			);
-		}
-
-		const chapterTargets = Object.fromEntries(
-			navigation.chapters.map((chapter: ChapterSummary) => {
-				const firstLesson = navigation.sequence.find(
-					(item: CourseSequenceItem) => item.chapterSlug === chapter.slug
-				);
-				return [
-					chapter.slug,
-					firstLesson
-						? {
-								chapterSlug: chapter.slug,
-								lessonSlug: firstLesson.slug
-							}
-						: null
-				];
-			})
-		);
-
 		return {
-			chapters: navigation.chapters as ChapterSummary[],
-			currentChapter,
-			lessonsInChapter,
-			currentLesson: currentLesson as PublishedLessonRuntime,
-			previousLesson: navigation.sequence[currentIndex - 1] ?? null,
-			nextLesson: navigation.sequence[currentIndex + 1] ?? null,
-			chapterTargets
+			currentLesson: currentLesson as PublishedLessonRuntime
 		};
 	});
 

@@ -2,24 +2,25 @@
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import {
+		prefetchLesson,
+		prefetchLessonBatch,
+		setLessonPrefetchLowPriorityPaused
+	} from '$lib/app/lesson-prefetch';
 	import CodingLessonWorkspace from '$lib/components/app/CodingLessonWorkspace.svelte';
 	import LessonHeader from '$lib/components/app/LessonHeader.svelte';
 	import LessonReaderPane from '$lib/components/app/LessonReaderPane.svelte';
 	import QuizLessonWorkspace from '$lib/components/app/QuizLessonWorkspace.svelte';
 	import { onMount, untrack } from 'svelte';
 	import type {
-		CourseSequenceItem,
+		LessonNavigationTarget,
 		LessonRunResponse,
 		LessonSubmitResponse,
+		LessonSummary,
 		PublicLesson,
 		RunIntent
 	} from '$lib/types';
 	import type { PageData } from './$types';
-
-	type ChapterTarget = {
-		chapterSlug: string;
-		lessonSlug: string;
-	} | null;
 
 	type ConfettiPiece = {
 		id: number;
@@ -43,11 +44,48 @@
 		pointerId: number;
 	};
 
+	type NetworkInformationLike = {
+		saveData?: boolean;
+		effectiveType?: string;
+	};
+
 	let { data }: { data: PageData } = $props();
 	const initialLesson = untrack(() => data.currentLesson);
 
 	const currentLesson = $derived.by(() => data.currentLesson);
-	const currentChapter = $derived.by(() => data.currentChapter);
+	const sequence = $derived.by(() => data.sequence);
+	const chapterTargets = $derived.by(() => data.chapterTargets);
+	const currentChapter = $derived.by(() => {
+		const chapter = data.chapters.find((item) => item.slug === currentLesson.chapterSlug);
+		if (!chapter) {
+			throw new Error(`Could not find chapter for lesson ${currentLesson.slug}.`);
+		}
+		return chapter;
+	});
+	const lessonsInChapter = $derived.by(() =>
+		sequence
+			.filter((lesson) => lesson.chapterSlug === currentChapter.slug)
+			.map(
+				(lesson): LessonSummary => ({
+					slug: lesson.slug,
+					chapterSlug: lesson.chapterSlug,
+					order: lesson.order,
+					title: lesson.title,
+					mode: lesson.mode
+				})
+			)
+	);
+	const currentLessonIndex = $derived.by(() => {
+		const lessonIndex = sequence.findIndex(
+			(item) => item.chapterSlug === currentLesson.chapterSlug && item.slug === currentLesson.slug
+		);
+		if (lessonIndex < 0) {
+			throw new Error(`Could not find lesson ${currentLesson.slug} in the course sequence.`);
+		}
+		return lessonIndex;
+	});
+	const previousLesson = $derived.by(() => sequence[currentLessonIndex - 1] ?? null);
+	const nextLesson = $derived.by(() => sequence[currentLessonIndex + 1] ?? null);
 
 	let code = $state(initialLesson.mode === 'quiz' ? '' : initialLesson.starterCode);
 	let result = $state<LessonRunResponse | LessonSubmitResponse | null>(null);
@@ -67,6 +105,7 @@
 	let desktopSplitPaneElement = $state<HTMLDivElement | null>(null);
 	let lessonPaneRatio = $state(0.46);
 	let horizontalResizeState = $state<HorizontalResizeState | null>(null);
+	let documentHidden = $state(false);
 
 	const editorValue = $derived.by(() => {
 		if (currentLesson.mode === 'quiz') return '';
@@ -86,6 +125,8 @@
 
 	onMount(() => {
 		if (!browser) return;
+
+		documentHidden = document.hidden;
 
 		const storedVimMode = window.localStorage.getItem('kk-editor-vim-mode');
 		vimModeEnabled = storedVimMode === 'true';
@@ -109,6 +150,17 @@
 				lessonPaneRatio = Math.min(Math.max(parsed, 0.25), 0.7);
 			}
 		}
+
+		const handleVisibilityChange = () => {
+			documentHidden = document.hidden;
+		};
+
+		document.addEventListener('visibilitychange', handleVisibilityChange);
+
+		return () => {
+			document.removeEventListener('visibilitychange', handleVisibilityChange);
+			setLessonPrefetchLowPriorityPaused(false);
+		};
 	});
 
 	$effect(() => {
@@ -142,25 +194,72 @@
 		code = draftCodes[currentLesson.slug] ?? currentLesson.starterCode;
 	});
 
-	async function navigateToLesson(target: ChapterTarget | CourseSequenceItem | null) {
-		if (!target) return;
+	$effect(() => {
+		if (!browser) return;
+		setLessonPrefetchLowPriorityPaused(running !== null || documentHidden);
+	});
 
-		const lessonSlug = 'lessonSlug' in target ? target.lessonSlug : target.slug;
+	$effect(() => {
+		if (!browser) return;
+
+		prefetchLesson(previousLesson, 'high');
+		prefetchLesson(nextLesson, 'high');
+
+		prefetchLessonBatch(
+			lessonsInChapter.filter((lesson) => lesson.slug !== currentLesson.slug),
+			'medium'
+		);
+
+		const lowPriorityWarmupTimeout = window.setTimeout(() => {
+			const connection = (navigator as Navigator & { connection?: NetworkInformationLike })
+				.connection;
+			const shouldSkipLowPriorityWarmup =
+				connection?.saveData === true ||
+				connection?.effectiveType === 'slow-2g' ||
+				connection?.effectiveType === '2g';
+
+			if (shouldSkipLowPriorityWarmup) {
+				return;
+			}
+
+			prefetchLessonBatch(
+				sequence.filter(
+					(lesson) =>
+						!(
+							lesson.chapterSlug === currentLesson.chapterSlug && lesson.slug === currentLesson.slug
+						)
+				),
+				'low'
+			);
+		}, 1000);
+
+		return () => {
+			window.clearTimeout(lowPriorityWarmupTimeout);
+		};
+	});
+
+	function handlePrefetchIntent(target: LessonNavigationTarget | null) {
+		prefetchLesson(target, 'high');
+	}
+
+	async function navigateToLesson(target: LessonNavigationTarget | null) {
+		if (!target) return;
 
 		if (currentLesson.mode !== 'quiz') {
 			draftCodes[currentLesson.slug] = code;
 		}
 
+		prefetchLesson(target, 'high');
 		await goto(
 			resolve('/app/[chapterSlug]/[lessonSlug]', {
 				chapterSlug: target.chapterSlug,
-				lessonSlug
+				lessonSlug: 'lessonSlug' in target ? target.lessonSlug : target.slug
 			})
 		);
 	}
 
 	function handleChapterSelect(chapterSlug: string) {
-		void navigateToLesson(data.chapterTargets[chapterSlug] as ChapterTarget);
+		void navigateToLesson(chapterTargets[chapterSlug] ?? null);
 	}
 
 	function handleLessonSelect(lessonSlug: string) {
@@ -251,13 +350,13 @@
 
 		if (event.key === ',') {
 			event.preventDefault();
-			void navigateToLesson(data.previousLesson);
+			void navigateToLesson(previousLesson);
 			return;
 		}
 
 		if (event.key === '.') {
 			event.preventDefault();
-			void navigateToLesson(data.nextLesson);
+			void navigateToLesson(nextLesson);
 			return;
 		}
 
@@ -488,18 +587,20 @@
 	<div class="relative flex h-full flex-col">
 		<LessonHeader
 			chapters={data.chapters}
+			{chapterTargets}
 			{currentChapter}
-			lessonsInChapter={data.lessonsInChapter}
+			{lessonsInChapter}
 			completedLessonSlugs={completedLessons}
 			{currentLesson}
-			previousLesson={data.previousLesson}
-			nextLesson={data.nextLesson}
+			{previousLesson}
+			{nextLesson}
 			{vimModeEnabled}
 			showSettings={currentLesson.mode !== 'quiz'}
 			onToggleVim={() => (vimModeEnabled = !vimModeEnabled)}
 			onChapterSelect={handleChapterSelect}
 			onLessonSelect={handleLessonSelect}
 			onNavigateLesson={(lesson) => void navigateToLesson(lesson)}
+			onPrefetchLesson={handlePrefetchIntent}
 		/>
 
 		<div

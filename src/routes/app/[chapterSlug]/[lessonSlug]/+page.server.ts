@@ -1,10 +1,10 @@
 import { error } from '@sveltejs/kit';
 import { effectRunner } from '$lib/runtime';
-import { loadCoursePageData } from '$lib/server/course';
+import { loadPublishedLessonRuntime } from '$lib/server/course';
 
 export const load = async ({ params }) => {
 	const pageData = await effectRunner(
-		loadCoursePageData({
+		loadPublishedLessonRuntime({
 			chapterSlug: params.chapterSlug,
 			lessonSlug: params.lessonSlug
 		})
