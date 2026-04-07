@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { authActions, authState } from '$lib/auth';
+	import { authState } from '$lib/auth';
 	import GoogleSignInButton from '$lib/components/auth/GoogleSignInButton.svelte';
 	import ProfilePill from '$lib/components/auth/ProfilePill.svelte';
 
@@ -152,7 +152,9 @@
 									style:width={`${progressPercent}%`}
 								></div>
 							</div>
-							<p class="mt-3 text-sm text-[var(--kk-text-soft)]">{completedLessonsCount} complete</p>
+							<p class="mt-3 text-sm text-[var(--kk-text-soft)]">
+								{completedLessonsCount} complete
+							</p>
 						</div>
 
 						{#if resumeTarget}

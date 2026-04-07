@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { indentWithTab } from '@codemirror/commands';
 	import { basicSetup } from 'codemirror';
 	import { python } from '@codemirror/lang-python';
 	import { HighlightStyle, syntaxHighlighting } from '@codemirror/language';
 	import { Compartment, EditorState } from '@codemirror/state';
-	import { EditorView } from '@codemirror/view';
+	import { EditorView, keymap } from '@codemirror/view';
 	import { tags } from '@lezer/highlight';
 	import { vim } from '@replit/codemirror-vim';
 	import { onMount } from 'svelte';
@@ -68,6 +69,7 @@
 					python(),
 					syntaxHighlighting(pinkSyntax),
 					EditorState.tabSize.of(4),
+					keymap.of([indentWithTab]),
 					EditorView.lineWrapping,
 					editableCompartment.of(editableExtension(readOnly)),
 					EditorView.theme(
