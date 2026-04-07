@@ -34,8 +34,13 @@
 	}: Props = $props();
 
 	let settingsOpen = $state(false);
+	let activeMenu = $state<'chapter' | 'lesson' | null>(null);
 	let settingsButtonElement = $state<HTMLButtonElement | null>(null);
 	let settingsPanelElement = $state<HTMLDivElement | null>(null);
+	let chapterButtonElement = $state<HTMLButtonElement | null>(null);
+	let chapterPanelElement = $state<HTMLDivElement | null>(null);
+	let lessonButtonElement = $state<HTMLButtonElement | null>(null);
+	let lessonPanelElement = $state<HTMLDivElement | null>(null);
 
 	const completedLessonSlugSet = $derived.by(() => new Set(completedLessonSlugs));
 
@@ -45,17 +50,53 @@
 		}
 	});
 
+	function isWithinPopover(
+		target: Node,
+		button: HTMLButtonElement | null,
+		panel: HTMLDivElement | null
+	) {
+		return button?.contains(target) || panel?.contains(target);
+	}
+
+	function toggleMenu(menu: 'chapter' | 'lesson') {
+		settingsOpen = false;
+		activeMenu = activeMenu === menu ? null : menu;
+	}
+
+	function getLessonMeta(lesson: LessonSummary) {
+		if (completedLessonSlugSet.has(lesson.slug)) return 'Completed';
+		if (lesson.mode === 'quiz') return 'Quiz';
+		if (lesson.mode === 'unit') return 'Practice';
+		return 'Exercise';
+	}
+
 	function handleWindowPointerDown(event: PointerEvent) {
-		if (!settingsOpen) return;
 		const target = event.target;
 		if (!(target instanceof Node)) return;
-		if (settingsButtonElement?.contains(target) || settingsPanelElement?.contains(target)) return;
-		settingsOpen = false;
+
+		if (settingsOpen && !isWithinPopover(target, settingsButtonElement, settingsPanelElement)) {
+			settingsOpen = false;
+		}
+
+		if (
+			activeMenu === 'chapter' &&
+			!isWithinPopover(target, chapterButtonElement, chapterPanelElement)
+		) {
+			activeMenu = null;
+		}
+
+		if (
+			activeMenu === 'lesson' &&
+			!isWithinPopover(target, lessonButtonElement, lessonPanelElement)
+		) {
+			activeMenu = null;
+		}
 	}
 
 	function handleWindowKeydown(event: KeyboardEvent) {
 		if (event.key === 'Escape') {
 			settingsOpen = false;
+			activeMenu = null;
 		}
 	}
 </script>
@@ -72,7 +113,10 @@
 					<button
 						bind:this={settingsButtonElement}
 						type="button"
-						onclick={() => (settingsOpen = !settingsOpen)}
+						onclick={() => {
+							activeMenu = null;
+							settingsOpen = !settingsOpen;
+						}}
 						class="topbar-card topbar-button"
 						aria-expanded={settingsOpen}
 						aria-haspopup="true"
@@ -154,18 +198,23 @@
 
 		<div class="ml-auto flex min-w-0 items-center gap-3">
 			<div class="hidden min-w-0 items-center gap-3 md:flex">
-				<div class="topbar-card topbar-chip">
-					<select
-						value={currentChapter.slug}
-						onchange={(event) => onChapterSelect((event.currentTarget as HTMLSelectElement).value)}
-						class="topbar-select"
+				<div class="topbar-card topbar-menu-shell topbar-chip">
+					<button
+						bind:this={chapterButtonElement}
+						type="button"
+						class={`topbar-trigger ${activeMenu === 'chapter' ? 'topbar-trigger-open' : ''}`}
+						aria-expanded={activeMenu === 'chapter'}
+						aria-haspopup="true"
 						aria-label="Select chapter"
+						onclick={() => toggleMenu('chapter')}
 					>
-						{#each chapters as chapter (chapter.slug)}
-							<option value={chapter.slug}>CH{chapter.order}: {chapter.title}</option>
-						{/each}
-					</select>
-					<span class="topbar-select-chevron" aria-hidden="true">
+						<span class="topbar-trigger-prefix">CH{currentChapter.order}</span>
+						<span class="topbar-trigger-label">{currentChapter.title}</span>
+					</button>
+					<span
+						class={`topbar-select-chevron ${activeMenu === 'chapter' ? 'topbar-select-chevron-open' : ''}`}
+						aria-hidden="true"
+					>
 						<svg viewBox="0 0 24 24" class="h-4 w-4">
 							<path
 								d="m7 10 5 5 5-5"
@@ -177,20 +226,52 @@
 							/>
 						</svg>
 					</span>
+
+					{#if activeMenu === 'chapter'}
+						<div bind:this={chapterPanelElement} class="topbar-menu-panel left-0">
+							<div class="topbar-menu-list" role="menu" aria-label="Chapters">
+								{#each chapters as chapter (chapter.slug)}
+									<button
+										type="button"
+										role="menuitemradio"
+										aria-checked={currentChapter.slug === chapter.slug}
+										class={`topbar-menu-option ${currentChapter.slug === chapter.slug ? 'topbar-menu-option-current' : ''}`}
+										onclick={() => {
+											activeMenu = null;
+											onChapterSelect(chapter.slug);
+										}}
+									>
+										<span class="topbar-menu-option-kicker">CH{chapter.order}</span>
+										<span class="topbar-menu-option-copy">
+											<span class="topbar-menu-option-title">{chapter.title}</span>
+											<span class="topbar-menu-option-meta">
+												{chapter.lessonCount} lessons
+											</span>
+										</span>
+									</button>
+								{/each}
+							</div>
+						</div>
+					{/if}
 				</div>
 
-				<div class="topbar-card topbar-select-shell relative">
-					<select
-						value={currentLesson.slug}
-						onchange={(event) => onLessonSelect((event.currentTarget as HTMLSelectElement).value)}
-						class="topbar-select"
+				<div class="topbar-card topbar-menu-shell topbar-select-shell">
+					<button
+						bind:this={lessonButtonElement}
+						type="button"
+						class={`topbar-trigger ${activeMenu === 'lesson' ? 'topbar-trigger-open' : ''}`}
+						aria-expanded={activeMenu === 'lesson'}
+						aria-haspopup="true"
 						aria-label="Select lesson"
+						onclick={() => toggleMenu('lesson')}
 					>
-						{#each lessonsInChapter as lesson (lesson.slug)}
-							<option value={lesson.slug}>L{lesson.order}: {lesson.title}</option>
-						{/each}
-					</select>
-					<span class="topbar-select-chevron" aria-hidden="true">
+						<span class="topbar-trigger-prefix">L{currentLesson.order}</span>
+						<span class="topbar-trigger-label">{currentLesson.title}</span>
+					</button>
+					<span
+						class={`topbar-select-chevron ${activeMenu === 'lesson' ? 'topbar-select-chevron-open' : ''}`}
+						aria-hidden="true"
+					>
 						<svg viewBox="0 0 24 24" class="h-4 w-4">
 							<path
 								d="m7 10 5 5 5-5"
@@ -202,6 +283,39 @@
 							/>
 						</svg>
 					</span>
+
+					{#if activeMenu === 'lesson'}
+						<div bind:this={lessonPanelElement} class="topbar-menu-panel right-0">
+							<div class="topbar-menu-list" role="menu" aria-label="Lessons">
+								{#each lessonsInChapter as lesson (lesson.slug)}
+									<button
+										type="button"
+										role="menuitemradio"
+										aria-checked={currentLesson.slug === lesson.slug}
+										class={`topbar-menu-option ${currentLesson.slug === lesson.slug ? 'topbar-menu-option-current' : ''}`}
+										onclick={() => {
+											activeMenu = null;
+											onLessonSelect(lesson.slug);
+										}}
+									>
+										<span class="topbar-menu-option-kicker">L{lesson.order}</span>
+										<span class="topbar-menu-option-copy">
+											<span class="topbar-menu-option-title">{lesson.title}</span>
+											<span class="topbar-menu-option-meta">{getLessonMeta(lesson)}</span>
+										</span>
+										<span
+											class={`topbar-menu-option-status ${
+												completedLessonSlugSet.has(lesson.slug)
+													? 'topbar-menu-option-status-complete'
+													: ''
+											} ${currentLesson.slug === lesson.slug ? 'topbar-menu-option-status-current' : ''}`}
+											aria-hidden="true"
+										></span>
+									</button>
+								{/each}
+							</div>
+						</div>
+					{/if}
 				</div>
 			</div>
 

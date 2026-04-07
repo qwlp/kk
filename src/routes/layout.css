@@ -102,7 +102,7 @@ body::selection {
 }
 
 .topbar-button:focus-visible,
-.topbar-select:focus-visible,
+.topbar-trigger:focus-visible,
 .topbar-nav-button:focus-visible {
 	outline: none;
 	box-shadow:
@@ -139,6 +139,11 @@ body::selection {
 	color: var(--kk-text);
 }
 
+.topbar-menu-shell {
+	position: relative;
+	overflow: visible;
+}
+
 .topbar-select-shell {
 	display: flex;
 	align-items: stretch;
@@ -147,27 +152,177 @@ body::selection {
 	padding: 0;
 }
 
-.topbar-select {
-	display: block;
+.topbar-trigger {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
 	width: 100%;
 	height: 100%;
-	appearance: none;
 	border: 0;
 	border-radius: inherit;
 	background: transparent;
-	color-scheme: dark;
-	padding: 0 2.6rem 0 0.95rem;
+	padding: 0 2.85rem 0 0.95rem;
 	font: inherit;
+	text-align: left;
+	color: var(--kk-text);
+	cursor: pointer;
+	transition:
+		background-color 160ms ease,
+		box-shadow 160ms ease;
+}
+
+.topbar-trigger:hover,
+.topbar-trigger-open {
+	background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+}
+
+.topbar-trigger-prefix {
+	flex: none;
+	border-radius: 9999px;
+	padding: 0.38rem 0.62rem;
+	background: rgba(255, 255, 255, 0.06);
+	font-size: 0.74rem;
+	line-height: 1;
+	letter-spacing: 0.16em;
+	color: var(--kk-text-soft);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.topbar-trigger-label {
+	min-width: 0;
 	font-size: 0.98rem;
 	line-height: 1.25;
 	letter-spacing: 0.02em;
 	color: var(--kk-text);
-	cursor: pointer;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
-.topbar-select option {
-	background: #221928;
+.topbar-menu-panel {
+	position: absolute;
+	top: calc(100% + 0.75rem);
+	z-index: 30;
+	width: min(28rem, 70vw);
+	max-height: min(26rem, calc(100vh - 9rem));
+	overflow: hidden;
+	border: 1px solid rgba(255, 214, 236, 0.12);
+	border-radius: 1.15rem;
+	background:
+		radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 36%),
+		linear-gradient(180deg, rgba(34, 25, 40, 0.98), rgba(18, 13, 24, 0.98));
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.08),
+		0 24px 54px rgba(0, 0, 0, 0.42);
+	backdrop-filter: blur(18px);
+}
+
+.topbar-menu-list {
+	width: 100%;
+	max-height: inherit;
+	padding: 0.45rem;
+	overflow-y: auto;
+}
+
+.topbar-menu-option {
+	display: flex;
+	align-items: center;
+	gap: 0.85rem;
+	width: 100%;
+	border: 0;
+	border-radius: 0.9rem;
+	background: transparent;
+	padding: 0.8rem 0.9rem;
+	font: inherit;
+	text-align: left;
 	color: var(--kk-text);
+	cursor: pointer;
+	transition:
+		background-color 160ms ease,
+		transform 160ms ease,
+		box-shadow 160ms ease;
+}
+
+.topbar-menu-option:hover {
+	transform: translateY(-1px);
+	background: rgba(255, 255, 255, 0.04);
+}
+
+.topbar-menu-option:focus-visible {
+	outline: none;
+	box-shadow:
+		0 0 0 1px rgba(241, 107, 166, 0.35),
+		0 0 0 4px rgba(241, 107, 166, 0.12);
+}
+
+.topbar-menu-option-current {
+	background:
+		radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 46%),
+		linear-gradient(180deg, rgba(223, 79, 143, 0.17), rgba(144, 38, 84, 0.14));
+	box-shadow: inset 0 0 0 1px rgba(223, 79, 143, 0.22);
+}
+
+.topbar-menu-option-kicker {
+	flex: none;
+	min-width: 3.25rem;
+	border-radius: 9999px;
+	padding: 0.42rem 0.58rem;
+	background: rgba(255, 255, 255, 0.06);
+	font-size: 0.72rem;
+	line-height: 1;
+	letter-spacing: 0.14em;
+	color: var(--kk-text-soft);
+	text-align: center;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.topbar-menu-option-copy {
+	display: flex;
+	min-width: 0;
+	flex: 1;
+	flex-direction: column;
+	gap: 0.22rem;
+}
+
+.topbar-menu-option-title {
+	font-size: 0.95rem;
+	line-height: 1.25;
+	color: var(--kk-text);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.topbar-menu-option-meta {
+	font-size: 0.75rem;
+	line-height: 1.2;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--kk-text-dim);
+}
+
+.topbar-menu-option-status {
+	flex: none;
+	width: 0.72rem;
+	height: 0.72rem;
+	border-radius: 9999px;
+	border: 1px solid rgba(255, 214, 236, 0.18);
+	background: rgba(255, 255, 255, 0.04);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.topbar-menu-option-status-complete {
+	border-color: rgba(170, 142, 255, 0.9);
+	background:
+		radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.82), transparent 40%),
+		radial-gradient(circle at center, rgba(137, 119, 255, 0.94), rgba(67, 47, 137, 0.96));
+	box-shadow:
+		0 0 0 1px rgba(167, 143, 255, 0.24),
+		0 0 12px rgba(131, 104, 255, 0.36);
+}
+
+.topbar-menu-option-status-current {
+	transform: scale(1.12);
 }
 
 .topbar-select-chevron {
@@ -177,6 +332,14 @@ body::selection {
 	right: 0.85rem;
 	color: var(--kk-text-dim);
 	transform: translateY(-50%);
+	transition:
+		transform 160ms ease,
+		color 160ms ease;
+}
+
+.topbar-select-chevron-open {
+	color: var(--kk-text-soft);
+	transform: translateY(-50%) rotate(180deg);
 }
 
 .topbar-progress-shell {
