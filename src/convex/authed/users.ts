@@ -60,6 +60,13 @@ const getUserCourseState = async (
 const ensureCurrentUserRecord = async (
 	ctx: MutationCtx & { identity: UserIdentity }
 ): Promise<UserDoc> => {
+	console.log('authed/users:ensureCurrentUserRecord:start', {
+		tokenIdentifier: ctx.identity.tokenIdentifier,
+		subject: ctx.identity.subject,
+		issuer: ctx.identity.issuer,
+		email: ctx.identity.email ?? null
+	});
+
 	const existingUser = await getUserByTokenIdentifier(ctx.db, ctx.identity.tokenIdentifier);
 	const nextFields = {
 		subject: ctx.identity.subject,
@@ -73,6 +80,7 @@ const ensureCurrentUserRecord = async (
 	const now = Date.now();
 
 	if (!existingUser) {
+		console.log('authed/users:ensureCurrentUserRecord:creating_user');
 		const userId = await ctx.db.insert('users', {
 			tokenIdentifier: ctx.identity.tokenIdentifier,
 			...nextFields,
@@ -97,6 +105,9 @@ const ensureCurrentUserRecord = async (
 		existingUser.imageUrl !== optionalProfileFields.imageUrl;
 
 	if (hasChanges) {
+		console.log('authed/users:ensureCurrentUserRecord:patching_user', {
+			userId: existingUser._id
+		});
 		await ctx.db.patch(existingUser._id, {
 			...nextFields,
 			...optionalProfileFields,

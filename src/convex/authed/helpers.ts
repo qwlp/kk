@@ -7,7 +7,23 @@ import {
 import { action, mutation, query } from '../_generated/server';
 
 const authGuard = customCtx(async (ctx) => {
-	const identity = await ctx.auth.getUserIdentity();
+	let identity = null;
+
+	try {
+		identity = await ctx.auth.getUserIdentity();
+	} catch (errorValue) {
+		console.error('authed/authGuard:getUserIdentity_failed', {
+			error: errorValue instanceof Error ? errorValue.message : String(errorValue)
+		});
+		throw errorValue;
+	}
+
+	console.log('authed/authGuard:identity_lookup', {
+		tokenIdentifier: identity?.tokenIdentifier ?? null,
+		subject: identity?.subject ?? null,
+		issuer: identity?.issuer ?? null,
+		email: identity?.email ?? null
+	});
 
 	if (!identity) {
 		throw new Error('Unauthenticated');
