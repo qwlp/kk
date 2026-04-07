@@ -20,7 +20,8 @@ Complete the starter code so the program does the following:
 
 - Set `gems` to `{'ruby', 'emerald', 'ruby'}`.
 - Print the result of `len(gems)`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 2

@@ -23,9 +23,12 @@ Complete the `battle_cry` function.
 To complete `battle_cry`:
 
 - Print the exact text `'Charge!'`.
-  After that:
+
+After that:
+
 - Call `battle_cry()`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 Charge!

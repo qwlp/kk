@@ -21,12 +21,18 @@ It accepts 2 inputs:
 
 - `inventory`: a dictionary with string keys and integer values
 - `item`: a string
-  It should return 1 value:
+
+It should return 1 value:
+
 - a Boolean value
-  To solve it:
+
+To solve it:
+
 - Return `item in inventory`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(has_item({'potion': 2}, 'potion'))

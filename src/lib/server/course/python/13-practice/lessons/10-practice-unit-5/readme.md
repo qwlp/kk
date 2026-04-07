@@ -27,14 +27,20 @@ It accepts 2 inputs:
 
 - `bag`: a dictionary with string keys and integer values
 - `recipe`: a dictionary with string keys and integer values
-  It should return 1 value:
+
+It should return 1 value:
+
 - a Boolean
-  To solve it:
+
+To solve it:
+
 - Loop through each key/value pair in `recipe`, storing them in `item` and `needed`.
 - Inside the loop, if `bag.get(item, 0) < needed`, return `False`.
 - Return `True`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(can_craft({'wood': 3, 'ore': 2}, {'wood': 2, 'ore': 1}))

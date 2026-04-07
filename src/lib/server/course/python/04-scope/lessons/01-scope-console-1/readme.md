@@ -26,7 +26,8 @@ To complete `show_message`:
 
 - Set `message` to `'Local scope'`.
 - Print `message`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 Local scope

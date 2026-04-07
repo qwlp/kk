@@ -26,7 +26,8 @@ Complete the starter code so the program does the following:
 - Set `bonus_damage` to `3`.
 - Set `total_damage` to `base_damage + bonus_damage`.
 - Print `total_damage`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 15

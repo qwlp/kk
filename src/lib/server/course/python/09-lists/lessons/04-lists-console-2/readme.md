@@ -22,7 +22,8 @@ Complete the starter code so the program does the following:
 
 - Use `bag.append('elixir')`.
 - Print the result of `len(bag)`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 2

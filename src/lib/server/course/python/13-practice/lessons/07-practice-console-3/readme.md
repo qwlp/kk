@@ -22,7 +22,8 @@ Complete the starter code so the program does the following:
 
 - Set `tags` to `['fire', 'ice', 'fire', 'wind']`.
 - Print the result of `len(set(tags))`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 3

@@ -25,11 +25,16 @@ Complete the `greet` function.
 `greet` accepts 1 input:
 
 - `name`: a string
-  To complete `greet`:
+
+To complete `greet`:
+
 - Print `'Hello, ' + name`.
-  After that:
+
+After that:
+
 - Call `greet('Ada')`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 Hello, Ada

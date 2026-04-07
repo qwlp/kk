@@ -26,7 +26,8 @@ Complete the starter code so the program does the following:
 
 - Use a `for` loop to go through each `value` in `[2, 3, 4]`.
 - Inside the loop, update `total` to `total + value`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 9

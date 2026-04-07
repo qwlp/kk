@@ -25,7 +25,8 @@ Complete the starter code so the program does the following:
 - Set `kilobytes` to `3`.
 - Set `bytes_total` to `kilobytes * 1024`.
 - Print `bytes_total`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 3072

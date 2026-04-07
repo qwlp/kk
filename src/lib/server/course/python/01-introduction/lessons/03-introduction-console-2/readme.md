@@ -20,7 +20,8 @@ Complete the starter code so the program does the following:
 
 - Print the exact text `'Ready'`.
 - Print the exact text `'Code'`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 Ready

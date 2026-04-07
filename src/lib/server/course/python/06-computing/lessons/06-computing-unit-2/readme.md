@@ -20,12 +20,18 @@ Complete the `kilobytes_to_bytes` function.
 It accepts 1 input:
 
 - `kb`: an integer
-  It should return 1 value:
+
+It should return 1 value:
+
 - an integer
-  To solve it:
+
+To solve it:
+
 - Return `kb * 1024`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(kilobytes_to_bytes(1))

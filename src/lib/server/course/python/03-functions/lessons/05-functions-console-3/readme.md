@@ -25,12 +25,17 @@ Complete the `announce` function.
 `announce` accepts 1 input:
 
 - `name`: a string
-  To complete `announce`:
+
+To complete `announce`:
+
 - Print the exact text `'Now entering:'`.
 - Print `name`.
-  After that:
+
+After that:
+
 - Call `announce('Ayla')`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 Now entering:

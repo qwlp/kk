@@ -25,7 +25,8 @@ Complete the starter code so the program does the following:
 - Use a `while` loop that runs while `count > 0` is `True`.
 - Inside the loop, print `count`.
 - Inside the loop, update `count` to `count - 1`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 3

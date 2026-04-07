@@ -20,12 +20,18 @@ Complete the `has_duplicates` function.
 It accepts 1 input:
 
 - `items`: a list of integers
-  It should return 1 value:
+
+It should return 1 value:
+
 - a Boolean value
-  To solve it:
+
+To solve it:
+
 - Return `len(set(items)) != len(items)`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(has_duplicates([1, 1, 2]))

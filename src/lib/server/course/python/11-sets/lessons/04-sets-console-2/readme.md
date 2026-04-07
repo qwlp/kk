@@ -22,7 +22,8 @@ Complete the starter code so the program does the following:
 
 - Use `tools.add('rope')`.
 - Print `'rope' in tools`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 True

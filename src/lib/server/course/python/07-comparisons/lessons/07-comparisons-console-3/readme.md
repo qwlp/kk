@@ -26,7 +26,8 @@ Complete the starter code so the program does the following:
 
 - If `score >= 10`, print the exact text `'Win'`.
 - Otherwise, print the exact text `'Keep going'`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 Keep going

@@ -22,7 +22,8 @@ Complete the starter code so the program does the following:
 
 - Set `bag['gold']` to `15`.
 - Print `bag['gold']`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 15

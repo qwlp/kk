@@ -20,12 +20,18 @@ Complete the `add_reward` function.
 It accepts 1 input:
 
 - `points`: an integer
-  It should return 1 value:
+
+It should return 1 value:
+
 - the result of `points + 5`
-  To solve it:
+
+To solve it:
+
 - Return `points + 5`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(add_reward(1))

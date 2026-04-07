@@ -27,15 +27,21 @@ It accepts 2 inputs:
 
 - `word`: a string
 - `times`: an integer
-  It should return 1 value:
+
+It should return 1 value:
+
 - a string
-  To solve it:
+
+To solve it:
+
 - Start with `result` as an empty string.
 - Use `range(times)` to repeat the loop the correct number of times.
 - Inside the loop, update `result` to `result + word`.
 - Return `result`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(repeat_word('ha', 2))

@@ -26,7 +26,8 @@ Complete the starter code so the program does the following:
 
 - Try to print the result of `int(text)`.
 - If a `ValueError` happens, print the exact text `'invalid number'`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 invalid number

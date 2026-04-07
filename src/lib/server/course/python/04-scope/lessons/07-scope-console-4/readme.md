@@ -31,10 +31,13 @@ To complete `left`:
 
 - Set `count` to `1`.
 - Print `count`.
-  To complete `right`:
+
+To complete `right`:
+
 - Set `count` to `2`.
 - Print `count`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 1

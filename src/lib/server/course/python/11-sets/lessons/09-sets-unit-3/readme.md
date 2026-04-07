@@ -21,12 +21,18 @@ It accepts 2 inputs:
 
 - `left`: a set of strings
 - `right`: a set of strings
-  It should return 1 value:
+
+It should return 1 value:
+
 - a set of shared values
-  To solve it:
+
+To solve it:
+
 - Return `left & right`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(shared_items({'axe', 'bow'}, {'bow', 'staff'}))

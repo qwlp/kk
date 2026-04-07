@@ -29,15 +29,21 @@ It accepts 2 inputs:
 
 - `levels`: a list of integers
 - `minimum`: an integer
-  It should return 1 value:
+
+It should return 1 value:
+
 - a list
-  To solve it:
+
+To solve it:
+
 - Set `result` to `[]`.
 - Loop through each `level` in `levels`.
 - Inside the loop, if `level >= minimum`, use `result.append(level)`.
 - Return `result`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(filter_unlocked([1, 3, 5], 3))

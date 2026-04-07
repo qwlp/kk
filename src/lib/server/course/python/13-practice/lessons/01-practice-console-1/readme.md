@@ -29,7 +29,8 @@ Complete the starter code so the program does the following:
 - Use a `for` loop to go through each `price` in `prices`.
 - Inside the loop, update `total` to `total + price`.
 - Print `total`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 13

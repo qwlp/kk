@@ -23,11 +23,16 @@ Complete the `greet` function.
 `greet` accepts 1 input:
 
 - `name`: a string
-  To complete `greet`:
+
+To complete `greet`:
+
 - Print `name`.
-  After that:
+
+After that:
+
 - Call `greet('inside')`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 inside

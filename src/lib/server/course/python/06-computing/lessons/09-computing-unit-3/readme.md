@@ -21,12 +21,18 @@ It accepts 2 inputs:
 
 - `required`: an integer
 - `available`: an integer
-  It should return 1 value:
+
+It should return 1 value:
+
 - a Boolean value
-  To solve it:
+
+To solve it:
+
 - Return `available >= required`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(has_enough_memory(128, 256))

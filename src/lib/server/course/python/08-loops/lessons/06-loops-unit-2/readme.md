@@ -28,15 +28,21 @@ Complete the `count_big_scores` function.
 It accepts 1 input:
 
 - `scores`: a list of integers
-  It should return 1 value:
+
+It should return 1 value:
+
 - an integer
-  To solve it:
+
+To solve it:
+
 - Set `count` to `0`.
 - Loop through each `score` in `scores`.
 - Inside the loop, if `score >= 10`, update `count` to `count + 1`.
 - Return `count`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(count_big_scores([5, 10, 12]))

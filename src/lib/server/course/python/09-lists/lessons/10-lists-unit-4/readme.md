@@ -20,13 +20,20 @@ Complete the `join_names` function.
 It accepts 1 input:
 
 - `names`: a list of strings
-  It should return 1 value:
+
+It should return 1 value:
+
 - a string
-  To solve it:
+
+To solve it:
+
 - Return `', '.join(names)`.
-  Return the value. Do not print it. The tests check the returned result.
-  Be careful with spaces, punctuation, and capitalization. The returned string must match exactly.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Be careful with spaces, punctuation, and capitalization. The returned string must match exactly.
+
+Here are examples of how the function should behave:
 
 ```python
 print(join_names(['Ayla', 'Kai']))

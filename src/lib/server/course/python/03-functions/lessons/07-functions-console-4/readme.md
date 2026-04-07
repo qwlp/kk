@@ -23,13 +23,20 @@ Complete the `double` function.
 `double` accepts 1 input:
 
 - `value`: an integer
-  `double` should return 1 value:
+
+`double` should return 1 value:
+
 - the correct value
-  To complete `double`:
+
+To complete `double`:
+
 - Return `value * 2`.
-  After that:
+
+After that:
+
 - Print the result of `double(6)`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 12

@@ -20,7 +20,8 @@ Complete the starter code so the program does the following:
 
 - Set `bag` to `{'rope': 1, 'torch': 2}`.
 - Print `bag['rope'] + bag['torch']`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 3

@@ -30,16 +30,22 @@ Complete the `average` function.
 It accepts 1 input:
 
 - `scores`: a list of integers
-  It should return 1 value:
+
+It should return 1 value:
+
 - an integer
-  To solve it:
+
+To solve it:
+
 - If `not scores`, return `0`.
 - Set `total` to `0`.
 - Loop through each `score` in `scores`.
 - Inside the loop, update `total` to `total + score`.
 - Return `total / len(scores)`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(average([2, 4, 6]))

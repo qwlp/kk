@@ -25,13 +25,19 @@ It accepts 2 inputs:
 
 - `total`: an integer
 - `count`: an integer
-  It should return 1 value:
+
+It should return 1 value:
+
 - the correct value for the condition
-  To solve it:
+
+To solve it:
+
 - If `count == 0`, return `0`.
 - Return `total / count`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(safe_divide(10, 0))

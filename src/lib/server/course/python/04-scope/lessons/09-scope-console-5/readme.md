@@ -26,9 +26,12 @@ Complete the `show_theme` function.
 To complete `show_theme`:
 
 - Print `theme`.
-  After that:
+
+After that:
+
 - Set `theme` to `'forest'`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 forest

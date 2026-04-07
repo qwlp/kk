@@ -27,7 +27,8 @@ The helper function is already written.
 Complete the starter code so the program does the following:
 
 - Store the returned value from `area_of_circle(spear_length)` in `spear_area`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 12.56

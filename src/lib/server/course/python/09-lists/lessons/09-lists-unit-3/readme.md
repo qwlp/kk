@@ -28,15 +28,21 @@ Complete the `smallest` function.
 It accepts 1 input:
 
 - `items`: a list of integers
-  It should return 1 value:
+
+It should return 1 value:
+
 - the correct value
-  To solve it:
+
+To solve it:
+
 - Set `best` to `items[0]`.
 - Loop through each `item` in `items`.
 - Inside the loop, if `item < best`, set `best` to `item`.
 - Return `best`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(smallest([5, 2, 9]))

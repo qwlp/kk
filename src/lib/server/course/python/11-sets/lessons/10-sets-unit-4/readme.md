@@ -21,12 +21,18 @@ It accepts 2 inputs:
 
 - `earned`: a set of strings
 - `owned`: a set of strings
-  It should return 1 value:
+
+It should return 1 value:
+
 - the result of the set difference
-  To solve it:
+
+To solve it:
+
 - Return `earned - owned`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(new_badges({'bronze', 'silver'}, {'bronze'}))

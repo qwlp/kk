@@ -28,16 +28,22 @@ Complete the `top_score` function.
 It accepts 1 input:
 
 - `scores`: a list of integers
-  It should return 1 value:
+
+It should return 1 value:
+
 - an integer
-  To solve it:
+
+To solve it:
+
 - If `not scores`, return `0`.
 - Set `best` to `scores[0]`.
 - Loop through each `score` in `scores`.
 - Inside the loop, if `score > best`, set `best` to `score`.
 - Return `best`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(top_score([2, 9, 5]))

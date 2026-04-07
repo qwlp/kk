@@ -20,7 +20,8 @@ Complete the starter code so the program does the following:
 
 - Print the exact text `'Level 1'`.
 - Print `2`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 Level 1

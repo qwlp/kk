@@ -20,7 +20,8 @@ Complete the starter code so the program does the following:
 
 - Set `items` to `['rope', 'torch', 'map']`.
 - Print `items[0]`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 rope

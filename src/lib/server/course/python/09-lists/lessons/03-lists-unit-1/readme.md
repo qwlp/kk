@@ -20,12 +20,18 @@ Complete the `get_last_item` function.
 It accepts 1 input:
 
 - `items`: a list of strings
-  It should return 1 value:
+
+It should return 1 value:
+
 - the requested value
-  To solve it:
+
+To solve it:
+
 - Return `items[-1]`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(get_last_item(['axe', 'bow']))

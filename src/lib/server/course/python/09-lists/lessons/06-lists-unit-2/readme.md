@@ -28,15 +28,21 @@ Complete the `count_even` function.
 It accepts 1 input:
 
 - `nums`: a list of integers
-  It should return 1 value:
+
+It should return 1 value:
+
 - an integer
-  To solve it:
+
+To solve it:
+
 - Set `count` to `0`.
 - Loop through each `num` in `nums`.
 - Inside the loop, if `num % 2 == 0`, update `count` to `count + 1`.
 - Return `count`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(count_even([1, 2, 4]))

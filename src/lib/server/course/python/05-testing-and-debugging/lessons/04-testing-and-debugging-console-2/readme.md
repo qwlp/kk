@@ -20,7 +20,8 @@ Complete the starter code so the program does the following:
 
 - Set `lives` to `9`.
 - Print `lives`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 9

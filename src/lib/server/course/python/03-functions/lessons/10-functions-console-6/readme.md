@@ -24,13 +24,20 @@ Complete the `total_damage` function.
 
 - `base`: an integer
 - `bonus`: an integer
-  `total_damage` should return 1 value:
+
+`total_damage` should return 1 value:
+
 - the result of `base + bonus`
-  To complete `total_damage`:
+
+To complete `total_damage`:
+
 - Return `base + bonus`.
-  After that:
+
+After that:
+
 - Print the result of `total_damage(12, 3)`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 15

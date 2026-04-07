@@ -23,7 +23,8 @@ Complete the starter code so the program does the following:
 - Print the exact text `'Load'`.
 - Print the exact text `'Aim'`.
 - Print the exact text `'Fire'`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 Load

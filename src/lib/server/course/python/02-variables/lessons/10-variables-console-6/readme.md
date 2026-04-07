@@ -26,7 +26,8 @@ Complete the starter code so the program does the following:
 - Set `used` to `3`.
 - Set `remaining` to `potions - used`.
 - Print `remaining`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 5

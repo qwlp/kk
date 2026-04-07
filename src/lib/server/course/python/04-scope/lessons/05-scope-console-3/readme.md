@@ -23,12 +23,17 @@ Complete the `build_label` function.
 `build_label` should return 1 value:
 
 - the correct value
-  To complete `build_label`:
+
+To complete `build_label`:
+
 - Set `label` to `'Knight'`.
 - Return `label`.
-  After that:
+
+After that:
+
 - Print the result of `build_label()`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 Knight

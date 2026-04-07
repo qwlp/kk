@@ -24,13 +24,19 @@ Complete the `first_item` function.
 It accepts 1 input:
 
 - `items`: a list of integers
-  It should return 1 value:
+
+It should return 1 value:
+
 - the requested item, or `None` if the list is empty
-  To solve it:
+
+To solve it:
+
 - If `not items`, return `None`.
 - Return `items[0]`.
-  Return the value. Do not print it. The tests check the returned result.
-  Here are examples of how the function should behave:
+
+Return the value. Do not print it. The tests check the returned result.
+
+Here are examples of how the function should behave:
 
 ```python
 print(first_item([1, 2, 3]))

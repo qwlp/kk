@@ -20,7 +20,8 @@ Complete the starter code so the program does the following:
 
 - Set `hero_name` to `'Ayla'`.
 - Print `hero_name`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 Ayla

@@ -28,7 +28,8 @@ Complete the starter code so the program does the following:
 
 - If `count == 0`, print the exact text `'cannot divide'`.
 - Otherwise, print `total / count`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 cannot divide

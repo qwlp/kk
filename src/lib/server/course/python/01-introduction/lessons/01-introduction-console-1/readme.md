@@ -17,7 +17,8 @@ The assignment changes the specific values, but the basic pattern is the same.
 Complete the starter code so the program does the following:
 
 - Print the exact text `'Welcome to Python!'`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 Welcome to Python!

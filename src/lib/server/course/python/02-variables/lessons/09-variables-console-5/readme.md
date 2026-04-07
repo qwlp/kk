@@ -22,7 +22,8 @@ Complete the starter code so the program does the following:
 - Set `role` to `'wizard'`.
 - Print `role`.
 - Print `role`.
-  Your finished program should print exactly this output:
+
+Your finished program should print exactly this output:
 
 ```text
 wizard
