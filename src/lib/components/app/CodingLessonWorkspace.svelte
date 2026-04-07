@@ -223,7 +223,7 @@
 			role="separator"
 			aria-label="Resize editor and terminal panes"
 			aria-orientation="horizontal"
-			class="group relative h-3 shrink-0 cursor-row-resize bg-transparent"
+			class="group relative h-7 shrink-0 cursor-row-resize bg-transparent"
 			onpointerdown={startVerticalResize}
 		>
 			<div
@@ -235,7 +235,7 @@
 		</div>
 
 		<div
-			class="flex min-h-0 shrink-0 basis-[var(--kk-terminal-pane-height)] flex-col border-t border-[var(--kk-border)] bg-transparent"
+			class="flex min-h-[9rem] shrink-0 basis-[var(--kk-terminal-pane-height)] flex-col border-t border-[var(--kk-border)] bg-transparent"
 		>
 			<div class="flex flex-wrap items-center gap-3 px-4 py-3">
 				<div class="flex flex-wrap items-center gap-3">
