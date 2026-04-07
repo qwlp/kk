@@ -4,7 +4,7 @@
 	"title": "Review Quiz: Variables",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What is the main job of a variable?",
+	"question": "What is the job of a variable?",
 	"choices": [
 		{
 			"id": "a",
@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "To define a loop automatically."
+			"label": "To repeat code over a collection."
 		},
 		{
 			"id": "c",
-			"label": "To remove duplicates from data."
+			"label": "To keep only unique values."
 		},
 		{
 			"id": "d",
-			"label": "To catch exceptions."
+			"label": "To handle runtime errors."
 		}
 	],
 	"correctChoiceId": "a"

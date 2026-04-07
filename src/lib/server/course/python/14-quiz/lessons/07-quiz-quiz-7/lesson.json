@@ -4,7 +4,7 @@
 	"title": "Review Quiz: Lists",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What index gives the first item in a list?",
+	"question": "What index gets the first item in a list?",
 	"choices": [
 		{
 			"id": "a",

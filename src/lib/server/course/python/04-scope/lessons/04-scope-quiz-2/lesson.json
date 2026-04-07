@@ -4,23 +4,23 @@
 	"title": "Quiz: Local Variables",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "Where can a local variable usually be used?",
+	"question": "If `message` is created inside `show_message()`, where can you usually use it?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "Inside the function where it was created."
+			"label": "Inside `show_message()`."
 		},
 		{
 			"id": "b",
-			"label": "In every file in the project."
+			"label": "Anywhere in the same file."
 		},
 		{
 			"id": "c",
-			"label": "Only inside comments."
+			"label": "Inside any function with the same name."
 		},
 		{
 			"id": "d",
-			"label": "Only inside strings."
+			"label": "Anywhere after the function is called once."
 		}
 	],
 	"correctChoiceId": "a"

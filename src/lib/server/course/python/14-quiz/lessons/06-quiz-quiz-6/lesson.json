@@ -4,23 +4,23 @@
 	"title": "Review Quiz: Loops",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "Which statement is commonly used to loop over items in a collection?",
+	"question": "Which keyword is commonly used to loop over a list?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "for"
+			"label": "`for`"
 		},
 		{
 			"id": "b",
-			"label": "def"
+			"label": "`while`"
 		},
 		{
 			"id": "c",
-			"label": "return"
+			"label": "`def`"
 		},
 		{
 			"id": "d",
-			"label": "except"
+			"label": "`if`"
 		}
 	],
 	"correctChoiceId": "a"

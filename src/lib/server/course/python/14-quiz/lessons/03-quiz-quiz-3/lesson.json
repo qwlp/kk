@@ -4,23 +4,23 @@
 	"title": "Review Quiz: Functions",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What keyword defines a function in Python?",
+	"question": "Which keyword starts a function definition in Python?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "def"
+			"label": "`def`"
 		},
 		{
 			"id": "b",
-			"label": "func"
+			"label": "`return`"
 		},
 		{
 			"id": "c",
-			"label": "return"
+			"label": "`if`"
 		},
 		{
 			"id": "d",
-			"label": "loop"
+			"label": "`for`"
 		}
 	],
 	"correctChoiceId": "a"

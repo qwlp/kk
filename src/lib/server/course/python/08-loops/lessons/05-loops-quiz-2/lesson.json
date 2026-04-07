@@ -4,23 +4,23 @@
 	"title": "Quiz: Loop Variables",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "In `for weapon in [\"axe\", \"bow\"]`, what is `weapon`?",
+	"question": "On the first pass of `for weapon in [\"axe\", \"bow\"]`, what is `weapon`?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "The current item from the loop."
+			"label": "`\"axe\"`"
 		},
 		{
 			"id": "b",
-			"label": "The full list."
+			"label": "`\"bow\"`"
 		},
 		{
 			"id": "c",
-			"label": "A function definition."
+			"label": "`weapon`"
 		},
 		{
 			"id": "d",
-			"label": "A comment."
+			"label": "`0`"
 		}
 	],
 	"correctChoiceId": "a"

@@ -4,7 +4,7 @@
 	"title": "Quiz: Membership Checks",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What does `\"rope\" in tools` check when `tools` is a set?",
+	"question": "What does `\"rope\" in tools` check if `tools` is a set?",
 	"choices": [
 		{
 			"id": "a",
@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "Whether `\"rope\"` is the first item."
+			"label": "Whether `\"rope\"` would come first if the set were sorted."
 		},
 		{
 			"id": "c",
-			"label": "Whether the set is empty."
+			"label": "Whether the set has exactly one item."
 		},
 		{
 			"id": "d",
-			"label": "Whether the set has duplicates."
+			"label": "Whether `\"rope\"` is a key with a value."
 		}
 	],
 	"correctChoiceId": "a"

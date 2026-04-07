@@ -4,23 +4,23 @@
 	"title": "Quiz: Parameters Are Inputs",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "In `def greet(name):`, what is `name`?",
+	"question": "In `def greet(name):`, what is `name` called?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "A parameter that receives input for the function."
+			"label": "A parameter."
 		},
 		{
 			"id": "b",
-			"label": "A keyword that ends the function."
+			"label": "An argument."
 		},
 		{
 			"id": "c",
-			"label": "A built-in Python type."
+			"label": "The function name."
 		},
 		{
 			"id": "d",
-			"label": "A comment."
+			"label": "A return value."
 		}
 	],
 	"correctChoiceId": "a"

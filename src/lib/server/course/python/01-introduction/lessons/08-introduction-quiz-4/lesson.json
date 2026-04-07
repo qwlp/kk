@@ -4,7 +4,7 @@
 	"title": "Quiz: Execution Order",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "If line 1 prints `A` and line 2 prints `B`, what prints first?",
+	"question": "What prints first here: `print(\"A\")` then `print(\"B\")`?",
 	"choices": [
 		{
 			"id": "a",
@@ -16,11 +16,11 @@
 		},
 		{
 			"id": "c",
-			"label": "They print at the same time."
+			"label": "Both on the same line at the same time."
 		},
 		{
 			"id": "d",
-			"label": "Nothing prints."
+			"label": "Nothing, because the second line replaces the first."
 		}
 	],
 	"correctChoiceId": "a"

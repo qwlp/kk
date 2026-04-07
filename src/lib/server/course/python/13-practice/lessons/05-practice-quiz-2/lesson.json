@@ -4,7 +4,7 @@
 	"title": "Quiz: Breaking Problems Into Steps",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What is usually a good strategy for a larger beginner problem?",
+	"question": "What is a good approach to a larger beginner problem?",
 	"choices": [
 		{
 			"id": "a",
@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "Avoid using variables or functions."
+			"label": "Write it all in one big expression so you finish faster."
 		},
 		{
 			"id": "c",
-			"label": "Ignore edge cases until the very end."
+			"label": "Solve every edge case before understanding the main task."
 		},
 		{
 			"id": "d",
-			"label": "Rewrite the whole language in your head first."
+			"label": "Start over from scratch each time one small part is confusing."
 		}
 	],
 	"correctChoiceId": "a"

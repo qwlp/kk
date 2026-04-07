@@ -4,23 +4,23 @@
 	"title": "Review Quiz: Printing Output",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "Which built-in function displays a value in the console?",
+	"question": "Which function prints a value to the console?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "print"
+			"label": "`print()`"
 		},
 		{
 			"id": "b",
-			"label": "append"
+			"label": "`input()`"
 		},
 		{
 			"id": "c",
-			"label": "input"
+			"label": "`len()`"
 		},
 		{
 			"id": "d",
-			"label": "range"
+			"label": "`str()`"
 		}
 	],
 	"correctChoiceId": "a"

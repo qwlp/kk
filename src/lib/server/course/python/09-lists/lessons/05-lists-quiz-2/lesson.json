@@ -4,7 +4,7 @@
 	"title": "Quiz: Indexes Start at Zero",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What index gives you the first item in a list?",
+	"question": "If `items = [\"rope\", \"torch\", \"map\"]`, which index gets `\"rope\"`?",
 	"choices": [
 		{
 			"id": "a",

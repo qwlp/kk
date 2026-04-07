@@ -4,7 +4,7 @@
 	"title": "Quiz: Numbers vs Text",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "Which value is a number, not a string?",
+	"question": "Which value would Python treat as a number?",
 	"choices": [
 		{
 			"id": "a",

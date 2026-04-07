@@ -4,7 +4,7 @@
 	"title": "Quiz: Assignment vs Equality",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "In the line `lives = 3`, what does `=` mean?",
+	"question": "What does `=` mean in `lives = 3`?",
 	"choices": [
 		{
 			"id": "a",
@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "Check whether `lives` already equals 3."
+			"label": "Check whether `lives` is equal to 3."
 		},
 		{
 			"id": "c",
-			"label": "Print 3 to the console."
+			"label": "Add 3 to `lives`."
 		},
 		{
 			"id": "d",
-			"label": "Repeat the line three times."
+			"label": "Convert `lives` into a string."
 		}
 	],
 	"correctChoiceId": "a"

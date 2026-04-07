@@ -20,7 +20,7 @@
 		},
 		{
 			"id": "d",
-			"label": "An integer."
+			"label": "A tuple."
 		}
 	],
 	"correctChoiceId": "a"

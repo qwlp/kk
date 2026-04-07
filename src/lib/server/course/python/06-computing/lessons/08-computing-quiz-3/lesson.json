@@ -4,7 +4,7 @@
 	"title": "Quiz: Powers of Two",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What is `2 ** 5`?",
+	"question": "What does `2 ** 5` evaluate to?",
 	"choices": [
 		{
 			"id": "a",

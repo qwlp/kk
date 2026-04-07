@@ -4,23 +4,23 @@
 	"title": "Quiz: Why Loops Matter",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "Why would you use a loop?",
+	"question": "Why use a loop instead of copying the same line again and again?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "To repeat similar work without duplicating code."
+			"label": "To repeat work without duplicating code."
 		},
 		{
 			"id": "b",
-			"label": "To replace every variable in the file."
+			"label": "To give a block of code a reusable name."
 		},
 		{
 			"id": "c",
-			"label": "To stop functions from returning values."
+			"label": "To store many values in order."
 		},
 		{
 			"id": "d",
-			"label": "To turn lists into strings automatically."
+			"label": "To compare two values."
 		}
 	],
 	"correctChoiceId": "a"

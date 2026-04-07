@@ -4,11 +4,11 @@
 	"title": "Quiz: The `in` Operator for Keys",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What does `\"potion\" in inventory` check?",
+	"question": "What does `\"potion\" in inventory` check when `inventory` is a dictionary?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "Whether `\"potion\"` is a key in the dictionary."
+			"label": "Whether `\"potion\"` is a key."
 		},
 		{
 			"id": "b",
@@ -16,11 +16,11 @@
 		},
 		{
 			"id": "c",
-			"label": "Whether the dictionary is sorted."
+			"label": "Whether `\"potion\"` should be added as a key."
 		},
 		{
 			"id": "d",
-			"label": "Whether the dictionary has exactly one item."
+			"label": "Whether `\"potion\"` is the first key in the dictionary."
 		}
 	],
 	"correctChoiceId": "a"

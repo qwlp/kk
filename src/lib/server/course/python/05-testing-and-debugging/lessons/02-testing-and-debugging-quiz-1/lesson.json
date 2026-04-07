@@ -4,23 +4,23 @@
 	"title": "Quiz: What a Test Gives You",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What is a unit test mainly for?",
+	"question": "What is a unit test for?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "Checking whether code behaves correctly for chosen cases."
+			"label": "Checking whether code works for chosen inputs."
 		},
 		{
 			"id": "b",
-			"label": "Making Python code run faster automatically."
+			"label": "Making the code run faster automatically."
 		},
 		{
 			"id": "c",
-			"label": "Replacing functions with comments."
+			"label": "Writing the function for you."
 		},
 		{
 			"id": "d",
-			"label": "Turning bugs into syntax errors."
+			"label": "Running the whole app for every possible input."
 		}
 	],
 	"correctChoiceId": "a"

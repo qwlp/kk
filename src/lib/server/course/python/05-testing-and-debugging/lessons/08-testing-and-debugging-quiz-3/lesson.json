@@ -4,23 +4,23 @@
 	"title": "Quiz: Exact Comparisons",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "Why do tests catch formatting bugs so well?",
+	"question": "Why do tests catch small output mistakes so well?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "Because they compare the complete actual result to the expected result."
+			"label": "Because they compare the full actual output to the expected output."
 		},
 		{
 			"id": "b",
-			"label": "Because strings cannot contain bugs."
+			"label": "Because Python autocorrects small output mistakes."
 		},
 		{
 			"id": "c",
-			"label": "Because tests ignore punctuation and spaces."
+			"label": "Because tests ignore case, spaces, and punctuation."
 		},
 		{
 			"id": "d",
-			"label": "Because Python formats every string the same way."
+			"label": "Because printed strings always format themselves the same way."
 		}
 	],
 	"correctChoiceId": "a"

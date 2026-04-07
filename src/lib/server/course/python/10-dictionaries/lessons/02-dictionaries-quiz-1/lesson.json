@@ -4,7 +4,7 @@
 	"title": "Quiz: What a Dictionary Stores",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What is a dictionary best for?",
+	"question": "What kind of data is a dictionary best for?",
 	"choices": [
 		{
 			"id": "a",
@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "Keeping values in strict index order only."
+			"label": "Storing values by numeric position only."
 		},
 		{
 			"id": "c",
-			"label": "Removing duplicates automatically from a list."
+			"label": "Keeping only unique values."
 		},
 		{
 			"id": "d",
-			"label": "Defining a function body."
+			"label": "Grouping steps into reusable code."
 		}
 	],
 	"correctChoiceId": "a"

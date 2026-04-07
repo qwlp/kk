@@ -4,23 +4,23 @@
 	"title": "Quiz: What an Error Is",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What is a programming error in this context?",
+	"question": "What happens if Python runs `int(\"oops\")`?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "A problem that makes the code fail or behave incorrectly."
+			"label": "It raises an error."
 		},
 		{
 			"id": "b",
-			"label": "A special kind of loop."
+			"label": "It returns `0`."
 		},
 		{
 			"id": "c",
-			"label": "A comment that explains the code."
+			"label": "It returns `None`."
 		},
 		{
 			"id": "d",
-			"label": "A function that always returns `True`."
+			"label": "It strips the quotes and returns `oops`."
 		}
 	],
 	"correctChoiceId": "a"

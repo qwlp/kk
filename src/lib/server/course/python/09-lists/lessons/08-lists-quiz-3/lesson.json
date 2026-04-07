@@ -4,23 +4,23 @@
 	"title": "Quiz: What `append()` Does",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What does `append()` do to a list?",
+	"question": "What does `bag.append(\"elixir\")` do?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "Adds one item to the end."
+			"label": "Adds `\"elixir\"` to the end of `bag`."
 		},
 		{
 			"id": "b",
-			"label": "Removes the first item."
+			"label": "Adds `\"elixir\"` to the beginning of `bag`."
 		},
 		{
 			"id": "c",
-			"label": "Sorts the whole list."
+			"label": "Replaces the whole list with `\"elixir\"`."
 		},
 		{
 			"id": "d",
-			"label": "Counts the items."
+			"label": "Returns the last item in `bag`."
 		}
 	],
 	"correctChoiceId": "a"

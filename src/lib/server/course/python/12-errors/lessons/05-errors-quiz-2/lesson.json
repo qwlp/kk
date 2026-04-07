@@ -4,23 +4,23 @@
 	"title": "Quiz: Why Handle Errors",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "Why would you handle errors instead of ignoring them?",
+	"question": "Why handle errors instead of ignoring them?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "To make the program safer and more predictable with bad input."
+			"label": "To make the program safer and more predictable."
 		},
 		{
 			"id": "b",
-			"label": "To make Python stop using functions."
+			"label": "To guarantee the program can never fail."
 		},
 		{
 			"id": "c",
-			"label": "To force every value to become a string."
+			"label": "To avoid thinking about bad input."
 		},
 		{
 			"id": "d",
-			"label": "To remove all conditionals from the program."
+			"label": "To make every invalid value become valid automatically."
 		}
 	],
 	"correctChoiceId": "a"

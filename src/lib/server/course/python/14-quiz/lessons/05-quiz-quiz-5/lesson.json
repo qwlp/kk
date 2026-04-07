@@ -4,7 +4,7 @@
 	"title": "Review Quiz: Comparisons",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What does `==` do?",
+	"question": "What does `==` check?",
 	"choices": [
 		{
 			"id": "a",
@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "It assigns a variable."
+			"label": "It stores a value in a variable."
 		},
 		{
 			"id": "c",
-			"label": "It starts a loop."
+			"label": "It adds one value to another."
 		},
 		{
 			"id": "d",
-			"label": "It creates a set."
+			"label": "It checks whether a value is greater than another."
 		}
 	],
 	"correctChoiceId": "a"

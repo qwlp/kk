@@ -4,7 +4,7 @@
 	"title": "Quiz: Same Name in Different Functions",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "Can two different functions each use a local variable named `count`?",
+	"question": "Can two different functions both have a local variable named `count`?",
 	"choices": [
 		{
 			"id": "a",

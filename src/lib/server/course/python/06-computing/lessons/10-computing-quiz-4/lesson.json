@@ -4,23 +4,23 @@
 	"title": "Quiz: Why Abstractions Help",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "Why is wrapping a conversion in a function useful?",
+	"question": "Why put a conversion like kilobytes-to-bytes in a function?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "It hides repeated details behind a clear reusable name."
+			"label": "It gives repeated logic a clear reusable name."
 		},
 		{
 			"id": "b",
-			"label": "It changes how many bytes are in a kilobyte."
+			"label": "It changes the value of the conversion."
 		},
 		{
 			"id": "c",
-			"label": "It makes Python stop using math."
+			"label": "It means you no longer need inputs."
 		},
 		{
 			"id": "d",
-			"label": "It turns numbers into comments."
+			"label": "It turns the result into text automatically."
 		}
 	],
 	"correctChoiceId": "a"

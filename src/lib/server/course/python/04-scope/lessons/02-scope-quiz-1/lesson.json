@@ -4,7 +4,7 @@
 	"title": "Quiz: What Scope Means",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What does \"scope\" describe?",
+	"question": "In Python, what does a variable's scope tell you?",
 	"choices": [
 		{
 			"id": "a",
@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "How long a program takes to run."
+			"label": "What value the variable currently stores."
 		},
 		{
 			"id": "c",
-			"label": "How many lines of code are in a file."
+			"label": "What type the variable has."
 		},
 		{
 			"id": "d",
-			"label": "The color of the console output."
+			"label": "How long the file takes to run."
 		}
 	],
 	"correctChoiceId": "a"

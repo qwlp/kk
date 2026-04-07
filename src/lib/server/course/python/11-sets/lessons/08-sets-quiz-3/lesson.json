@@ -4,23 +4,23 @@
 	"title": "Quiz: Intersection Meaning",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What does set intersection return?",
+	"question": "What is `{\"axe\", \"bow\"} & {\"bow\", \"staff\"}`?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "The values that appear in both sets."
+			"label": "`{\"bow\"}`"
 		},
 		{
 			"id": "b",
-			"label": "All values from either set."
+			"label": "`{\"axe\", \"bow\", \"staff\"}`"
 		},
 		{
 			"id": "c",
-			"label": "The size of the larger set."
+			"label": "`{\"axe\"}`"
 		},
 		{
 			"id": "d",
-			"label": "Only the values from the first set."
+			"label": "`{\"staff\"}`"
 		}
 	],
 	"correctChoiceId": "a"

@@ -4,23 +4,23 @@
 	"title": "Quiz: Meaning of `and`",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "When does `left and right` evaluate to `True`?",
+	"question": "What does `((True and True) or (True and False))` evaluate to?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "Only when both `left` and `right` are true."
+			"label": "`True`"
 		},
 		{
 			"id": "b",
-			"label": "Whenever either side is true."
+			"label": "`False`"
 		},
 		{
 			"id": "c",
-			"label": "Only when both sides are false."
+			"label": "`None`"
 		},
 		{
 			"id": "d",
-			"label": "It never evaluates to `True`."
+			"label": "An error."
 		}
 	],
 	"correctChoiceId": "a"

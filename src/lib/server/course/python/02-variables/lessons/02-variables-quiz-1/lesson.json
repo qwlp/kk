@@ -4,23 +4,23 @@
 	"title": "Quiz: What a Variable Is",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What is the main job of a variable?",
+	"question": "What is `score` doing in `score = 10`?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "To store a value so it can be reused later."
+			"label": "Storing a value so the program can use it later."
 		},
 		{
 			"id": "b",
-			"label": "To print output without `print()`."
+			"label": "Comparing `score` to `10`."
 		},
 		{
 			"id": "c",
-			"label": "To make code run from bottom to top."
+			"label": "Calling a function named `score`."
 		},
 		{
 			"id": "d",
-			"label": "To turn every number into a string."
+			"label": "Printing `10` immediately."
 		}
 	],
 	"correctChoiceId": "a"

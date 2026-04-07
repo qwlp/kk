@@ -4,23 +4,23 @@
 	"title": "Quiz: What `return` Means",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What does `return` do in a function?",
+	"question": "What does `return 8` do inside a function?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "It sends a value back to the caller."
+			"label": "It sends `8` back to the caller."
 		},
 		{
 			"id": "b",
-			"label": "It prints automatically."
+			"label": "It prints `8` to the console."
 		},
 		{
 			"id": "c",
-			"label": "It repeats the function forever."
+			"label": "It stores `8` in a global variable."
 		},
 		{
 			"id": "d",
-			"label": "It creates a new parameter."
+			"label": "It runs the function 8 times."
 		}
 	],
 	"correctChoiceId": "a"

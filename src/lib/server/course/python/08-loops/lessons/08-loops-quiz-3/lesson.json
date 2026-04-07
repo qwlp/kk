@@ -4,7 +4,7 @@
 	"title": "Quiz: Stopping a `while` Loop",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What makes a `while` loop stop?",
+	"question": "When does a `while` loop stop?",
 	"choices": [
 		{
 			"id": "a",
@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "It always runs forever."
+			"label": "Its condition becomes true."
 		},
 		{
 			"id": "c",
-			"label": "A list becomes empty."
+			"label": "The loop body finishes once."
 		},
 		{
 			"id": "d",
-			"label": "A function is defined."
+			"label": "Any variable inside it changes value."
 		}
 	],
 	"correctChoiceId": "a"

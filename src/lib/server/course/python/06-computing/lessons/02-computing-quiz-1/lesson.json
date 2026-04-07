@@ -4,7 +4,7 @@
 	"title": "Quiz: What a Bit Is",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What is a bit?",
+	"question": "What is a bit in computing?",
 	"choices": [
 		{
 			"id": "a",
@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "A type of Python loop."
+			"label": "A group of 8 bits."
 		},
 		{
 			"id": "c",
-			"label": "A built-in function that prints values."
+			"label": "A decimal digit stored in memory."
 		},
 		{
 			"id": "d",
-			"label": "A variable that can only store text."
+			"label": "A Python value that can only be `True` or `False`."
 		}
 	],
 	"correctChoiceId": "a"

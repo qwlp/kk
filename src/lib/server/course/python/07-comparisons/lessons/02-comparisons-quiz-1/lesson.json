@@ -4,23 +4,23 @@
 	"title": "Quiz: Comparison Results",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What kind of value does `5 > 3` produce?",
+	"question": "What does `5 > 3` evaluate to?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "A boolean value."
+			"label": "`True`"
 		},
 		{
 			"id": "b",
-			"label": "A list."
+			"label": "`False`"
 		},
 		{
 			"id": "c",
-			"label": "A function."
+			"label": "`5`"
 		},
 		{
 			"id": "d",
-			"label": "A dictionary."
+			"label": "An error."
 		}
 	],
 	"correctChoiceId": "a"

@@ -4,7 +4,7 @@
 	"title": "Quiz: What a List Stores",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What is a Python list best at storing?",
+	"question": "What does `[\"rope\", \"torch\", \"map\"]` represent?",
 	"choices": [
 		{
 			"id": "a",
@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "Only one value at a time."
+			"label": "A named block of reusable code."
 		},
 		{
 			"id": "c",
-			"label": "Only key/value pairs."
+			"label": "A collection of key/value pairs."
 		},
 		{
 			"id": "d",
-			"label": "Only unique values."
+			"label": "A collection that only keeps unique values."
 		}
 	],
 	"correctChoiceId": "a"

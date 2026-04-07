@@ -150,12 +150,12 @@ const plans = {
 			q(
 				'Quiz: What `print()` Does',
 				'`print()` shows a value in the console.',
-				'What does `print()` do in Python?',
+				'What does `print("Mage")` do?',
 				[
-					{ id: 'a', label: 'It displays a value in the console.' },
-					{ id: 'b', label: 'It creates a variable.' },
-					{ id: 'c', label: 'It repeats code forever.' },
-					{ id: 'd', label: 'It turns text into a number.' }
+					{ id: 'a', label: 'It prints `Mage` to the console.' },
+					{ id: 'b', label: 'It stores `Mage` in a variable.' },
+					{ id: 'c', label: 'It returns `Mage` without displaying it.' },
+					{ id: 'd', label: 'It checks whether `Mage` is already defined.' }
 				]
 			),
 			q(
@@ -172,7 +172,7 @@ const plans = {
 			q(
 				'Quiz: Numbers vs Text',
 				'A number and a string that looks like a number are different values.',
-				'Which value is a number, not a string?',
+				'Which value would Python treat as a number?',
 				[
 					{ id: 'a', label: '7' },
 					{ id: 'b', label: '"7"' },
@@ -183,23 +183,23 @@ const plans = {
 			q(
 				'Quiz: Execution Order',
 				'A simple Python file runs from top to bottom.',
-				'If line 1 prints `A` and line 2 prints `B`, what prints first?',
+				'What prints first here: `print("A")` then `print("B")`?',
 				[
 					{ id: 'a', label: 'A' },
 					{ id: 'b', label: 'B' },
-					{ id: 'c', label: 'They print at the same time.' },
-					{ id: 'd', label: 'Nothing prints.' }
+					{ id: 'c', label: 'Both on the same line at the same time.' },
+					{ id: 'd', label: 'Nothing, because the second line replaces the first.' }
 				]
 			),
 			q(
 				'Quiz: Exact Output Matters',
 				'Tests compare actual output to expected output.',
-				'Why do these lessons ask for exact output?',
+				'If the expected output is `Hello` but your code prints `hello`, what happens?',
 				[
-					{ id: 'a', label: 'Because the tests compare your output to the expected text.' },
-					{ id: 'b', label: 'Because Python can only print one phrase per file.' },
-					{ id: 'c', label: 'Because all programs must use the same output.' },
-					{ id: 'd', label: 'Because strings cannot contain spaces.' }
+					{ id: 'a', label: 'The test fails because the output does not match exactly.' },
+					{ id: 'b', label: 'The test still passes because Python ignores capitalization.' },
+					{ id: 'c', label: 'Python automatically changes the output to match.' },
+					{ id: 'd', label: 'Only spaces matter to the test, not letters.' }
 				]
 			)
 		]
@@ -259,12 +259,12 @@ const plans = {
 			q(
 				'Quiz: What a Variable Is',
 				'A variable stores a value so your program can reuse it.',
-				'What is the main job of a variable?',
+				'What is `score` doing in `score = 10`?',
 				[
-					{ id: 'a', label: 'To store a value so it can be reused later.' },
-					{ id: 'b', label: 'To print output without `print()`.' },
-					{ id: 'c', label: 'To make code run from bottom to top.' },
-					{ id: 'd', label: 'To turn every number into a string.' }
+					{ id: 'a', label: 'Storing a value so the program can use it later.' },
+					{ id: 'b', label: 'Comparing `score` to `10`.' },
+					{ id: 'c', label: 'Calling a function named `score`.' },
+					{ id: 'd', label: 'Printing `10` immediately.' }
 				]
 			),
 			q(
@@ -281,12 +281,12 @@ const plans = {
 			q(
 				'Quiz: Assignment vs Equality',
 				'`=` stores a value in a variable.',
-				'In the line `lives = 3`, what does `=` mean?',
+				'What does `=` mean in `lives = 3`?',
 				[
 					{ id: 'a', label: 'Store the value 3 in the variable `lives`.' },
-					{ id: 'b', label: 'Check whether `lives` already equals 3.' },
-					{ id: 'c', label: 'Print 3 to the console.' },
-					{ id: 'd', label: 'Repeat the line three times.' }
+					{ id: 'b', label: 'Check whether `lives` is equal to 3.' },
+					{ id: 'c', label: 'Add 3 to `lives`.' },
+					{ id: 'd', label: 'Convert `lives` into a string.' }
 				]
 			),
 			q(
@@ -355,34 +355,34 @@ const plans = {
 			q(
 				'Quiz: What a Function Is',
 				'Functions let you reuse code instead of copying it everywhere.',
-				'Why do programmers use functions?',
+				'Why turn repeated code into a function?',
 				[
-					{ id: 'a', label: 'To reuse code instead of copying the same logic everywhere.' },
-					{ id: 'b', label: 'To stop Python from using variables.' },
-					{ id: 'c', label: 'To make every program print automatically.' },
-					{ id: 'd', label: 'To replace all loops.' }
+					{ id: 'a', label: 'To reuse it instead of copying the same code everywhere.' },
+					{ id: 'b', label: 'To store many values in order.' },
+					{ id: 'c', label: 'To compare two values.' },
+					{ id: 'd', label: 'To automatically run all code at startup.' }
 				]
 			),
 			q(
 				'Quiz: Parameters Are Inputs',
 				'A parameter is a name that receives a value when a function is called.',
-				'In `def greet(name):`, what is `name`?',
+				'In `def greet(name):`, what is `name` called?',
 				[
-					{ id: 'a', label: 'A parameter that receives input for the function.' },
-					{ id: 'b', label: 'A keyword that ends the function.' },
-					{ id: 'c', label: 'A built-in Python type.' },
-					{ id: 'd', label: 'A comment.' }
+					{ id: 'a', label: 'A parameter.' },
+					{ id: 'b', label: 'An argument.' },
+					{ id: 'c', label: 'The function name.' },
+					{ id: 'd', label: 'A return value.' }
 				]
 			),
 			q(
 				'Quiz: What `return` Means',
 				'`return` sends a value back to the caller.',
-				'What does `return` do in a function?',
+				'What does `return 8` do inside a function?',
 				[
-					{ id: 'a', label: 'It sends a value back to the caller.' },
-					{ id: 'b', label: 'It prints automatically.' },
-					{ id: 'c', label: 'It repeats the function forever.' },
-					{ id: 'd', label: 'It creates a new parameter.' }
+					{ id: 'a', label: 'It sends `8` back to the caller.' },
+					{ id: 'b', label: 'It prints `8` to the console.' },
+					{ id: 'c', label: 'It stores `8` in a global variable.' },
+					{ id: 'd', label: 'It runs the function 8 times.' }
 				]
 			),
 			q(
@@ -391,9 +391,9 @@ const plans = {
 				'Which line calls a function named `wave`?',
 				[
 					{ id: 'a', label: 'wave()' },
-					{ id: 'b', label: 'def wave:' },
-					{ id: 'c', label: 'return wave' },
-					{ id: 'd', label: 'print = wave' }
+					{ id: 'b', label: 'def wave():' },
+					{ id: 'c', label: 'wave' },
+					{ id: 'd', label: '"wave()"' }
 				]
 			)
 		]
@@ -443,40 +443,40 @@ const plans = {
 			q(
 				'Quiz: What Scope Means',
 				'Scope describes where a variable name can be used.',
-				'What does "scope" describe?',
+				"In Python, what does a variable's scope tell you?",
 				[
 					{ id: 'a', label: 'Where a variable name can be accessed in a program.' },
-					{ id: 'b', label: 'How long a program takes to run.' },
-					{ id: 'c', label: 'How many lines of code are in a file.' },
-					{ id: 'd', label: 'The color of the console output.' }
+					{ id: 'b', label: 'What value the variable currently stores.' },
+					{ id: 'c', label: 'What type the variable has.' },
+					{ id: 'd', label: 'How long the file takes to run.' }
 				]
 			),
 			q(
 				'Quiz: Local Variables',
 				'A local variable is created inside a function.',
-				'Where can a local variable usually be used?',
+				'If `message` is created inside `show_message()`, where can you usually use it?',
 				[
-					{ id: 'a', label: 'Inside the function where it was created.' },
-					{ id: 'b', label: 'In every file in the project.' },
-					{ id: 'c', label: 'Only inside comments.' },
-					{ id: 'd', label: 'Only inside strings.' }
+					{ id: 'a', label: 'Inside `show_message()`.' },
+					{ id: 'b', label: 'Anywhere in the same file.' },
+					{ id: 'c', label: 'Inside any function with the same name.' },
+					{ id: 'd', label: 'Anywhere after the function is called once.' }
 				]
 			),
 			q(
 				'Quiz: Getting a Value Out',
 				'Use `return` to send a value back to the caller.',
-				'What is the usual way to send a value out of a function?',
+				'Which keyword sends a value back out of a function?',
 				[
-					{ id: 'a', label: 'Use `return`.' },
-					{ id: 'b', label: 'Rename the function.' },
-					{ id: 'c', label: 'Put the value in a comment.' },
-					{ id: 'd', label: 'Use quotes around the function name.' }
+					{ id: 'a', label: '`return`' },
+					{ id: 'b', label: '`print`' },
+					{ id: 'c', label: '`input`' },
+					{ id: 'd', label: '`def`' }
 				]
 			),
 			q(
 				'Quiz: Same Name in Different Functions',
 				'Two different functions can each have a local variable with the same name.',
-				'Can two different functions each use a local variable named `count`?',
+				'Can two different functions both have a local variable named `count`?',
 				[
 					{ id: 'a', label: 'Yes, because each function has its own local scope.' },
 					{ id: 'b', label: 'No, Python only allows one variable name per file.' },
@@ -487,12 +487,12 @@ const plans = {
 			q(
 				'Quiz: Parameters and Scope',
 				'A parameter behaves like a local variable filled in by the caller.',
-				'A parameter like `name` in `def greet(name):` belongs to which scope?',
+				'In `def greet(name):`, which scope does `name` belong to?',
 				[
 					{ id: 'a', label: 'The function’s local scope.' },
-					{ id: 'b', label: 'Only the global scope.' },
-					{ id: 'c', label: 'The comment scope.' },
-					{ id: 'd', label: 'No scope at all.' }
+					{ id: 'b', label: 'The caller’s local scope.' },
+					{ id: 'c', label: 'Only the global scope.' },
+					{ id: 'd', label: 'It has no scope until the function returns.' }
 				]
 			)
 		]
@@ -557,40 +557,40 @@ const plans = {
 			q(
 				'Quiz: What a Test Gives You',
 				'A test checks whether code behaves correctly for chosen inputs.',
-				'What is a unit test mainly for?',
+				'What is a unit test for?',
 				[
-					{ id: 'a', label: 'Checking whether code behaves correctly for chosen cases.' },
-					{ id: 'b', label: 'Making Python code run faster automatically.' },
-					{ id: 'c', label: 'Replacing functions with comments.' },
-					{ id: 'd', label: 'Turning bugs into syntax errors.' }
+					{ id: 'a', label: 'Checking whether code works for chosen inputs.' },
+					{ id: 'b', label: 'Making the code run faster automatically.' },
+					{ id: 'c', label: 'Writing the function for you.' },
+					{ id: 'd', label: 'Running the whole app for every possible input.' }
 				]
 			),
 			q(
 				'Quiz: Good Debugging Starts Small',
 				'The fastest debugging usually starts with the smallest broken piece you can inspect.',
-				'When a program fails, what is usually a good first step?',
+				'When a program fails, what is a good first step?',
 				[
 					{
 						id: 'a',
-						label: 'Look at the smallest part of the code that should produce the result.'
+						label: 'Check the smallest piece of code that should produce the result.'
 					},
-					{ id: 'b', label: 'Rewrite the whole program immediately.' },
-					{ id: 'c', label: 'Delete all tests.' },
-					{ id: 'd', label: 'Add random code until the output changes.' }
+					{ id: 'b', label: 'Change several parts at once and see what happens.' },
+					{ id: 'c', label: 'Skip the failing test and move on.' },
+					{ id: 'd', label: 'Start by restyling the output.' }
 				]
 			),
 			q(
 				'Quiz: Exact Comparisons',
 				'Tests compare actual results to expected results.',
-				'Why do tests catch formatting bugs so well?',
+				'Why do tests catch small output mistakes so well?',
 				[
 					{
 						id: 'a',
-						label: 'Because they compare the complete actual result to the expected result.'
+						label: 'Because they compare the full actual output to the expected output.'
 					},
-					{ id: 'b', label: 'Because strings cannot contain bugs.' },
-					{ id: 'c', label: 'Because tests ignore punctuation and spaces.' },
-					{ id: 'd', label: 'Because Python formats every string the same way.' }
+					{ id: 'b', label: 'Because Python autocorrects small output mistakes.' },
+					{ id: 'c', label: 'Because tests ignore case, spaces, and punctuation.' },
+					{ id: 'd', label: 'Because printed strings always format themselves the same way.' }
 				]
 			)
 		]
@@ -646,18 +646,18 @@ const plans = {
 			q(
 				'Quiz: What a Bit Is',
 				'A bit is one of the smallest units of digital information.',
-				'What is a bit?',
+				'What is a bit in computing?',
 				[
 					{ id: 'a', label: 'A small unit of digital information.' },
-					{ id: 'b', label: 'A type of Python loop.' },
-					{ id: 'c', label: 'A built-in function that prints values.' },
-					{ id: 'd', label: 'A variable that can only store text.' }
+					{ id: 'b', label: 'A group of 8 bits.' },
+					{ id: 'c', label: 'A decimal digit stored in memory.' },
+					{ id: 'd', label: 'A Python value that can only be `True` or `False`.' }
 				]
 			),
 			q(
 				'Quiz: How Many Bits in a Byte',
 				'The relationship between bits and bytes is worth memorizing.',
-				'How many bits are in one byte?',
+				'One byte is how many bits?',
 				[
 					{ id: 'a', label: '8' },
 					{ id: 'b', label: '2' },
@@ -668,7 +668,7 @@ const plans = {
 			q(
 				'Quiz: Powers of Two',
 				'Binary systems naturally connect to powers of two.',
-				'What is `2 ** 5`?',
+				'What does `2 ** 5` evaluate to?',
 				[
 					{ id: 'a', label: '32' },
 					{ id: 'b', label: '10' },
@@ -679,12 +679,12 @@ const plans = {
 			q(
 				'Quiz: Why Abstractions Help',
 				'A function can hide repeated details behind a clear name.',
-				'Why is wrapping a conversion in a function useful?',
+				'Why put a conversion like kilobytes-to-bytes in a function?',
 				[
-					{ id: 'a', label: 'It hides repeated details behind a clear reusable name.' },
-					{ id: 'b', label: 'It changes how many bytes are in a kilobyte.' },
-					{ id: 'c', label: 'It makes Python stop using math.' },
-					{ id: 'd', label: 'It turns numbers into comments.' }
+					{ id: 'a', label: 'It gives repeated logic a clear reusable name.' },
+					{ id: 'b', label: 'It changes the value of the conversion.' },
+					{ id: 'c', label: 'It means you no longer need inputs.' },
+					{ id: 'd', label: 'It turns the result into text automatically.' }
 				]
 			)
 		]
@@ -752,12 +752,12 @@ const plans = {
 			q(
 				'Quiz: Comparison Results',
 				'Comparison operators return booleans.',
-				'What kind of value does `5 > 3` produce?',
+				'What does `5 > 3` evaluate to?',
 				[
-					{ id: 'a', label: 'A boolean value.' },
-					{ id: 'b', label: 'A list.' },
-					{ id: 'c', label: 'A function.' },
-					{ id: 'd', label: 'A dictionary.' }
+					{ id: 'a', label: '`True`' },
+					{ id: 'b', label: '`False`' },
+					{ id: 'c', label: '`5`' },
+					{ id: 'd', label: 'An error.' }
 				]
 			),
 			q(
@@ -774,12 +774,12 @@ const plans = {
 			q(
 				'Quiz: Meaning of `and`',
 				'`and` is only true when both sides are true.',
-				'When does `left and right` evaluate to `True`?',
+				'What does `((True and True) or (True and False))` evaluate to?',
 				[
-					{ id: 'a', label: 'Only when both `left` and `right` are true.' },
-					{ id: 'b', label: 'Whenever either side is true.' },
-					{ id: 'c', label: 'Only when both sides are false.' },
-					{ id: 'd', label: 'It never evaluates to `True`.' }
+					{ id: 'a', label: '`True`' },
+					{ id: 'b', label: '`False`' },
+					{ id: 'c', label: '`None`' },
+					{ id: 'd', label: 'An error.' }
 				]
 			)
 		]
@@ -844,34 +844,34 @@ const plans = {
 			q(
 				'Quiz: Why Loops Matter',
 				'Loops let you repeat work without duplicating code.',
-				'Why would you use a loop?',
+				'Why use a loop instead of copying the same line again and again?',
 				[
-					{ id: 'a', label: 'To repeat similar work without duplicating code.' },
-					{ id: 'b', label: 'To replace every variable in the file.' },
-					{ id: 'c', label: 'To stop functions from returning values.' },
-					{ id: 'd', label: 'To turn lists into strings automatically.' }
+					{ id: 'a', label: 'To repeat work without duplicating code.' },
+					{ id: 'b', label: 'To give a block of code a reusable name.' },
+					{ id: 'c', label: 'To store many values in order.' },
+					{ id: 'd', label: 'To compare two values.' }
 				]
 			),
 			q(
 				'Quiz: Loop Variables',
 				'In a `for` loop, the loop variable holds the current item.',
-				'In `for weapon in ["axe", "bow"]`, what is `weapon`?',
+				'On the first pass of `for weapon in ["axe", "bow"]`, what is `weapon`?',
 				[
-					{ id: 'a', label: 'The current item from the loop.' },
-					{ id: 'b', label: 'The full list.' },
-					{ id: 'c', label: 'A function definition.' },
-					{ id: 'd', label: 'A comment.' }
+					{ id: 'a', label: '`"axe"`' },
+					{ id: 'b', label: '`"bow"`' },
+					{ id: 'c', label: '`weapon`' },
+					{ id: 'd', label: '`0`' }
 				]
 			),
 			q(
 				'Quiz: Stopping a `while` Loop',
 				'A `while` loop stops when its condition becomes false.',
-				'What makes a `while` loop stop?',
+				'When does a `while` loop stop?',
 				[
 					{ id: 'a', label: 'Its condition becomes false.' },
-					{ id: 'b', label: 'It always runs forever.' },
-					{ id: 'c', label: 'A list becomes empty.' },
-					{ id: 'd', label: 'A function is defined.' }
+					{ id: 'b', label: 'Its condition becomes true.' },
+					{ id: 'c', label: 'The loop body finishes once.' },
+					{ id: 'd', label: 'Any variable inside it changes value.' }
 				]
 			)
 		]
@@ -938,18 +938,18 @@ const plans = {
 			q(
 				'Quiz: What a List Stores',
 				'A list stores multiple values in a specific order.',
-				'What is a Python list best at storing?',
+				'What does `["rope", "torch", "map"]` represent?',
 				[
 					{ id: 'a', label: 'An ordered collection of values.' },
-					{ id: 'b', label: 'Only one value at a time.' },
-					{ id: 'c', label: 'Only key/value pairs.' },
-					{ id: 'd', label: 'Only unique values.' }
+					{ id: 'b', label: 'A named block of reusable code.' },
+					{ id: 'c', label: 'A collection of key/value pairs.' },
+					{ id: 'd', label: 'A collection that only keeps unique values.' }
 				]
 			),
 			q(
 				'Quiz: Indexes Start at Zero',
 				'Python uses zero-based indexing for lists.',
-				'What index gives you the first item in a list?',
+				'If `items = ["rope", "torch", "map"]`, which index gets `"rope"`?',
 				[
 					{ id: 'a', label: '0' },
 					{ id: 'b', label: '1' },
@@ -960,12 +960,12 @@ const plans = {
 			q(
 				'Quiz: What `append()` Does',
 				'`append()` adds one item to the end of a list.',
-				'What does `append()` do to a list?',
+				'What does `bag.append("elixir")` do?',
 				[
-					{ id: 'a', label: 'Adds one item to the end.' },
-					{ id: 'b', label: 'Removes the first item.' },
-					{ id: 'c', label: 'Sorts the whole list.' },
-					{ id: 'd', label: 'Counts the items.' }
+					{ id: 'a', label: 'Adds `"elixir"` to the end of `bag`.' },
+					{ id: 'b', label: 'Adds `"elixir"` to the beginning of `bag`.' },
+					{ id: 'c', label: 'Replaces the whole list with `"elixir"`.' },
+					{ id: 'd', label: 'Returns the last item in `bag`.' }
 				]
 			)
 		]
@@ -1033,34 +1033,34 @@ const plans = {
 			q(
 				'Quiz: What a Dictionary Stores',
 				'Dictionaries store values by key.',
-				'What is a dictionary best for?',
+				'What kind of data is a dictionary best for?',
 				[
 					{ id: 'a', label: 'Storing key/value pairs.' },
-					{ id: 'b', label: 'Keeping values in strict index order only.' },
-					{ id: 'c', label: 'Removing duplicates automatically from a list.' },
-					{ id: 'd', label: 'Defining a function body.' }
+					{ id: 'b', label: 'Storing values by numeric position only.' },
+					{ id: 'c', label: 'Keeping only unique values.' },
+					{ id: 'd', label: 'Grouping steps into reusable code.' }
 				]
 			),
 			q(
 				'Quiz: Looking Up by Key',
 				'Dictionary lookups use keys inside square brackets.',
-				'How do you read the value for the key `"name"` from a dictionary called `player`?',
+				'If `player = {"name": "Ayla", "level": 3}`, what does `player["name"]` give you?',
 				[
-					{ id: 'a', label: 'player["name"]' },
-					{ id: 'b', label: 'player[0]' },
-					{ id: 'c', label: 'player.name()' },
-					{ id: 'd', label: 'name[player]' }
+					{ id: 'a', label: '`"Ayla"`' },
+					{ id: 'b', label: '`3`' },
+					{ id: 'c', label: '`"name"`' },
+					{ id: 'd', label: 'An error every time.' }
 				]
 			),
 			q(
 				'Quiz: The `in` Operator for Keys',
 				'With dictionaries, `in` checks keys.',
-				'What does `"potion" in inventory` check?',
+				'What does `"potion" in inventory` check when `inventory` is a dictionary?',
 				[
-					{ id: 'a', label: 'Whether `"potion"` is a key in the dictionary.' },
+					{ id: 'a', label: 'Whether `"potion"` is a key.' },
 					{ id: 'b', label: 'Whether any value equals `"potion"`.' },
-					{ id: 'c', label: 'Whether the dictionary is sorted.' },
-					{ id: 'd', label: 'Whether the dictionary has exactly one item.' }
+					{ id: 'c', label: 'Whether `"potion"` should be added as a key.' },
+					{ id: 'd', label: 'Whether `"potion"` is the first key in the dictionary.' }
 				]
 			)
 		]
@@ -1125,34 +1125,34 @@ const plans = {
 			q(
 				'Quiz: What Makes a Set Special',
 				'Sets are mainly about uniqueness.',
-				'What is the main property of a set?',
+				'How many items are in `{"ruby", "emerald", "ruby"}`?',
 				[
-					{ id: 'a', label: 'It stores unique values.' },
-					{ id: 'b', label: 'It stores values by key.' },
-					{ id: 'c', label: 'It always keeps values sorted alphabetically.' },
-					{ id: 'd', label: 'It can only store numbers.' }
+					{ id: 'a', label: '2' },
+					{ id: 'b', label: '3' },
+					{ id: 'c', label: '1' },
+					{ id: 'd', label: 'An error.' }
 				]
 			),
 			q(
 				'Quiz: Membership Checks',
 				'Checking whether a value is present is a common use of sets.',
-				'What does `"rope" in tools` check when `tools` is a set?',
+				'What does `"rope" in tools` check if `tools` is a set?',
 				[
 					{ id: 'a', label: 'Whether `"rope"` is in the set.' },
-					{ id: 'b', label: 'Whether `"rope"` is the first item.' },
-					{ id: 'c', label: 'Whether the set is empty.' },
-					{ id: 'd', label: 'Whether the set has duplicates.' }
+					{ id: 'b', label: 'Whether `"rope"` would come first if the set were sorted.' },
+					{ id: 'c', label: 'Whether the set has exactly one item.' },
+					{ id: 'd', label: 'Whether `"rope"` is a key with a value.' }
 				]
 			),
 			q(
 				'Quiz: Intersection Meaning',
 				'Set intersection keeps only shared values.',
-				'What does set intersection return?',
+				'What is `{"axe", "bow"} & {"bow", "staff"}`?',
 				[
-					{ id: 'a', label: 'The values that appear in both sets.' },
-					{ id: 'b', label: 'All values from either set.' },
-					{ id: 'c', label: 'The size of the larger set.' },
-					{ id: 'd', label: 'Only the values from the first set.' }
+					{ id: 'a', label: '`{"bow"}`' },
+					{ id: 'b', label: '`{"axe", "bow", "staff"}`' },
+					{ id: 'c', label: '`{"axe"}`' },
+					{ id: 'd', label: '`{"staff"}`' }
 				]
 			)
 		]
@@ -1218,34 +1218,34 @@ const plans = {
 			q(
 				'Quiz: What an Error Is',
 				'An error is a problem that stops code from behaving normally.',
-				'What is a programming error in this context?',
+				'What happens if Python runs `int("oops")`?',
 				[
-					{ id: 'a', label: 'A problem that makes the code fail or behave incorrectly.' },
-					{ id: 'b', label: 'A special kind of loop.' },
-					{ id: 'c', label: 'A comment that explains the code.' },
-					{ id: 'd', label: 'A function that always returns `True`.' }
+					{ id: 'a', label: 'It raises an error.' },
+					{ id: 'b', label: 'It returns `0`.' },
+					{ id: 'c', label: 'It returns `None`.' },
+					{ id: 'd', label: 'It strips the quotes and returns `oops`.' }
 				]
 			),
 			q(
 				'Quiz: Why Handle Errors',
 				'Programs are more reliable when they account for bad input and edge cases.',
-				'Why would you handle errors instead of ignoring them?',
+				'Why handle errors instead of ignoring them?',
 				[
-					{ id: 'a', label: 'To make the program safer and more predictable with bad input.' },
-					{ id: 'b', label: 'To make Python stop using functions.' },
-					{ id: 'c', label: 'To force every value to become a string.' },
-					{ id: 'd', label: 'To remove all conditionals from the program.' }
+					{ id: 'a', label: 'To make the program safer and more predictable.' },
+					{ id: 'b', label: 'To guarantee the program can never fail.' },
+					{ id: 'c', label: 'To avoid thinking about bad input.' },
+					{ id: 'd', label: 'To make every invalid value become valid automatically.' }
 				]
 			),
 			q(
 				'Quiz: What `except` Does',
 				'`except` defines what your program should do if a matching error happens.',
-				'What is the role of an `except` block?',
+				'When does an `except` block run?',
 				[
-					{ id: 'a', label: 'To handle a matching error and run fallback code.' },
-					{ id: 'b', label: 'To define a new function.' },
-					{ id: 'c', label: 'To make a variable global.' },
-					{ id: 'd', label: 'To repeat the same code forever.' }
+					{ id: 'a', label: 'When a matching error happens in the `try` block.' },
+					{ id: 'b', label: 'Every time after the `try` block finishes.' },
+					{ id: 'c', label: 'Before the `try` block runs.' },
+					{ id: 'd', label: 'Only when the function returns `None`.' }
 				]
 			)
 		]
@@ -1319,23 +1319,23 @@ const plans = {
 			q(
 				'Quiz: Choosing the Right Tool',
 				'Good programming often means choosing the data structure that fits the job.',
-				'Which Python tool is a good fit when you need unique values only?',
+				'Which Python data type would you pick for unique values only?',
 				[
 					{ id: 'a', label: 'A set.' },
-					{ id: 'b', label: 'A string.' },
-					{ id: 'c', label: 'A print statement.' },
-					{ id: 'd', label: 'A comment.' }
+					{ id: 'b', label: 'A list.' },
+					{ id: 'c', label: 'A dictionary.' },
+					{ id: 'd', label: 'A string.' }
 				]
 			),
 			q(
 				'Quiz: Breaking Problems Into Steps',
 				'Larger beginner problems are usually several small ideas combined.',
-				'What is usually a good strategy for a larger beginner problem?',
+				'What is a good approach to a larger beginner problem?',
 				[
 					{ id: 'a', label: 'Break it into smaller steps you already know how to solve.' },
-					{ id: 'b', label: 'Avoid using variables or functions.' },
-					{ id: 'c', label: 'Ignore edge cases until the very end.' },
-					{ id: 'd', label: 'Rewrite the whole language in your head first.' }
+					{ id: 'b', label: 'Write it all in one big expression so you finish faster.' },
+					{ id: 'c', label: 'Solve every edge case before understanding the main task.' },
+					{ id: 'd', label: 'Start over from scratch each time one small part is confusing.' }
 				]
 			)
 		]
@@ -1345,34 +1345,34 @@ const plans = {
 			q(
 				'Review Quiz: Printing Output',
 				'Printing output is the first feedback loop in a beginner program.',
-				'Which built-in function displays a value in the console?',
+				'Which function prints a value to the console?',
 				[
-					{ id: 'a', label: 'print' },
-					{ id: 'b', label: 'append' },
-					{ id: 'c', label: 'input' },
-					{ id: 'd', label: 'range' }
+					{ id: 'a', label: '`print()`' },
+					{ id: 'b', label: '`input()`' },
+					{ id: 'c', label: '`len()`' },
+					{ id: 'd', label: '`str()`' }
 				]
 			),
 			q(
 				'Review Quiz: Variables',
 				'Variables let code store and reuse values.',
-				'What is the main job of a variable?',
+				'What is the job of a variable?',
 				[
 					{ id: 'a', label: 'To store a value for later use.' },
-					{ id: 'b', label: 'To define a loop automatically.' },
-					{ id: 'c', label: 'To remove duplicates from data.' },
-					{ id: 'd', label: 'To catch exceptions.' }
+					{ id: 'b', label: 'To repeat code over a collection.' },
+					{ id: 'c', label: 'To keep only unique values.' },
+					{ id: 'd', label: 'To handle runtime errors.' }
 				]
 			),
 			q(
 				'Review Quiz: Functions',
 				'Functions package reusable behavior behind a name.',
-				'What keyword defines a function in Python?',
+				'Which keyword starts a function definition in Python?',
 				[
-					{ id: 'a', label: 'def' },
-					{ id: 'b', label: 'func' },
-					{ id: 'c', label: 'return' },
-					{ id: 'd', label: 'loop' }
+					{ id: 'a', label: '`def`' },
+					{ id: 'b', label: '`return`' },
+					{ id: 'c', label: '`if`' },
+					{ id: 'd', label: '`for`' }
 				]
 			),
 			q(
@@ -1381,37 +1381,37 @@ const plans = {
 				'A variable created inside a function is usually called what?',
 				[
 					{ id: 'a', label: 'A local variable.' },
-					{ id: 'b', label: 'A global comment.' },
-					{ id: 'c', label: 'A set item.' },
-					{ id: 'd', label: 'A hidden test.' }
+					{ id: 'b', label: 'A global variable.' },
+					{ id: 'c', label: 'A parameter.' },
+					{ id: 'd', label: 'A constant.' }
 				]
 			),
 			q(
 				'Review Quiz: Comparisons',
 				'Comparisons answer yes-or-no questions with booleans.',
-				'What does `==` do?',
+				'What does `==` check?',
 				[
 					{ id: 'a', label: 'It checks whether two values are equal.' },
-					{ id: 'b', label: 'It assigns a variable.' },
-					{ id: 'c', label: 'It starts a loop.' },
-					{ id: 'd', label: 'It creates a set.' }
+					{ id: 'b', label: 'It stores a value in a variable.' },
+					{ id: 'c', label: 'It adds one value to another.' },
+					{ id: 'd', label: 'It checks whether a value is greater than another.' }
 				]
 			),
 			q(
 				'Review Quiz: Loops',
 				'Loops repeat code without duplication.',
-				'Which statement is commonly used to loop over items in a collection?',
+				'Which keyword is commonly used to loop over a list?',
 				[
-					{ id: 'a', label: 'for' },
-					{ id: 'b', label: 'def' },
-					{ id: 'c', label: 'return' },
-					{ id: 'd', label: 'except' }
+					{ id: 'a', label: '`for`' },
+					{ id: 'b', label: '`while`' },
+					{ id: 'c', label: '`def`' },
+					{ id: 'd', label: '`if`' }
 				]
 			),
 			q(
 				'Review Quiz: Lists',
 				'Lists are ordered collections.',
-				'What index gives the first item in a list?',
+				'What index gets the first item in a list?',
 				[
 					{ id: 'a', label: '0' },
 					{ id: 'b', label: '1' },
@@ -1422,12 +1422,12 @@ const plans = {
 			q(
 				'Review Quiz: Dictionaries',
 				'Dictionaries store data by key.',
-				'Which collection stores key/value pairs?',
+				'Which Python collection stores key/value pairs?',
 				[
 					{ id: 'a', label: 'A dictionary.' },
-					{ id: 'b', label: 'A set.' },
-					{ id: 'c', label: 'A string.' },
-					{ id: 'd', label: 'A comment.' }
+					{ id: 'b', label: 'A list.' },
+					{ id: 'c', label: 'A set.' },
+					{ id: 'd', label: 'A tuple.' }
 				]
 			),
 			q(
@@ -1438,18 +1438,18 @@ const plans = {
 					{ id: 'a', label: 'A set.' },
 					{ id: 'b', label: 'A list.' },
 					{ id: 'c', label: 'A dictionary.' },
-					{ id: 'd', label: 'An integer.' }
+					{ id: 'd', label: 'A tuple.' }
 				]
 			),
 			q(
 				'Review Quiz: Errors',
 				'Good code handles bad input and awkward edge cases.',
-				'What is one reason to use `try` and `except`?',
+				'Why might you use `try` and `except`?',
 				[
 					{ id: 'a', label: 'To recover from expected kinds of runtime errors.' },
-					{ id: 'b', label: 'To define list indexes.' },
-					{ id: 'c', label: 'To make a variable local.' },
-					{ id: 'd', label: 'To replace every `if` statement.' }
+					{ id: 'b', label: 'To define a new list.' },
+					{ id: 'c', label: 'To compare two values.' },
+					{ id: 'd', label: 'To make every value a string.' }
 				]
 			)
 		]
@@ -1515,17 +1515,9 @@ Let's break it down:
 ${assignment}
 `;
 
-const quizMd = (title, concept, example) => `# ${title}
+const quizMd = (title, concept) => `# ${title}
 
 ${concept}
-
-\`\`\`python
-${strip(example)}
-\`\`\`
-
-## Quiz
-
-Read the question and choose the best answer.
 `;
 
 const buildConsole = (def) => {
@@ -2451,7 +2443,7 @@ const buildFiles = (chapter, lessonIndex, modeIndex, def, mode) => {
 					null,
 					2
 				),
-				'readme.md': quizMd(def.title, def.concept, 'print("Read the question carefully")\n')
+				'readme.md': quizMd(def.title, def.concept)
 			}
 		};
 	}

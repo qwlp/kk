@@ -4,23 +4,23 @@
 	"title": "Quiz: What `print()` Does",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What does `print()` do in Python?",
+	"question": "What does `print(\"Mage\")` do?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "It displays a value in the console."
+			"label": "It prints `Mage` to the console."
 		},
 		{
 			"id": "b",
-			"label": "It creates a variable."
+			"label": "It stores `Mage` in a variable."
 		},
 		{
 			"id": "c",
-			"label": "It repeats code forever."
+			"label": "It returns `Mage` without displaying it."
 		},
 		{
 			"id": "d",
-			"label": "It turns text into a number."
+			"label": "It checks whether `Mage` is already defined."
 		}
 	],
 	"correctChoiceId": "a"

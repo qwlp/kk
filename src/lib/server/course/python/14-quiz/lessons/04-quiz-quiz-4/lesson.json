@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "A global comment."
+			"label": "A global variable."
 		},
 		{
 			"id": "c",
-			"label": "A set item."
+			"label": "A parameter."
 		},
 		{
 			"id": "d",
-			"label": "A hidden test."
+			"label": "A constant."
 		}
 	],
 	"correctChoiceId": "a"

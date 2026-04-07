@@ -4,23 +4,23 @@
 	"title": "Quiz: What `except` Does",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What is the role of an `except` block?",
+	"question": "When does an `except` block run?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "To handle a matching error and run fallback code."
+			"label": "When a matching error happens in the `try` block."
 		},
 		{
 			"id": "b",
-			"label": "To define a new function."
+			"label": "Every time after the `try` block finishes."
 		},
 		{
 			"id": "c",
-			"label": "To make a variable global."
+			"label": "Before the `try` block runs."
 		},
 		{
 			"id": "d",
-			"label": "To repeat the same code forever."
+			"label": "Only when the function returns `None`."
 		}
 	],
 	"correctChoiceId": "a"

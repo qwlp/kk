@@ -4,23 +4,23 @@
 	"title": "Quiz: Exact Output Matters",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "Why do these lessons ask for exact output?",
+	"question": "If the expected output is `Hello` but your code prints `hello`, what happens?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "Because the tests compare your output to the expected text."
+			"label": "The test fails because the output does not match exactly."
 		},
 		{
 			"id": "b",
-			"label": "Because Python can only print one phrase per file."
+			"label": "The test still passes because Python ignores capitalization."
 		},
 		{
 			"id": "c",
-			"label": "Because all programs must use the same output."
+			"label": "Python automatically changes the output to match."
 		},
 		{
 			"id": "d",
-			"label": "Because strings cannot contain spaces."
+			"label": "Only spaces matter to the test, not letters."
 		}
 	],
 	"correctChoiceId": "a"

@@ -4,7 +4,7 @@
 	"title": "Quiz: How Many Bits in a Byte",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "How many bits are in one byte?",
+	"question": "One byte is how many bits?",
 	"choices": [
 		{
 			"id": "a",

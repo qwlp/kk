@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "def wave:"
+			"label": "def wave():"
 		},
 		{
 			"id": "c",
-			"label": "return wave"
+			"label": "wave"
 		},
 		{
 			"id": "d",
-			"label": "print = wave"
+			"label": "\"wave()\""
 		}
 	],
 	"correctChoiceId": "a"

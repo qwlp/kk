@@ -4,23 +4,23 @@
 	"title": "Quiz: Looking Up by Key",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "How do you read the value for the key `\"name\"` from a dictionary called `player`?",
+	"question": "If `player = {\"name\": \"Ayla\", \"level\": 3}`, what does `player[\"name\"]` give you?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "player[\"name\"]"
+			"label": "`\"Ayla\"`"
 		},
 		{
 			"id": "b",
-			"label": "player[0]"
+			"label": "`3`"
 		},
 		{
 			"id": "c",
-			"label": "player.name()"
+			"label": "`\"name\"`"
 		},
 		{
 			"id": "d",
-			"label": "name[player]"
+			"label": "An error every time."
 		}
 	],
 	"correctChoiceId": "a"

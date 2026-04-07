@@ -4,7 +4,7 @@
 	"title": "Quiz: Parameters and Scope",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "A parameter like `name` in `def greet(name):` belongs to which scope?",
+	"question": "In `def greet(name):`, which scope does `name` belong to?",
 	"choices": [
 		{
 			"id": "a",
@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "Only the global scope."
+			"label": "The caller’s local scope."
 		},
 		{
 			"id": "c",
-			"label": "The comment scope."
+			"label": "Only the global scope."
 		},
 		{
 			"id": "d",
-			"label": "No scope at all."
+			"label": "It has no scope until the function returns."
 		}
 	],
 	"correctChoiceId": "a"

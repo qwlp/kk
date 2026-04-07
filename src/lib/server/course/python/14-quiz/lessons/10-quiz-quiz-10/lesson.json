@@ -4,7 +4,7 @@
 	"title": "Review Quiz: Errors",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "What is one reason to use `try` and `except`?",
+	"question": "Why might you use `try` and `except`?",
 	"choices": [
 		{
 			"id": "a",
@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "To define list indexes."
+			"label": "To define a new list."
 		},
 		{
 			"id": "c",
-			"label": "To make a variable local."
+			"label": "To compare two values."
 		},
 		{
 			"id": "d",
-			"label": "To replace every `if` statement."
+			"label": "To make every value a string."
 		}
 	],
 	"correctChoiceId": "a"

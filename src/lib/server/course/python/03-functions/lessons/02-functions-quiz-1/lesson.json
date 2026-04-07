@@ -4,23 +4,23 @@
 	"title": "Quiz: What a Function Is",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "Why do programmers use functions?",
+	"question": "Why turn repeated code into a function?",
 	"choices": [
 		{
 			"id": "a",
-			"label": "To reuse code instead of copying the same logic everywhere."
+			"label": "To reuse it instead of copying the same code everywhere."
 		},
 		{
 			"id": "b",
-			"label": "To stop Python from using variables."
+			"label": "To store many values in order."
 		},
 		{
 			"id": "c",
-			"label": "To make every program print automatically."
+			"label": "To compare two values."
 		},
 		{
 			"id": "d",
-			"label": "To replace all loops."
+			"label": "To automatically run all code at startup."
 		}
 	],
 	"correctChoiceId": "a"

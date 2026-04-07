@@ -4,7 +4,7 @@
 	"title": "Review Quiz: Dictionaries",
 	"prompt": "Choose the best answer.",
 	"mode": "quiz",
-	"question": "Which collection stores key/value pairs?",
+	"question": "Which Python collection stores key/value pairs?",
 	"choices": [
 		{
 			"id": "a",
@@ -12,15 +12,15 @@
 		},
 		{
 			"id": "b",
-			"label": "A set."
+			"label": "A list."
 		},
 		{
 			"id": "c",
-			"label": "A string."
+			"label": "A set."
 		},
 		{
 			"id": "d",
-			"label": "A comment."
+			"label": "A tuple."
 		}
 	],
 	"correctChoiceId": "a"
