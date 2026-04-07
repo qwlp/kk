@@ -12,7 +12,7 @@
 	let { lesson, selectedChoiceId, submitting, onSelectChoice, onSubmit }: Props = $props();
 </script>
 
-<section class="stone-panel flex min-h-0 w-full flex-1 flex-col">
+<section class="stone-panel flex h-full min-h-0 w-full flex-1 flex-col">
 	<div class="flex min-h-0 flex-1 flex-col justify-between px-5 py-6 md:px-8">
 		<div class="mx-auto flex w-full max-w-3xl flex-1 flex-col">
 			<p
