@@ -227,10 +227,10 @@
 			onpointerdown={startVerticalResize}
 		>
 			<div
-				class="absolute inset-x-4 top-1/2 h-px -translate-y-1/2 bg-[rgba(255,214,236,0.16)] transition group-hover:bg-[var(--kk-highlight)]"
+				class="pointer-events-none absolute inset-x-4 top-1/2 h-px -translate-y-1/2 bg-[rgba(255,214,236,0.16)] transition group-hover:bg-[var(--kk-highlight)]"
 			></div>
 			<div
-				class="absolute top-1/2 left-1/2 h-7 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgba(255,214,236,0.12)] bg-[rgba(34,23,38,0.96)] transition group-hover:border-[var(--kk-highlight)]"
+				class="pointer-events-none absolute top-1/2 left-1/2 h-7 w-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[rgba(255,214,236,0.12)] bg-[rgba(34,23,38,0.96)] transition group-hover:border-[var(--kk-highlight)]"
 			></div>
 		</div>
 
