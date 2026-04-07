@@ -16,10 +16,12 @@ import type * as private_courseValidators from '../private/courseValidators.js';
 import type * as private_courses from '../private/courses.js';
 import type * as private_helpers from '../private/helpers.js';
 import type * as private_submissions from '../private/submissions.js';
+import type * as authed_users from '../authed/users.js';
 
 import type { ApiFromModules, FilterApi, FunctionReference } from 'convex/server';
 
 declare const fullApi: ApiFromModules<{
+	'authed/users': typeof authed_users;
 	'private/courseDrafts': typeof private_courseDrafts;
 	'private/courseHelpers': typeof private_courseHelpers;
 	'private/courseImport': typeof private_courseImport;

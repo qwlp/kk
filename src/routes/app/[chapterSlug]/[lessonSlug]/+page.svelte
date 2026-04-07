@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import { authActions, authState } from '$lib/auth';
 	import {
 		prefetchLesson,
 		prefetchLessonBatch,
@@ -102,11 +103,15 @@
 	let selectedChoiceId = $state('');
 	let submittedQuizChoices = $state<Record<string, string>>({});
 	let syncedLessonSlug = $state(initialLesson.slug);
+	let syncedAuthedLastActiveKey = $state('');
 	let desktopSplitPaneElement = $state<HTMLDivElement | null>(null);
 	let lessonPaneRatio = $state(0.46);
 	let horizontalResizeState = $state<HorizontalResizeState | null>(null);
 	let documentHidden = $state(false);
 
+	const activeCourseState = $derived.by(
+		() => $authState.courseStates[currentLesson.courseSlug] ?? null
+	);
 	const editorValue = $derived.by(() => {
 		if (currentLesson.mode === 'quiz') return '';
 		return code;
@@ -179,6 +184,41 @@
 	});
 
 	$effect(() => {
+		if (!browser || $authState.status !== 'signed_in' || !activeCourseState) return;
+
+		completedLessons = activeCourseState.completedLessonSlugs;
+		vimModeEnabled = activeCourseState.vimModeEnabled;
+
+		if (activeCourseState.lessonPaneRatio !== null) {
+			lessonPaneRatio = activeCourseState.lessonPaneRatio;
+		}
+	});
+
+	$effect(() => {
+		if (!browser || $authState.status !== 'signed_in') return;
+
+		const remoteState = $authState.courseStates[currentLesson.courseSlug];
+		if (
+			remoteState?.vimModeEnabled === vimModeEnabled &&
+			remoteState.lessonPaneRatio === lessonPaneRatio
+		) {
+			return;
+		}
+
+		const timeout = window.setTimeout(() => {
+			void authActions.setCurrentCoursePreferences({
+				courseSlug: currentLesson.courseSlug,
+				vimModeEnabled,
+				lessonPaneRatio
+			});
+		}, 250);
+
+		return () => {
+			window.clearTimeout(timeout);
+		};
+	});
+
+	$effect(() => {
 		if (currentLesson.slug === syncedLessonSlug) return;
 
 		syncedLessonSlug = currentLesson.slug;
@@ -197,6 +237,25 @@
 	$effect(() => {
 		if (!browser) return;
 		setLessonPrefetchLowPriorityPaused(running !== null || documentHidden);
+	});
+
+	$effect(() => {
+		if (!browser || $authState.status !== 'signed_in') return;
+
+		const nextKey = `${currentLesson.courseSlug}:${currentLesson.chapterSlug}:${currentLesson.slug}`;
+		if (syncedAuthedLastActiveKey === nextKey) return;
+
+		syncedAuthedLastActiveKey = nextKey;
+
+		void authActions
+			.setCurrentCourseLastActiveLesson({
+				courseSlug: currentLesson.courseSlug,
+				chapterSlug: currentLesson.chapterSlug,
+				lessonSlug: currentLesson.slug
+			})
+			.catch(() => {
+				syncedAuthedLastActiveKey = '';
+			});
 	});
 
 	$effect(() => {
@@ -455,6 +514,24 @@
 
 			if (payload.status === 'passed') {
 				markLessonComplete(currentLesson);
+
+				if ($authState.status === 'signed_in') {
+					try {
+						await authActions.markCurrentLessonCompleted({
+							courseSlug: currentLesson.courseSlug,
+							chapterSlug: currentLesson.chapterSlug,
+							lessonSlug: currentLesson.slug
+						});
+					} catch {
+						pushToast({
+							tone: 'error',
+							title: 'Progress not saved',
+							message: 'The lesson passed, but your account progress did not sync.',
+							durationMs: 2800
+						});
+					}
+				}
+
 				triggerConfetti();
 				pushToast({
 					tone: 'success',

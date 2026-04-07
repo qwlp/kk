@@ -19,6 +19,33 @@ const submissionTestValidator = v.object({
 });
 
 export default defineSchema({
+	users: defineTable({
+		tokenIdentifier: v.string(),
+		subject: v.string(),
+		issuer: v.string(),
+		name: v.optional(v.string()),
+		email: v.optional(v.string()),
+		imageUrl: v.optional(v.string()),
+		createdAt: v.number(),
+		updatedAt: v.number()
+	}).index('by_tokenIdentifier', ['tokenIdentifier']),
+
+	userCourseStates: defineTable({
+		userId: v.id('users'),
+		courseSlug: v.string(),
+		completedLessonSlugs: v.array(v.string()),
+		lastCompletedChapterSlug: v.optional(v.string()),
+		lastCompletedLessonSlug: v.optional(v.string()),
+		lastActiveChapterSlug: v.optional(v.string()),
+		lastActiveLessonSlug: v.optional(v.string()),
+		vimModeEnabled: v.optional(v.boolean()),
+		lessonPaneRatio: v.optional(v.number()),
+		createdAt: v.number(),
+		updatedAt: v.number()
+	})
+		.index('by_userId', ['userId'])
+		.index('by_userId_courseSlug', ['userId', 'courseSlug']),
+
 	courses: defineTable({
 		slug: v.string(),
 		title: v.string(),
