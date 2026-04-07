@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Python Practice</title>
+	<title>kk</title>
 </svelte:head>
 
 {@render children()}
