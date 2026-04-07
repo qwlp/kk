@@ -112,23 +112,6 @@
 	const activeCourseState = $derived.by(
 		() => $authState.courseStates[currentLesson.courseSlug] ?? null
 	);
-	const getUnitLessonTerminalOutput = (runResult: LessonRunResponse | LessonSubmitResponse) => {
-		const firstIssue = runResult.tests.find((test) => test.status !== 'passed')?.message;
-		if (firstIssue) return firstIssue;
-
-		if (runResult.stderr && runResult.stderr.trim().length > 0) {
-			return runResult.stderr.trimEnd();
-		}
-
-		if (runResult.status === 'passed') {
-			const publicCaseCount = runResult.tests.filter((test) => test.visibility === 'public').length;
-			const visibleCaseCount = publicCaseCount > 0 ? publicCaseCount : runResult.tests.length;
-			const label = visibleCaseCount === 1 ? 'test' : 'tests';
-			return `Passed ${visibleCaseCount} ${label} in ${runResult.durationMs} ms`;
-		}
-
-		return `${runResult.status.toUpperCase()} in ${runResult.durationMs} ms`;
-	};
 	const editorValue = $derived.by(() => {
 		if (currentLesson.mode === 'quiz') return '';
 		return code;
@@ -136,9 +119,6 @@
 	const terminalOutput = $derived.by(() => {
 		if (submissionError) return submissionError;
 		if (!result) return '';
-		if (currentLesson.mode === 'unit') {
-			return getUnitLessonTerminalOutput(result);
-		}
 		if (result.stdout && result.stdout.trim().length > 0) return result.stdout.trimEnd();
 		if (result.stderr && result.stderr.trim().length > 0) return result.stderr.trimEnd();
 		const firstIssue = result.tests?.find((test) => test.status !== 'passed')?.message;
