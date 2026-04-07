@@ -94,13 +94,22 @@ with open(os.environ["KK_RESULT_FILE"], "w", encoding="utf-8") as handle:
     json.dump({"result": result}, handle)
 """
 
-VISIBLE_TEST_RUNNER = r"""
+RUN_VISIBLE_TEST_RUNNER = r"""
 import runpy
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path.cwd()))
 runpy.run_path(str(Path.cwd() / "main_test.py"), init_globals={"__RUN__": True})
+"""
+
+SUBMIT_VISIBLE_TEST_RUNNER = r"""
+import runpy
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path.cwd()))
+runpy.run_path(str(Path.cwd() / "main_test.py"))
 """
 
 def normalize_output(value: str) -> str:
@@ -199,9 +208,9 @@ def run_stdin_case(case: dict) -> tuple[dict, str, str]:
 
     return {"kind": "failed", "message": public_message(expected, actual)}, stdout, stderr
 
-def run_visible_tests() -> tuple[str, str, int]:
+def run_visible_tests(run_only: bool) -> tuple[str, str, int]:
     proc = subprocess.run(
-        [sys.executable, "-c", VISIBLE_TEST_RUNNER],
+        [sys.executable, "-c", RUN_VISIBLE_TEST_RUNNER if run_only else SUBMIT_VISIBLE_TEST_RUNNER],
         cwd=str(WORKDIR),
         capture_output=True,
         text=True,
@@ -233,7 +242,7 @@ def main() -> None:
 
     if intent == "run":
         if mode == "unit":
-            stdout, stderr, exit_code = run_visible_tests()
+            stdout, stderr, exit_code = run_visible_tests(True)
             if exit_code == 0:
                 status = "passed"
             elif stderr.strip():
@@ -263,7 +272,7 @@ def main() -> None:
         return
 
     if mode == "unit":
-        stdout, stderr, exit_code = run_visible_tests()
+        stdout, stderr, exit_code = run_visible_tests(False)
         if exit_code == 0:
             final_status = "passed"
         elif stderr.strip():
