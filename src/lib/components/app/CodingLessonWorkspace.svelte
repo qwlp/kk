@@ -14,6 +14,8 @@
 		pointerId: number;
 	};
 
+	type EditorFile = 'main.py' | 'main_test.py';
+
 	interface Props {
 		lesson: ConsoleLesson | UnitLesson;
 		editorValue: string;
@@ -41,8 +43,40 @@
 	let workspacePaneElement = $state<HTMLDivElement | null>(null);
 	let terminalPaneRatio = $state(0.32);
 	let verticalResizeState = $state<VerticalResizeState | null>(null);
+	let activeEditorFile = $state<EditorFile>('main.py');
 
 	const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
+
+	const editorFileItems = $derived.by(() => {
+		if (lesson.mode !== 'unit') {
+			return [{ id: 'main.py' as const, label: 'main.py', readOnly: false }];
+		}
+
+		return [
+			{ id: 'main.py' as const, label: 'main.py', readOnly: false },
+			{ id: 'main_test.py' as const, label: lesson.testFileName, readOnly: true }
+		];
+	});
+
+	const activeEditorValue = $derived.by(() => {
+		if (lesson.mode === 'unit' && activeEditorFile === 'main_test.py') {
+			return lesson.testFileContent;
+		}
+
+		return editorValue;
+	});
+
+	const activeEditorReadOnly = $derived.by(
+		() => lesson.mode === 'unit' && activeEditorFile === 'main_test.py'
+	);
+
+	const getEditorTabClass = (isActive: boolean) =>
+		[
+			'rounded-full border px-3 py-1 font-mono text-xs font-semibold tracking-[0.12em] uppercase transition',
+			isActive
+				? 'border-[var(--kk-highlight)] bg-[rgba(217,79,139,0.16)] text-[var(--kk-text)]'
+				: 'border-[rgba(255,214,236,0.08)] bg-transparent text-[var(--kk-text-dim)]'
+		].join(' ');
 
 	onMount(() => {
 		if (!browser) return;
@@ -59,6 +93,11 @@
 	$effect(() => {
 		if (!browser) return;
 		window.localStorage.setItem('kk-terminal-pane-ratio', String(terminalPaneRatio));
+	});
+
+	$effect(() => {
+		void lesson.slug;
+		activeEditorFile = 'main.py';
 	});
 
 	function startVerticalResize(event: PointerEvent) {
@@ -116,7 +155,36 @@
 			{/if}
 
 			<div class="relative min-h-0 flex-1 bg-transparent">
-				<CodeEditor value={editorValue} readOnly={false} vimMode={vimModeEnabled} {onValueChange} />
+				<div class="flex items-center justify-between border-b border-white/8 px-3 py-2">
+					<div class="flex flex-wrap items-center gap-2">
+						{#each editorFileItems as file (file.id)}
+							<button
+								type="button"
+								class={getEditorTabClass(activeEditorFile === file.id)}
+								onclick={() => {
+									activeEditorFile = file.id;
+								}}
+							>
+								{file.label}
+							</button>
+						{/each}
+					</div>
+
+					{#if lesson.mode === 'unit' && activeEditorReadOnly}
+						<p
+							class="font-mono text-[0.72rem] tracking-[0.14em] text-[var(--kk-text-dim)] uppercase"
+						>
+							Read Only Test File
+						</p>
+					{/if}
+				</div>
+
+				<CodeEditor
+					value={activeEditorValue}
+					readOnly={activeEditorReadOnly}
+					vimMode={vimModeEnabled}
+					{onValueChange}
+				/>
 				<div
 					class="pointer-events-none absolute inset-x-0 top-0 h-16 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),transparent)]"
 				></div>

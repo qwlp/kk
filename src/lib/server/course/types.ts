@@ -84,6 +84,8 @@ export interface PublishedUnitLessonRuntime extends PublishedLessonRuntimeBase {
 	mode: 'unit';
 	starterCode: string;
 	functionName: string;
+	testFileName: string;
+	testFileContent: string;
 }
 
 export interface PublishedQuizLessonRuntime extends PublishedLessonRuntimeBase {

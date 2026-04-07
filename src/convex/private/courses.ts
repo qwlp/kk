@@ -162,6 +162,11 @@ export const getPublishedLessonBySlugs = privateQuery({
 			};
 		}
 
+		const evaluator = await ctx.db
+			.query('lessonEvaluatorVersions')
+			.withIndex('by_lessonVersionId', (q: any) => q.eq('lessonVersionId', lesson._id))
+			.unique();
+
 		return {
 			...publicLessonBase(
 				lesson,
@@ -170,7 +175,9 @@ export const getPublishedLessonBySlugs = privateQuery({
 				published.courseVersion.versionNumber
 			),
 			starterCode: lesson.starterCode ?? '',
-			functionName: lesson.functionName ?? ''
+			functionName: lesson.functionName ?? '',
+			testFileName: evaluator?.testFileName ?? 'main_test.py',
+			testFileContent: evaluator?.testFileContent ?? ''
 		};
 	}
 });

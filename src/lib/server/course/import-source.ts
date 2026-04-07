@@ -1,6 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { renderLessonMarkdown, renderMarkdownFragment } from './markdown';
+import { renderUnitTestFile } from './unit-test-file';
 import type {
 	ChapterManifest,
 	ConsoleLessonManifest,
@@ -98,11 +99,10 @@ const parseUnitLesson = async (
 	lessonDirectory: string,
 	manifest: UnitLessonManifest
 ): Promise<ImportLesson> => {
-	const [lessonMarkdown, starterCode, solutionCode, testFileContent] = await Promise.all([
+	const [lessonMarkdown, starterCode, solutionCode] = await Promise.all([
 		readFile(path.join(lessonDirectory, 'readme.md'), 'utf8'),
 		readFile(path.join(lessonDirectory, 'code.py'), 'utf8'),
-		readFile(path.join(lessonDirectory, 'complete.py'), 'utf8'),
-		readFile(path.join(lessonDirectory, 'main_test.py'), 'utf8')
+		readFile(path.join(lessonDirectory, 'complete.py'), 'utf8')
 	]);
 
 	return {
@@ -120,7 +120,11 @@ const parseUnitLesson = async (
 		hiddenCases: manifest.hiddenCases,
 		solutionCode,
 		testFileName: 'main_test.py',
-		testFileContent
+		testFileContent: renderUnitTestFile({
+			functionName: manifest.functionName,
+			publicCases: manifest.publicCases,
+			hiddenCases: manifest.hiddenCases
+		})
 	};
 };
 

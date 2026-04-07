@@ -63,6 +63,8 @@ export interface UnitLesson extends BasePublicLesson {
 	mode: 'unit';
 	starterCode: string;
 	functionName: string;
+	testFileName: string;
+	testFileContent: string;
 }
 
 export interface QuizChoice {

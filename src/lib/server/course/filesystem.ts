@@ -1,5 +1,6 @@
 import type { ChapterSummary, CourseSequenceItem, LessonSummary, PublicLesson } from '$lib/types';
 import { renderLessonMarkdown, renderMarkdownFragment } from './markdown';
+import { renderUnitTestFile } from './unit-test-file';
 import type {
 	ChapterDefinition,
 	ChapterManifest,
@@ -39,12 +40,6 @@ const starterCodeModules = import.meta.glob('./python/*/lessons/*/code.py', {
 }) as Record<string, string>;
 
 const solutionCodeModules = import.meta.glob('./python/*/lessons/*/complete.py', {
-	eager: true,
-	query: '?raw',
-	import: 'default'
-}) as Record<string, string>;
-
-const testFileModules = import.meta.glob('./python/*/lessons/*/main_test.py', {
 	eager: true,
 	query: '?raw',
 	import: 'default'
@@ -132,7 +127,9 @@ const toPublicLesson = (lesson: LessonDefinition): PublicLesson => {
 		lessonHtml: lesson.lessonHtml,
 		mode: lesson.mode,
 		starterCode: lesson.starterCode,
-		functionName: lesson.functionName
+		functionName: lesson.functionName,
+		testFileName: lesson.testFileName,
+		testFileContent: lesson.testFileContent
 	};
 };
 
@@ -199,11 +196,11 @@ const parseUnitLesson = ({
 		'complete.py'
 	),
 	testFileName: 'main_test.py',
-	testFileContent: getRequiredModule(
-		testFileModules,
-		`${lessonDirectory}/main_test.py`,
-		'main_test.py'
-	),
+	testFileContent: renderUnitTestFile({
+		functionName: manifest.functionName,
+		publicCases: manifest.publicCases,
+		hiddenCases: manifest.hiddenCases
+	}),
 	functionName: manifest.functionName,
 	publicCases: manifest.publicCases,
 	hiddenCases: manifest.hiddenCases,
