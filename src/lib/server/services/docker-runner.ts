@@ -262,6 +262,31 @@ def main() -> None:
         )
         return
 
+    if mode == "unit":
+        stdout, stderr, exit_code = run_visible_tests()
+        if exit_code == 0:
+            final_status = "passed"
+        elif stderr.strip():
+            final_status = "error"
+        else:
+            final_status = "failed"
+
+        duration_ms = int((time.perf_counter() - started) * 1000)
+        stdout, stderr = trim_to_limit(stdout, stderr)
+
+        print(
+            json.dumps(
+                {
+                    "status": final_status,
+                    "durationMs": duration_ms,
+                    "stdout": stdout,
+                    "stderr": stderr,
+                    "tests": [],
+                }
+            )
+        )
+        return
+
     collected_stdout = ""
     collected_stderr = ""
     test_results: list[dict] = []
